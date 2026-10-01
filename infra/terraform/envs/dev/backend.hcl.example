@@ -1,0 +1,6 @@
+# Partial backend config for the GCS remote state.
+# Copy to backend.hcl (git-ignored) and run: make tf-init
+# The state bucket is bootstrapped once, outside this config (see docs/runbook.md).
+
+bucket = "your-tf-state-bucket"
+prefix = "enterprise-rag/dev"

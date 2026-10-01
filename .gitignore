@@ -1,0 +1,76 @@
+# ---------------------------------------------------------------- Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# ---------------------------------------------------------------- Virtualenvs
+.venv/
+venv/
+env/
+.python-version
+
+# ---------------------------------------------------------------- Secrets / env
+.env
+.env.*
+!.env.example
+credentials/
+credentials/*.json
+*service-account*.json
+*-sa-key*.json
+application_default_credentials.json
+
+# ---------------------------------------------------------------- Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+backend.hcl
+!backend.hcl.example
+# NOTE: .terraform.lock.hcl is intentionally committed.
+
+# ---------------------------------------------------------------- Data (large / raw)
+data/
+*.parquet
+*.jsonl.gz
+*.npy
+*.faiss
+
+# ---------------------------------------------------------------- Pipelines / build outputs
+eval/pipelines/*.json
+eval/pipelines/*.yaml.compiled
+
+# ---------------------------------------------------------------- Notebooks
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ---------------------------------------------------------------- Local AI-assistant instructions
+CLAUDE.md
+
+# ---------------------------------------------------------------- OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp

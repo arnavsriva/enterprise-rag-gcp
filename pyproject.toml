@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "enterprise-rag-gcp"
+version = "0.1.0"
+description = "Enterprise-style RAG over SEC 10-K filings on Google Cloud"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11,<3.13"
+# Dependencies are managed in requirements.txt (runtime) and requirements-dev.txt (dev/CI).
+
+[tool.setuptools.packages.find]
+include = ["ingest*", "rag*", "api*", "eval*"]
+
+# ---------------------------------------------------------------- ruff
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = [".terraform", "results"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W",   # pycodestyle
+  "F",        # pyflakes
+  "I",        # isort
+  "B",        # bugbear
+  "UP",       # pyupgrade
+  "SIM",      # simplify
+  "ASYNC",    # async pitfalls
+  "S",        # bandit (security)
+  "RUF",
+]
+ignore = ["E501"]  # line length handled by the formatter
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]  # asserts are fine in tests
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_configs = true
+exclude = ["^\\.venv/", "^infra/"]
+
+[[tool.mypy.overrides]]
+module = [
+  "google.*",
+  "vertexai.*",
+  "llama_index.*",
+  "langchain.*",
+  "langchain_core.*",
+  "langchain_google_vertexai.*",
+  "kfp.*",
+  "google_cloud_pipeline_components.*",
+  "pgvector.*",
+  "asyncpg.*",
+]
+ignore_missing_imports = true
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-ra -m 'not integration'"
+markers = [
+  "integration: requires GCP credentials / billable resources (deselected by default)",
+]

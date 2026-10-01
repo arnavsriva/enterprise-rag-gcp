@@ -1,0 +1,11 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is git-ignored.
+
+project_id = "your-gcp-project-id"
+region     = "us-central1"
+env        = "dev"
+
+labels = {
+  project = "enterprise-rag"
+  env     = "dev"
+  owner   = "your-name"
+}
