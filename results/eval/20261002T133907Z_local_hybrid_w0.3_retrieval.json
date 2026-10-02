@@ -1,0 +1,6299 @@
+{
+  "label": "local_hybrid_w0.3_retrieval",
+  "started_at": "2026-10-02T13:39:07+00:00",
+  "finished_at": "2026-10-02T13:39:15+00:00",
+  "golden_set": "eval/golden_set/golden_v1.jsonl",
+  "n_items": 99,
+  "config": {
+    "target": "local",
+    "url": null,
+    "mode": "hybrid",
+    "backend": null,
+    "top_k": 6,
+    "retrieval_only": true,
+    "limit": null,
+    "generation_model": "gemini-3.8-flash",
+    "judge_model": null,
+    "vector_weight": 0.3,
+    "concurrency": 4
+  },
+  "metrics": {
+    "retrieval": {
+      "n": 89,
+      "recall@1": 0.1011,
+      "recall@3": 0.236,
+      "recall@6": 0.3596,
+      "mrr": 0.1824,
+      "by_category": {
+        "numeric": {
+          "n": 60,
+          "recall@6": 0.4333
+        },
+        "narrative": {
+          "n": 20,
+          "recall@6": 0.3
+        },
+        "comparison": {
+          "n": 9,
+          "recall@6": 0.0
+        }
+      }
+    },
+    "ops": {
+      "n": 99,
+      "errors": 0,
+      "latency_ms_p50": null,
+      "latency_ms_p95": null,
+      "mean_cost_usd": 0.0,
+      "cost_per_1k_queries_usd": 0.0
+    }
+  },
+  "gate": null,
+  "cost_usd": {
+    "system_estimated": 0.0,
+    "judge_estimated": null
+  },
+  "judge": {
+    "model": null,
+    "usage": null
+  },
+  "items": [
+    {
+      "id": "num-001",
+      "category": "numeric",
+      "question": "How much money did Apple Inc. spend on buying back its own common stock during the 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:299",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:119",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.455
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:45",
+          "ticker": "AAPL",
+          "item": "5",
+          "score": 0.44
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:190",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.42
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:73",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.39279
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.35
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-002",
+      "category": "numeric",
+      "question": "What was the total amount of Apple's unrecorded compensation expenses tied to unvested restricted stock units at the end of fiscal 2025?",
+      "answerable": true,
+      "coverage_rank": 4,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:149",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:103",
+          "ticker": "AMZN",
+          "item": "8",
+          "score": 0.434524
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:122",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.371429
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:74",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.3
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:177",
+          "ticker": "BA",
+          "item": "15",
+          "score": 0.3
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:121",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.285714
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-003",
+      "category": "numeric",
+      "question": "For Apple in fiscal year 2025, what was the total amount of manufacturing purchase commitments that were scheduled to be paid within the upcoming twelve months?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.592308
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.538461
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.538461
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:290",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.484615
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:45",
+          "ticker": "AAPL",
+          "item": "5",
+          "score": 0.430769
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-004",
+      "category": "numeric",
+      "question": "How much did Microsoft record for its depreciation expense during fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:72",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.82692
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.658824
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.658824
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:91",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.576471
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:87",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.370588
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:112",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.332482
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-005",
+      "category": "numeric",
+      "question": "What was the total amount of aggregate legal liabilities that Microsoft had accrued by the end of fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.536319
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.466667
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:123",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.408333
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:90",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.408333
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:91",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.35
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-006",
+      "category": "numeric",
+      "question": "What was the basic earnings per share reported by Microsoft Corporation for fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:128",
+          "ticker": "GOOGL",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.638424
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:110",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.445455
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:119",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.387052
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:119",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.318182
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:69",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-007",
+      "category": "numeric",
+      "question": "What was the total stockholders' equity reported by Amazon at the close of its 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.452941
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:91",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.411765
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.411765
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.411765
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:322",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.411765
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-008",
+      "category": "numeric",
+      "question": "What was the financial impact of foreign currency fluctuations on Amazon's cost of sales in fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:51",
+          "ticker": "AMZN",
+          "item": "7",
+          "score": 0.984046
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:53",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.476
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:49",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.448
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:76",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.364
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:134",
+          "ticker": "KO",
+          "item": "7",
+          "score": 0.308
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.308
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-009",
+      "category": "numeric",
+      "question": "For Amazon in fiscal year 2025, what was the total amount of accrued interest and penalties (net of federal income tax benefit) connected to tax uncertainties?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:114",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:140",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.641666
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:159",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.6125
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:104",
+          "ticker": "AMZN",
+          "item": "8",
+          "score": 0.562273
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:318",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.525
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:112",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.4375
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-010",
+      "category": "numeric",
+      "question": "For fiscal year 2025, what was the total fair value of outstanding derivative assets reported by Alphabet Inc. as of December 31?",
+      "answerable": true,
+      "coverage_rank": 5,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:293",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:288",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.625
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:237",
+          "ticker": "JPM",
+          "item": "7",
+          "score": 0.425
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:357",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.35
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:111",
+          "ticker": "GOOGL",
+          "item": "8",
+          "score": 0.3
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:155",
+          "ticker": "BAC",
+          "item": "7",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-011",
+      "category": "numeric",
+      "question": "How many people did Alphabet Inc. employ at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.5
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.333333
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.333333
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.3
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-012",
+      "category": "numeric",
+      "question": "How much did Alphabet report as its gross realized gain from the sale of debt securities for the 2025 fiscal year, in millions?",
+      "answerable": true,
+      "coverage_rank": 2,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:166",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:108",
+          "ticker": "GOOGL",
+          "item": "8",
+          "score": 0.486667
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:107",
+          "ticker": "GOOGL",
+          "item": "8",
+          "score": 0.447344
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:49",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.35
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:250",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.35
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:324",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.326667
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-013",
+      "category": "numeric",
+      "question": "How much money did Meta Platforms, Inc. spend on repurchasing its Class A common stock during the 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:299",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:204",
+          "ticker": "META",
+          "item": "8",
+          "score": 0.696826
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.6125
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:72",
+          "ticker": "WMT",
+          "item": "5",
+          "score": 0.4375
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:125",
+          "ticker": "META",
+          "item": "5",
+          "score": 0.421432
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:101",
+          "ticker": "META",
+          "item": "1A",
+          "score": 0.379167
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-014",
+      "category": "numeric",
+      "question": "How much additional tax did the IRS claim Meta Platforms, Inc. owed for the 2017 to 2019 tax years, according to the statutory notice received in fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 6,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:211",
+          "ticker": "META",
+          "item": "8",
+          "score": 0.891389
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:189",
+          "ticker": "PFE",
+          "item": "8",
+          "score": 0.617647
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:108",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.57647
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:112",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.494118
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:114",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.494118
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:212",
+          "ticker": "META",
+          "item": "8",
+          "score": 0.464706
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-015",
+      "category": "numeric",
+      "question": "How much did Meta Platforms, Inc. spend on research and development during the 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.840701
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:72",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.653333
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.606667
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.42
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.42
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.42
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-016",
+      "category": "numeric",
+      "question": "How much did NVIDIA record for depreciation expense during fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:91",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.725931
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:72",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.658824
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.658824
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:145",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.48554
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:85",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.371281
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-017",
+      "category": "numeric",
+      "question": "According to NVIDIA's fiscal year 2026 Form 10-K, what was the ending balance of the sales return allowance for fiscal year 2024?",
+      "answerable": true,
+      "coverage_rank": 4,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.45
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:177",
+          "ticker": "BA",
+          "item": "15",
+          "score": 0.366667
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:148",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.366667
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:183",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.35
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:117",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.35
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-018",
+      "category": "numeric",
+      "question": "What was the total amortization expense for intangible assets recognized by NVIDIA during fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": 2,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:94",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:130",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.533333
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:91",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.456415
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:72",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.366667
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:124",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.27469
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.266667
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-019",
+      "category": "numeric",
+      "question": "For JPMorgan Chase & Co. in the year ended December 31, 2024, what was the amortized cost basis for Commercial and industrial loans that had single modifications consisting of term extensions?",
+      "answerable": true,
+      "coverage_rank": 3,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:378",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.9376
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:376",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.737152
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:377",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.6875
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:369",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.479673
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:336",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.425
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:85",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.4
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-020",
+      "category": "numeric",
+      "question": "What was the total net income reported by JPMorgan Chase & Co. for the fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:84",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:85",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.440741
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:86",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.414815
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:83",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.388889
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:73",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.337037
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:459",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.332076
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-021",
+      "category": "numeric",
+      "question": "For fiscal year 2025, what was JPMorgan Chase & Co.'s weighted average discount rate for its operating leases?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:147",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:115",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.673077
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:113",
+          "ticker": "GOOGL",
+          "item": "8",
+          "score": 0.673077
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:84",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.538462
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:181",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.538462
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:92",
+          "ticker": "AMZN",
+          "item": "8",
+          "score": 0.511539
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-022",
+      "category": "numeric",
+      "question": "What was the total amount of year-end tangible assets reported by Bank of America Corporation for fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 2,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:194",
+          "ticker": "BAC",
+          "item": "7",
+          "score": 0.424825
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:210",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.376923
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:212",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.376923
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.323077
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:196",
+          "ticker": "BAC",
+          "item": "7",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-023",
+      "category": "numeric",
+      "question": "In its fiscal year 2025 report, what was the total value of U.S. Small Business Card loans that Bank of America excluded from the total?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:180",
+          "ticker": "JPM",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:158",
+          "ticker": "BAC",
+          "item": "7",
+          "score": 0.671668
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:255",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.617647
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:182",
+          "ticker": "JPM",
+          "item": "7",
+          "score": 0.617647
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:254",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.504343
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:167",
+          "ticker": "BAC",
+          "item": "7",
+          "score": 0.498107
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-024",
+      "category": "numeric",
+      "question": "What was the increase in Bank of America Corporation's projected benefit obligation resulting from lower discount rates at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:164",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.6125
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:79",
+          "ticker": "CAT",
+          "item": "7",
+          "score": 0.525
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:80",
+          "ticker": "CAT",
+          "item": "7",
+          "score": 0.466667
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:139",
+          "ticker": "CAT",
+          "item": "8",
+          "score": 0.4375
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:91",
+          "ticker": "DIS",
+          "item": "7",
+          "score": 0.408333
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-025",
+      "category": "numeric",
+      "question": "In fiscal year 2025, how much did The Goldman Sachs Group, Inc. report for net realized losses related to level 3 other financial liabilities?",
+      "answerable": true,
+      "coverage_rank": 2,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:296",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.878369
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:308",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.660938
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:290",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.645462
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:304",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.604577
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:307",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.594565
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:278",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.514097
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-026",
+      "category": "numeric",
+      "question": "What was the amortized cost of investments for Goldman Sachs at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.478947
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.442105
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:91",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.405263
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:322",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.357527
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:369",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.322792
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-027",
+      "category": "numeric",
+      "question": "What was the total amount of Level 1 financial assets held by Goldman Sachs in fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:278",
+          "ticker": "GS",
+          "item": "8",
+          "score": 1.0
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:197",
+          "ticker": "PFE",
+          "item": "8",
+          "score": 0.294
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:112",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.252
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:298",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.185513
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:145",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.182
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:287",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.161924
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-028",
+      "category": "numeric",
+      "question": "By what amount did the carrying value of Johnson & Johnson's debt exceed its fair value at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:357",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:341",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.646154
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:294",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.592308
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:322",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.538462
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:127",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.538462
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:128",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.484615
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-029",
+      "category": "numeric",
+      "question": "How much total debt did Johnson & Johnson report having at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 3,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:184",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.63
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.513744
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:183",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.455
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:100",
+          "ticker": "CVX",
+          "item": "7",
+          "score": 0.455
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:94",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.357964
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-030",
+      "category": "numeric",
+      "question": "Based on Johnson & Johnson's fiscal year 2025 10-K, how many specific patents were included in the infringement lawsuits against generic manufacturers concerning UPTRAVI?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:183",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:184",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.618822
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.451613
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:152",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.384778
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.383871
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:186",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.36129
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-031",
+      "category": "numeric",
+      "question": "Based on Pfizer's fiscal year 2025 10-K, what amount was recognized as post-closing compensation expense for payments made to Seagen employees during the fourth quarter of 2023?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:269",
+          "ticker": "PFE",
+          "item": "15",
+          "score": 0.597991
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:130",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.572727
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:186",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.509091
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:183",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.509091
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.509091
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-032",
+      "category": "numeric",
+      "question": "What percentage of Haleon's outstanding voting shares did Pfizer own at the end of fiscal year 2024?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:176",
+          "ticker": "PFE",
+          "item": "8",
+          "score": 0.795833
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:118",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:120",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.495833
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:122",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.379167
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:119",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.320833
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-033",
+      "category": "numeric",
+      "question": "What was the ending balance of goodwill reported by Pfizer at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.478947
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.442105
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:254",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.405263
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:269",
+          "ticker": "PFE",
+          "item": "15",
+          "score": 0.405263
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:127",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.331579
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-034",
+      "category": "numeric",
+      "question": "What was the total fair and carrying value of loan receivables for UnitedHealth Group at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:293",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:357",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.606667
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:340",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.606667
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:297",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.577561
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:356",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.56
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:322",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.56
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-035",
+      "category": "numeric",
+      "question": "What was the total provision for income taxes for UnitedHealth Group Incorporated in fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 2,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:114",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 1.0
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:113",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.605833
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:159",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.538461
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:140",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.511538
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:318",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.484615
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:141",
+          "ticker": "UNH",
+          "item": "15",
+          "score": 0.430769
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-036",
+      "category": "numeric",
+      "question": "In fiscal year 2025, what was the monetary gain recognized by UnitedHealth Group resulting from the deconsolidation of a business?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.617647
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:141",
+          "ticker": "UNH",
+          "item": "15",
+          "score": 0.576471
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:73",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.535294
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:142",
+          "ticker": "UNH",
+          "item": "15",
+          "score": 0.452941
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.411765
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-037",
+      "category": "numeric",
+      "question": "What was the total amount of cash utilized for financing activities by Exxon Mobil Corporation during the 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:80",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:72",
+          "ticker": "GOOGL",
+          "item": "7",
+          "score": 0.608696
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:94",
+          "ticker": "XOM",
+          "item": "7",
+          "score": 0.416593
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:88",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.365217
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:92",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.304348
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-038",
+      "category": "numeric",
+      "question": "What was Exxon Mobil's total debt balance at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.636364
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:100",
+          "ticker": "CVX",
+          "item": "7",
+          "score": 0.540909
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.35
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.318182
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.318182
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-039",
+      "category": "numeric",
+      "question": "What was the weighted-average interest rate on short-term borrowings for Exxon Mobil at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:97",
+          "ticker": "WMT",
+          "item": "7A",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:116",
+          "ticker": "GOOGL",
+          "item": "8",
+          "score": 0.486111
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:163",
+          "ticker": "CVX",
+          "item": "8",
+          "score": 0.471641
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:365",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.427778
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:358",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.427778
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:359",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.408333
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-040",
+      "category": "numeric",
+      "question": "What was the total principal amount of long-term debt scheduled to mature in 2027 for Chevron Corporation as reported at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:193",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:163",
+          "ticker": "CVX",
+          "item": "8",
+          "score": 0.65491
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:90",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.64
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:100",
+          "ticker": "CVX",
+          "item": "7",
+          "score": 0.632966
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:213",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.62
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:211",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.62
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-041",
+      "category": "numeric",
+      "question": "In Chevron Corporation's fiscal 2025 reporting, what starting percentage was assumed for health care cost-trend rates in 2026 for the primary U.S. OPEB plan?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:312",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:112",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.622222
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:211",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.57037
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:212",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.544444
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:118",
+          "ticker": "PFE",
+          "item": "7",
+          "score": 0.518519
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:213",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.492593
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-042",
+      "category": "numeric",
+      "question": "In its fiscal year 2025 report, in how many distinct climate-related lawsuits filed by U.S. municipalities, states, and other plaintiffs were Chevron Corporation entities listed as codefendants?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:210",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:212",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.6
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:211",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.6
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:213",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.583333
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:146",
+          "ticker": "GOOGL",
+          "item": "15",
+          "score": 0.333333
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:153",
+          "ticker": "CVX",
+          "item": "8",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-043",
+      "category": "numeric",
+      "question": "How much net cash was generated from operating activities by Walmart Inc. during the fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:80",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.975692
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.682442
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:88",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.62439
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:72",
+          "ticker": "GOOGL",
+          "item": "7",
+          "score": 0.460976
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:87",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.458878
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.308937
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-044",
+      "category": "numeric",
+      "question": "What was the total value of indefinite-lived intangible assets held by Walmart at the close of fiscal 2026?",
+      "answerable": true,
+      "coverage_rank": 3,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:146",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:64",
+          "ticker": "PG",
+          "item": "7",
+          "score": 0.56875
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:111",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.365625
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:94",
+          "ticker": "DIS",
+          "item": "7",
+          "score": 0.35
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:237",
+          "ticker": "JPM",
+          "item": "7",
+          "score": 0.284375
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:165",
+          "ticker": "PFE",
+          "item": "8",
+          "score": 0.284375
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-045",
+      "category": "numeric",
+      "question": "How much did Walmart Inc. spend on advertising in fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.766598
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.705127
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.674037
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:87",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.508968
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:90",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.40815
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:91",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.388889
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-046",
+      "category": "numeric",
+      "question": "What was the diluted earnings per share for The Coca-Cola Company in fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:128",
+          "ticker": "GOOGL",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:120",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:118",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.619231
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.538462
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:110",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.430769
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:119",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.430769
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-047",
+      "category": "numeric",
+      "question": "What was the accumulated benefit obligation for The Coca-Cola Company's pension plans at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:194",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.969565
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:253",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.777245
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:195",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.741666
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:164",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:114",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.63913
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:139",
+          "ticker": "CAT",
+          "item": "8",
+          "score": 0.608696
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-048",
+      "category": "numeric",
+      "question": "What was the remaining carrying value of the BodyArmor trademark for The Coca-Cola Company following the impairment charges recorded in fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:216",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.952255
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:217",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.547579
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:231",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.387559
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:187",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.313793
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:101",
+          "ticker": "KO",
+          "item": "7",
+          "score": 0.3
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:220",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.285524
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-049",
+      "category": "numeric",
+      "question": "What was the accumulated benefit obligation for all defined benefit pension plans for Procter & Gamble at the end of fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:102",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.968422
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:101",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.924962
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:103",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.72
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:164",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.63
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:139",
+          "ticker": "CAT",
+          "item": "8",
+          "score": 0.56
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:163",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.56
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-050",
+      "category": "numeric",
+      "question": "What was the total amount of before-tax restructuring charges incurred by The Procter & Gamble Company during fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:91",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.78125
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:108",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:128",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.6125
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:140",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.525
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:94",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.493448
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:56",
+          "ticker": "PG",
+          "item": "7",
+          "score": 0.468827
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-051",
+      "category": "numeric",
+      "question": "In its fiscal year 2026 report, what did The Procter & Gamble Company estimate its intangible asset amortization expense would be for the fiscal year ending in 2027?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:94",
+          "ticker": "PG",
+          "item": "8",
+          "score": 0.811538
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.646154
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:146",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.376923
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:259",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.35
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:127",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.35
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-052",
+      "category": "numeric",
+      "question": "How much did Caterpillar pay for net income tax and related interest during the 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": 6,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:73",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:104",
+          "ticker": "AMZN",
+          "item": "8",
+          "score": 0.636364
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:112",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.604545
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:70",
+          "ticker": "DIS",
+          "item": "7",
+          "score": 0.540909
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:140",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.509091
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:125",
+          "ticker": "CAT",
+          "item": "8",
+          "score": 0.490813
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-053",
+      "category": "numeric",
+      "question": "What was the total notional value of derivative instruments held by Caterpillar Inc. at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:322",
+          "ticker": "GS",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.653333
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:179",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.373333
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:180",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.326667
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:293",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.326667
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.326667
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-054",
+      "category": "numeric",
+      "question": "How much did Caterpillar accrue for dealer discounts expected to be paid on previously sold units at the end of fiscal year 2024?",
+      "answerable": true,
+      "coverage_rank": 2,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:80",
+          "ticker": "CAT",
+          "item": "7",
+          "score": 0.695126
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.544445
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:111",
+          "ticker": "CAT",
+          "item": "8",
+          "score": 0.533333
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.427778
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.311111
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-055",
+      "category": "numeric",
+      "question": "How much did The Boeing Company pay in total net income taxes during fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:159",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:104",
+          "ticker": "AMZN",
+          "item": "8",
+          "score": 0.63913
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:114",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.63913
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:140",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.517391
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:318",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.486956
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:112",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.426087
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-056",
+      "category": "numeric",
+      "question": "In its fiscal year 2025 report, how many KC-46A Tanker aircraft did Boeing state had been approved by the U.S. Air Force under low rate initial production lots?",
+      "answerable": true,
+      "coverage_rank": 3,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:108",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:128",
+          "ticker": "PFE",
+          "item": "7",
+          "score": 0.646154
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:126",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.488461
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:60",
+          "ticker": "BA",
+          "item": "7",
+          "score": 0.39542
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.269231
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:61",
+          "ticker": "BA",
+          "item": "7",
+          "score": 0.267085
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-057",
+      "category": "numeric",
+      "question": "What was the reported investment balance for The Boeing Company's ownership stake in United Launch Alliance at the end of fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:176",
+          "ticker": "BA",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.665
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:254",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.63
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:175",
+          "ticker": "BA",
+          "item": "15",
+          "score": 0.595
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:259",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.49
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-058",
+      "category": "numeric",
+      "question": "How much did The Walt Disney Company record in income tax benefits from equity-based compensation deductions exceeding their fair value at grant date during fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:162",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:140",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.63
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:128",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.56
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:112",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.525
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:318",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.49
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:114",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.49
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-059",
+      "category": "numeric",
+      "question": "How much does The Walt Disney Company anticipate spending on produced and licensed content, including sports rights, in fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": 3,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:156",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.893187
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:11",
+          "ticker": "DIS",
+          "item": "1",
+          "score": 0.488221
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:85",
+          "ticker": "DIS",
+          "item": "7",
+          "score": 0.4
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.3
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:22",
+          "ticker": "DIS",
+          "item": "1",
+          "score": 0.3
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:130",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.27529
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "num-060",
+      "category": "numeric",
+      "question": "How much cash did The Walt Disney Company generate from the exercise of stock options during fiscal year 2025?",
+      "answerable": true,
+      "coverage_rank": 6,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:190",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.446174
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:141",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.39375
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:141",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.35
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:173",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.321875
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:174",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.318724
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-001",
+      "category": "narrative",
+      "question": "In its fiscal year 2025 10-K, what risks did Apple identify regarding the agreements it makes with third parties to distribute digital content?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:130",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.608696
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.517391
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:183",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.486957
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:186",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.456522
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:245",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.334783
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-002",
+      "category": "narrative",
+      "question": "What potential financial impact might Microsoft experience in fiscal year 2026 as a result of the expenses required to implement its comprehensive cybersecurity defenses?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:72",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.742087
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:91",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.658823
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:85",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.576471
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.535294
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:87",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.494118
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-003",
+      "category": "narrative",
+      "question": "In its fiscal year 2025 report, what does Amazon identify as the potential negative consequences if government authorities impose unfavorable regulations or launch enforcement actions against the company?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:127",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.592308
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:259",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.538461
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:258",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.430769
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.430769
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:257",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.376923
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-004",
+      "category": "narrative",
+      "question": "In its fiscal year 2025 Form 10-K, what technological advancement does Alphabet Inc. (GOOGL) highlight as rapidly transforming the advertising sector?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:147",
+          "ticker": "GOOGL",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.5
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:146",
+          "ticker": "GOOGL",
+          "item": "15",
+          "score": 0.5
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.4
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:124",
+          "ticker": "AMZN",
+          "item": "15",
+          "score": 0.383333
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:130",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.366667
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-005",
+      "category": "narrative",
+      "question": "What are the potential negative impacts that Meta Platforms warned about in fiscal year 2025 due to varying legal and regulatory requirements across different jurisdictions?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:92",
+          "ticker": "AAPL",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.533333
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.466667
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:93",
+          "ticker": "AAPL",
+          "item": "15",
+          "score": 0.466667
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:105",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.333333
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:87",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.333333
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-006",
+      "category": "narrative",
+      "question": "Based on the fiscal year 2026 report, what specific European regulation was cited by NVIDIA as a potential hurdle for the company's efforts to create and distribute artificial intelligence models within that region?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.646154
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:259",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.592308
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:127",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.538462
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:233",
+          "ticker": "JPM",
+          "item": "7",
+          "score": 0.484616
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:258",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.484616
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-007",
+      "category": "narrative",
+      "question": "Which specific anti-corruption regulations does JPMorgan Chase & Co. highlight being subject to in its fiscal year 2025 filing?",
+      "answerable": true,
+      "coverage_rank": 6,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:84",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.704598
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:83",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.541509
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:86",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.466327
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:85",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.462264
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:82",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.422642
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:18",
+          "ticker": "JPM",
+          "item": "1",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-008",
+      "category": "narrative",
+      "question": "According to the 2025 10-K, what specific factors cause Bank of America to face an elevated exposure to cybersecurity risks?",
+      "answerable": true,
+      "coverage_rank": 2,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:369",
+          "ticker": "BAC",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:46",
+          "ticker": "BAC",
+          "item": "1A",
+          "score": 0.3
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:48",
+          "ticker": "BAC",
+          "item": "1A",
+          "score": 0.288838
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:47",
+          "ticker": "BAC",
+          "item": "1A",
+          "score": 0.277511
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:186",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.247917
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:49",
+          "ticker": "BAC",
+          "item": "1A",
+          "score": 0.239285
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-009",
+      "category": "narrative",
+      "question": "In fiscal year 2025, through which alternative online platforms does The Goldman Sachs Group, Inc. mention that it or its executives might release potentially material business information to the public?",
+      "answerable": true,
+      "coverage_rank": 5,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:449",
+          "ticker": "GS",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:454",
+          "ticker": "GS",
+          "item": "15",
+          "score": 0.449801
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.336
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.308
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:60",
+          "ticker": "GS",
+          "item": "1",
+          "score": 0.3
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:111",
+          "ticker": "GS",
+          "item": "1A",
+          "score": 0.252
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-010",
+      "category": "narrative",
+      "question": "In its fiscal year 2025 report, how does Johnson & Johnson characterize the seasonal pattern of its financial operations?",
+      "answerable": true,
+      "coverage_rank": 6,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.6
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:87",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.5
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:184",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.45
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:94",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.42551
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:14",
+          "ticker": "JNJ",
+          "item": "1",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-011",
+      "category": "narrative",
+      "question": "What country does Pfizer highlight in its 2025 annual report as a source of a growing number of potential global competitors with enhanced research and development capabilities?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:146",
+          "ticker": "GOOGL",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:270",
+          "ticker": "PFE",
+          "item": "15",
+          "score": 0.593939
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:269",
+          "ticker": "PFE",
+          "item": "15",
+          "score": 0.530303
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:58",
+          "ticker": "PFE",
+          "item": "1A",
+          "score": 0.3
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:34",
+          "ticker": "PFE",
+          "item": "1",
+          "score": 0.282986
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:145",
+          "ticker": "GOOGL",
+          "item": "15",
+          "score": 0.275758
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-012",
+      "category": "narrative",
+      "question": "In its fiscal year 2025 filing, what strategy does UnitedHealth Group outline for containing and recovering from potential cyberattack disruptions?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:141",
+          "ticker": "UNH",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:142",
+          "ticker": "UNH",
+          "item": "15",
+          "score": 0.604546
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:128",
+          "ticker": "PFE",
+          "item": "7",
+          "score": 0.604546
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.509091
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:140",
+          "ticker": "UNH",
+          "item": "15",
+          "score": 0.477273
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.477273
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-013",
+      "category": "narrative",
+      "question": "According to the fiscal year 2025 10-K, what specific emerging technology does Exxon Mobil plan to integrate into its decision-making processes to stay competitive?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:369",
+          "ticker": "BAC",
+          "item": "15",
+          "score": 0.653333
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:183",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.606667
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:130",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.56
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:186",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.513333
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:270",
+          "ticker": "PFE",
+          "item": "15",
+          "score": 0.443333
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-014",
+      "category": "narrative",
+      "question": "According to its 2025 Form 10-K, what is the main objective of the Subsea Well Response Project that Chevron is a member of?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:146",
+          "ticker": "GOOGL",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:186",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.530303
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:130",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.487879
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.445454
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:270",
+          "ticker": "PFE",
+          "item": "15",
+          "score": 0.424242
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:124",
+          "ticker": "AMZN",
+          "item": "15",
+          "score": 0.424242
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-015",
+      "category": "narrative",
+      "question": "Based on Walmart's FY2026 10-K, what potential consequences could arise if the company experiences a disruption in its supply of certain medications?",
+      "answerable": true,
+      "coverage_rank": 6,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.39375
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:130",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.371875
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:186",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.371875
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:118",
+          "ticker": "DIS",
+          "item": "15",
+          "score": 0.35
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:44",
+          "ticker": "WMT",
+          "item": "1A",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-016",
+      "category": "narrative",
+      "question": "According to the 2025 10-K, what are the two primary lines of business that The Coca-Cola Company operates in?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:253",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.583333
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:255",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.466667
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.42
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:130",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.396667
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:254",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.396667
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-017",
+      "category": "narrative",
+      "question": "What are some of the ways in which Procter & Gamble relies on IT and OT systems according to its FY 2026 10-K?",
+      "answerable": true,
+      "coverage_rank": 6,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:129",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:130",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.651163
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000034088-26-000045:186",
+          "ticker": "XOM",
+          "item": "8",
+          "score": 0.472093
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:369",
+          "ticker": "BAC",
+          "item": "15",
+          "score": 0.325581
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:183",
+          "ticker": "JNJ",
+          "item": "16",
+          "score": 0.309302
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:20",
+          "ticker": "PG",
+          "item": "1A",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-018",
+      "category": "narrative",
+      "question": "What are some of the unexpected post-transaction expenses Caterpillar Inc. warns it might face after finalizing an acquisition, according to its fiscal year 2025 report?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:179",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.653333
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:61",
+          "ticker": "JNJ",
+          "item": "7",
+          "score": 0.653333
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:180",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.606667
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.56
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.56
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-019",
+      "category": "narrative",
+      "question": "In its fiscal year 2025 report, what potential consequences did The Boeing Company indicate might arise from reductions in its credit standing or a downturn in its financial performance?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:169",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:127",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.646154
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:175",
+          "ticker": "BA",
+          "item": "15",
+          "score": 0.646154
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:182",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.538461
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.484615
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:174",
+          "ticker": "BA",
+          "item": "15",
+          "score": 0.430769
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "nar-020",
+      "category": "narrative",
+      "question": "According to The Walt Disney Company's fiscal year 2025 report, how might fluctuations in its share price negatively affect its business operations?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:118",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.663158
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:120",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.589474
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.51579
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.442105
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.331579
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-001",
+      "category": "comparison",
+      "question": "Comparing Apple Inc.'s fiscal year 2025 to Microsoft Corporation's fiscal year 2026, what were the total net sales or total revenue for each company, and which company had the higher figure?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:49",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 1.0
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:63",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.383825
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:161",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.35
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:76",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.324074
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:133",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.311111
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.298148
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-002",
+      "category": "comparison",
+      "question": "Between JPMorgan Chase & Co. and Bank of America Corporation, which company reported a higher net interest income for the 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:84",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:266",
+          "ticker": "PFE",
+          "item": "15",
+          "score": 0.653333
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:83",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.583333
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:73",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.42
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:459",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.418388
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:82",
+          "ticker": "BAC",
+          "item": "7",
+          "score": 0.306156
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-003",
+      "category": "comparison",
+      "question": "What was the total net income attributable to the parent organization for Exxon Mobil Corporation in FY2025 compared to Chevron Corporation in FY2025, and which company reported the higher amount?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:122",
+          "ticker": "CVX",
+          "item": "8",
+          "score": 0.778947
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:210",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:103",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.589474
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:211",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.552632
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:49",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.515789
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:212",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.405263
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-004",
+      "category": "comparison",
+      "question": "Between The Coca-Cola Company in its fiscal year 2025 and The Procter & Gamble Company in its fiscal year 2026, which entity generated the higher total net sales or operating revenues, and what were the exact figures for each?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:49",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:161",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.442105
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:49",
+          "ticker": "PG",
+          "item": "7",
+          "score": 0.403862
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:224",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.379155
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.368421
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:76",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.368421
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-005",
+      "category": "comparison",
+      "question": "What were the consolidated net sales for Walmart Inc. in fiscal year 2026 and for Amazon.com, Inc. in fiscal year 2025, and which company reported the larger figure?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:76",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.713367
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:49",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001018724-26-000004:51",
+          "ticker": "AMZN",
+          "item": "7",
+          "score": 0.653406
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.537672
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.505972
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:89",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.363111
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-006",
+      "category": "comparison",
+      "question": "Which company reported higher advertising revenue for their 2025 fiscal year: Alphabet Inc. or Meta Platforms, Inc.?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.850814
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:142",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.798739
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:141",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.730769
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:147",
+          "ticker": "GOOGL",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:161",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.646154
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000080424-26-000103:128",
+          "ticker": "PG",
+          "item": "15",
+          "score": 0.538462
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-007",
+      "category": "comparison",
+      "question": "Between Caterpillar Inc. and The Boeing Company, which company reported higher total revenues for FY2025, and what were the reported figures for each?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:179",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:180",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.6
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:161",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.5
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:153",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.461863
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:174",
+          "ticker": "BA",
+          "item": "15",
+          "score": 0.433333
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:160",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.433333
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-008",
+      "category": "comparison",
+      "question": "Between NVIDIA Corporation (FY2026) and Microsoft Corporation (FY2026), which company had the higher research and development expense, and what were the exact reported amounts?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:72",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 1.0
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000200406-26-000016:90",
+          "ticker": "JNJ",
+          "item": "8",
+          "score": 0.65
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:139",
+          "ticker": "MSFT",
+          "item": "15",
+          "score": 0.55
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:259",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.5
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:257",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.5
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:258",
+          "ticker": "KO",
+          "item": "15",
+          "score": 0.45
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "cmp-009",
+      "category": "comparison",
+      "question": "Between The Goldman Sachs Group, Inc. (FY2025) and JPMorgan Chase & Co. (FY2025), which company reported larger total net revenues for the year, and what were their respective figures?",
+      "answerable": true,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:84",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:83",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.491892
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:85",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.435135
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:449",
+          "ticker": "GS",
+          "item": "15",
+          "score": 0.416216
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:86",
+          "ticker": "JPM",
+          "item": "15",
+          "score": 0.397297
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:160",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.302703
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-001",
+      "category": "unanswerable",
+      "question": "What was Tesla's total revenue in fiscal 2025?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:153",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:142",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.668884
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:146",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.471128
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:141",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.470648
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.311111
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:85",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.3
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-002",
+      "category": "unanswerable",
+      "question": "How much did Netflix spend on content in 2025?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:299",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:128",
+          "ticker": "PFE",
+          "item": "7",
+          "score": 0.646154
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:128",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.597416
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:74",
+          "ticker": "JPM",
+          "item": "9B",
+          "score": 0.538461
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001744489-25-000155:156",
+          "ticker": "DIS",
+          "item": "8",
+          "score": 0.430769
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:146",
+          "ticker": "GOOGL",
+          "item": "15",
+          "score": 0.323077
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-003",
+      "category": "unanswerable",
+      "question": "What was Apple's net income in fiscal 2018?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:73",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:211",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:103",
+          "ticker": "WMT",
+          "item": "8",
+          "score": 0.65625
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:149",
+          "ticker": "PFE",
+          "item": "8",
+          "score": 0.56875
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001652044-26-000018:89",
+          "ticker": "GOOGL",
+          "item": "8",
+          "score": 0.4375
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:49",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.388848
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-004",
+      "category": "unanswerable",
+      "question": "What were Microsoft's total revenues in fiscal 2015?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:70",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.929561
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:153",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.626316
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:68",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.609824
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:122",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.373684
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:146",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.368421
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-003942:142",
+          "ticker": "META",
+          "item": "7",
+          "score": 0.294737
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-005",
+      "category": "unanswerable",
+      "question": "What is the name of Jamie Dimon's dog?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:455",
+          "ticker": "GS",
+          "item": "15",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:76",
+          "ticker": "JPM",
+          "item": "10",
+          "score": 0.35
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:74",
+          "ticker": "JPM",
+          "item": "9B",
+          "score": 0.326439
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:183",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.2
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:323",
+          "ticker": "JPM",
+          "item": "8",
+          "score": 0.15
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000018230-26-000008:182",
+          "ticker": "CAT",
+          "item": "15",
+          "score": 0.15
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-006",
+      "category": "unanswerable",
+      "question": "What will Coca-Cola's revenue be in fiscal 2030?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:153",
+          "ticker": "BA",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:10",
+          "ticker": "KO",
+          "item": "1",
+          "score": 0.49
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:160",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.49
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:142",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.49
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:161",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.42
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:70",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.42
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-007",
+      "category": "unanswerable",
+      "question": "What was Boeing's share price at the close on March 3, 2026?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:117",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000731766-26-000062:118",
+          "ticker": "UNH",
+          "item": "8",
+          "score": 0.406452
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:91",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.383871
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:157",
+          "ticker": "WMT",
+          "item": "15",
+          "score": 0.33871
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-004357:45",
+          "ticker": "BA",
+          "item": "5",
+          "score": 0.3
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:74",
+          "ticker": "JPM",
+          "item": "9B",
+          "score": 0.270968
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-008",
+      "category": "unanswerable",
+      "question": "How many Starbucks stores does Walmart operate inside its supercenters?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:93",
+          "ticker": "KO",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:10",
+          "ticker": "WMT",
+          "item": "1",
+          "score": 0.622008
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:8",
+          "ticker": "KO",
+          "item": "1",
+          "score": 0.55
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001628280-26-010047:224",
+          "ticker": "KO",
+          "item": "8",
+          "score": 0.45
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:223",
+          "ticker": "JPM",
+          "item": "7",
+          "score": 0.4
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000886982-26-000091:243",
+          "ticker": "GS",
+          "item": "7",
+          "score": 0.35
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-009",
+      "category": "unanswerable",
+      "question": "What was NVIDIA's revenue from selling cars in fiscal 2026?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:146",
+          "ticker": "NVDA",
+          "item": "8",
+          "score": 0.755694
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:85",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.7
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:84",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.636364
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:90",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.497945
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001045810-26-000021:85",
+          "ticker": "NVDA",
+          "item": "7",
+          "score": 0.476679
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000104169-26-000055:87",
+          "ticker": "WMT",
+          "item": "7",
+          "score": 0.445455
+        }
+      ],
+      "judgment": null
+    },
+    {
+      "id": "una-010",
+      "category": "unanswerable",
+      "question": "What did Chevron's CEO eat for breakfast at the 2025 annual meeting?",
+      "answerable": false,
+      "coverage_rank": null,
+      "answer": null,
+      "answered": null,
+      "error": null,
+      "server_ms": null,
+      "estimated_cost_usd": null,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:212",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.7
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001628280-26-008131:74",
+          "ticker": "JPM",
+          "item": "9B",
+          "score": 0.56875
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:210",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.525
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000070858-26-000157:299",
+          "ticker": "BAC",
+          "item": "8",
+          "score": 0.48125
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000093410-26-000078:211",
+          "ticker": "CVX",
+          "item": "16",
+          "score": 0.48125
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000078003-26-000026:128",
+          "ticker": "PFE",
+          "item": "7",
+          "score": 0.4375
+        }
+      ],
+      "judgment": null
+    }
+  ]
+}

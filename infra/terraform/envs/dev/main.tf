@@ -60,6 +60,8 @@ module "artifact_registry" {
   repository_id = local.name_prefix
   labels        = local.labels
   writers       = [module.iam.members["build"]]
+  # Vertex AI Pipelines pulls the app image as its custom-code service agent (eval pipeline).
+  readers = ["serviceAccount:service-${data.google_project.this.number}@gcp-sa-aiplatform-cc.iam.gserviceaccount.com"]
 
   depends_on = [module.project_services]
 }

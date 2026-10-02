@@ -149,8 +149,26 @@ make status                    # the index endpoint should list no deployed inde
 Vectors stay in the index while undeployed (upserts work without a deployment), so redeploying
 doesn't need re-ingestion.
 
-## 6. Evaluate
-`make eval` — _TBD (Phase 5)_
+## 6. Evaluate and release
+
+The golden set is `eval/golden_set/golden_v1.jsonl` (99 items, approved; see `REVIEW.md`). The
+baseline is `eval/baseline.json`.
+
+```bash
+make eval-retrieval                  # ~free: recall@k of local retrieval (ARGS="--mode hybrid" to compare)
+make eval                            # ~$1.75: full eval of the live API from this machine -> results/eval/
+make eval-pipeline                   # ~$1.80: same eval on Vertex AI Pipelines as the eval SA
+make release                         # ~$2: build -> no-traffic candidate -> pipeline -> promote if the gate passes
+```
+
+- **Re-baseline deliberately**, and only from a clean run, after an intentional change (new
+  model, new golden set): `make eval ARGS="--update-baseline"`. The runner refuses to baseline a
+  run with request errors.
+- **When the gate fails:** `results/eval/<ts>_<label>.json` lists each failed check, plus
+  per-question judgments (`items[].judgment.reasoning`). The candidate stays reachable at its
+  `candidate---…run.app` URL. Live traffic is unchanged.
+- **Pipeline runs:** Vertex AI → Pipelines in the console. Step logs are under
+  `resource.type="ml_job"` and arrive a minute or two after a step finishes.
 
 ## 7. Teardown
 
@@ -185,4 +203,12 @@ These are intentionally kept after `make down`:
 - **Cloud ingest exited non-zero but data looks complete:** check the run report in
   `gs://<bucket>/results/ingest/` and `/health` counts. Cloud Run retries a failed task once, and
   ingestion is idempotent, so retries are safe.
+- **Pipeline fails at creation with "does not have permission to access Artifact Registry":**
+  the Vertex AI custom-code service agent needs `artifactregistry.reader` on the repository
+  (Terraform grants it).
+- **Pipeline step: "could not obtain an ID token":** Vertex custom jobs' metadata server doesn't
+  issue ID tokens. The eval SA needs `roles/iam.serviceAccountOpenIdTokenCreator` on itself
+  (Terraform grants it).
+- **Eval run has request errors (502/504):** Gemini global-endpoint congestion. Re-run later.
+  Errored runs are never used as a baseline.
 - **Local DB port conflict:** the project uses 5433. Change `PG_PORT` in `.env` if that's taken too.

@@ -175,3 +175,9 @@ def test_unavailable_backend_maps_to_501() -> None:
     with client_for(FakeService(error=NotImplementedError("vertex backend is Phase 4"))) as c:
         r = c.post("/query", json={"question": "What were sales?"})
     assert r.status_code == 501
+
+
+def test_model_timeout_maps_to_504() -> None:
+    with client_for(FakeService(error=TimeoutError())) as c:
+        r = c.post("/query", json={"question": "What were sales?"})
+    assert r.status_code == 504 and "timed out" in r.json()["detail"]

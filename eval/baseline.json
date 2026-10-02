@@ -1,0 +1,72 @@
+{
+  "source_run": "results/eval/20261002T135259Z_api_pgvector_vector_baseline.json",
+  "config": {
+    "target": "api",
+    "url": "https://rag-dev-api-lmjqazpplq-uc.a.run.app",
+    "mode": "vector",
+    "backend": null,
+    "top_k": 6,
+    "retrieval_only": false,
+    "limit": null,
+    "generation_model": "gemini-3.8-flash",
+    "judge_model": "gemini-3.1-pro-preview",
+    "vector_weight": 0.7,
+    "concurrency": 2
+  },
+  "metrics": {
+    "retrieval": {
+      "n": 89,
+      "recall@1": 0.5955,
+      "recall@3": 0.7416,
+      "recall@6": 0.8539,
+      "mrr": 0.6856,
+      "by_category": {
+        "numeric": {
+          "n": 60,
+          "recall@6": 0.9
+        },
+        "narrative": {
+          "n": 20,
+          "recall@6": 0.9
+        },
+        "comparison": {
+          "n": 9,
+          "recall@6": 0.4444
+        }
+      }
+    },
+    "ops": {
+      "n": 99,
+      "errors": 0,
+      "retried_requests": 5,
+      "latency_ms_p50": 4928.9,
+      "latency_ms_p95": 37062.0,
+      "mean_cost_usd": 0.004328,
+      "cost_per_1k_queries_usd": 4.33
+    },
+    "answers": {
+      "n_judged": 99,
+      "correctness_score": 0.9382,
+      "accuracy": 0.9326,
+      "false_refusal_rate": 0.0449,
+      "refusal_accuracy": 1.0,
+      "hallucination_rate": 0.0,
+      "faithfulness_rate": 1.0,
+      "invalid_citations_total": 0,
+      "by_category": {
+        "numeric": {
+          "n": 60,
+          "correctness_score": 0.95
+        },
+        "narrative": {
+          "n": 20,
+          "correctness_score": 0.95
+        },
+        "comparison": {
+          "n": 9,
+          "correctness_score": 0.8333
+        }
+      }
+    }
+  }
+}

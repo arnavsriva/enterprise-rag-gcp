@@ -42,7 +42,8 @@ class Settings(BaseSettings):
 
     # --- Retrieval
     retrieval_backend: RetrievalBackend = RetrievalBackend.PGVECTOR
-    retrieval_mode: Literal["vector", "hybrid"] = "hybrid"
+    # Vector-only won on the golden set (recall@6 0.843 vs <= 0.843 hybrid; see ADR-0008).
+    retrieval_mode: Literal["vector", "hybrid"] = "vector"
     retrieval_top_k: int = Field(default=6, gt=0, le=50)
     retrieval_candidates: int = Field(default=30, gt=0, le=200)  # per retriever, before fusion
     # Hybrid fusion weight for the vector retriever (keyword gets 1 - this). See ADR-0006.

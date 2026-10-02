@@ -17,7 +17,7 @@ GCP_REGION     ?= $(or $(call env_var,GCP_REGION),us-central1)
 .DEFAULT_GOAL := help
 .PHONY: help setup lock lint fmt test test-db db-up db-down migrate \
         tf-init tf-validate tf-plan up down status corpus ingest-dry ingest \
-        serve ask smoke smoke-cloud image deploy ingest-cloud cloud-ask eval bench
+        serve ask smoke smoke-cloud image deploy ingest-cloud cloud-ask eval eval-retrieval eval-pipeline release bench
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -153,8 +153,21 @@ ingest-dry: ## Download + parse + chunk; estimate tokens/cost (no API calls, no 
 ingest: ## [BILLABLE, ~$0.45 full corpus] Embed + store filings; unchanged ones are skipped. ARGS="--tickers AAPL"
 	$(BIN)/python -m ingest.run $(ARGS)
 
-eval: ## [BILLABLE] Run the evaluation pipeline against the golden set
-	@echo "eval: not implemented yet (Phase 5)"; exit 1
+eval: ## [BILLABLE, ~$1.70] Golden-set eval of the deployed API from this machine -> results/eval/
+	$(BIN)/python -m eval.run --target api --url $$($(TF_OUT) api_url) $(ARGS)
+
+eval-retrieval: ## [~free] Recall@k of local retrieval only (no generation, no judge). ARGS="--mode hybrid"
+	$(BIN)/python -m eval.run --target local --retrieval-only $(ARGS)
+
+eval-pipeline: ## [BILLABLE, ~$1.80] Same eval on Vertex AI Pipelines (as the eval SA) against the live API
+	@test -f .last-image || { echo "run 'make image' first"; exit 1; }
+	$(BIN)/python -m eval.pipelines.submit --image $$(cat .last-image) --api-url $$($(TF_OUT) api_url) \
+	  --project $(GCP_PROJECT_ID) --region $(GCP_REGION) --bucket $$($(TF_OUT) bucket) \
+	  --service-account $$(terraform -chdir=$(TF_DIR) output -json service_accounts | python3 -c 'import sys,json;print(json.load(sys.stdin)["eval"])') \
+	  --wait $(ARGS)
+
+release: ## [BILLABLE, ~$2] Build -> no-traffic candidate -> eval pipeline -> promote only if the gate passes
+	GCP_PROJECT_ID=$(GCP_PROJECT_ID) GCP_REGION=$(GCP_REGION) scripts/release.sh
 
 bench: ## [BILLABLE] Benchmark Vector Search vs pgvector
 	@echo "bench: not implemented yet (Phase 6)"; exit 1

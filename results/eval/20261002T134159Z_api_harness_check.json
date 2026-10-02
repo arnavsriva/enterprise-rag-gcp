@@ -1,0 +1,457 @@
+{
+  "label": "api_harness_check",
+  "started_at": "2026-10-02T13:41:59+00:00",
+  "finished_at": "2026-10-02T13:42:47+00:00",
+  "golden_set": "eval/golden_set/golden_v1.jsonl",
+  "n_items": 5,
+  "config": {
+    "target": "api",
+    "url": "https://rag-dev-api-lmjqazpplq-uc.a.run.app",
+    "mode": "vector",
+    "backend": null,
+    "top_k": 6,
+    "retrieval_only": false,
+    "limit": 5,
+    "generation_model": "gemini-3.8-flash",
+    "judge_model": "gemini-3.1-pro-preview",
+    "vector_weight": 0.7,
+    "concurrency": 4
+  },
+  "metrics": {
+    "retrieval": {
+      "n": 5,
+      "recall@1": 0.2,
+      "recall@3": 0.8,
+      "recall@6": 1.0,
+      "mrr": 0.4833,
+      "by_category": {
+        "numeric": {
+          "n": 5,
+          "recall@6": 1.0
+        },
+        "narrative": {
+          "n": 0,
+          "recall@6": null
+        },
+        "comparison": {
+          "n": 0,
+          "recall@6": null
+        }
+      }
+    },
+    "ops": {
+      "n": 5,
+      "errors": 0,
+      "latency_ms_p50": 4116.8,
+      "latency_ms_p95": 19233.4,
+      "mean_cost_usd": 0.004677,
+      "cost_per_1k_queries_usd": 4.68
+    },
+    "answers": {
+      "n_judged": 5,
+      "correctness_score": 1.0,
+      "accuracy": 1.0,
+      "false_refusal_rate": 0.0,
+      "refusal_accuracy": null,
+      "hallucination_rate": 0.0,
+      "faithfulness_rate": 1.0,
+      "invalid_citations_total": 0,
+      "by_category": {
+        "numeric": {
+          "n": 5,
+          "correctness_score": 1.0
+        },
+        "narrative": {
+          "n": 0,
+          "correctness_score": null
+        },
+        "comparison": {
+          "n": 0,
+          "correctness_score": null
+        }
+      }
+    }
+  },
+  "gate": null,
+  "cost_usd": {
+    "system_estimated": 0.0234,
+    "judge_estimated": 0.066
+  },
+  "judge": {
+    "model": "gemini-3.1-pro-preview",
+    "usage": {
+      "embedding_tokens": 0,
+      "input_tokens": 29389,
+      "output_tokens": 381,
+      "thinking_tokens": 223,
+      "model_calls": 5
+    }
+  },
+  "items": [
+    {
+      "id": "num-001",
+      "category": "numeric",
+      "question": "How much money did Apple Inc. spend on buying back its own common stock during the 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": 4,
+      "answer": "Apple Inc. reported the following figures for repurchases of its common stock in fiscal year 2025:\n\n* **$90,711 million** under \"Repurchases of common stock\" in the Consolidated Statements of Cash Flows [2].\n* **$89.3 billion** (for 402 million shares repurchased) in Note 10 (*Shareholders\u2019 Equity*) and Item 7 (*Capital Return Program*) [4][5].\n* **$90,052 million** under \"Common stock repurchased\" within the Accumulated Deficit section of the Consolidated Statements of Shareholders\u2019 Equity [3].",
+      "answered": true,
+      "error": null,
+      "server_ms": 4116.8,
+      "estimated_cost_usd": 0.00533025,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:45",
+          "ticker": "AAPL",
+          "item": "5",
+          "score": 0.797889
+        },
+        {
+          "n": 2,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:60",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.78632
+        },
+        {
+          "n": 3,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:59",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.780211
+        },
+        {
+          "n": 4,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:52",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.776947
+        },
+        {
+          "n": 5,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:73",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.773519
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:57",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.750054
+        }
+      ],
+      "judgment": {
+        "item_id": "num-001",
+        "correctness": "correct",
+        "faithful": true,
+        "appropriate_refusal": null,
+        "fabricated": null,
+        "unsupported_claims": [],
+        "reasoning": "The system correctly identifies the $89.3 billion figure for repurchases of common stock, which matches the ground truth. It also accurately extracts other related figures from the provided sources (such as the cash flow statement and statements of shareholders' equity), all of which are supported by the provided text.",
+        "error": null,
+        "hallucinated": false
+      }
+    },
+    {
+      "id": "num-002",
+      "category": "numeric",
+      "question": "What was the total amount of Apple's unrecorded compensation expenses tied to unvested restricted stock units at the end of fiscal 2025?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": "As of September 27, 2025, the total unrecognized compensation cost related to outstanding RSUs was $21.8 billion, which Apple expects to recognize over a weighted-average period of 2.5 years [1].",
+      "answered": true,
+      "error": null,
+      "server_ms": 3522.7,
+      "estimated_cost_usd": 0.00517755,
+      "sources": [
+        {
+          "n": 1,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:74",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.819224
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:73",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.780355
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:64",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.757751
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:58",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.75238
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:68",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.752369
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:70",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.751586
+        }
+      ],
+      "judgment": {
+        "item_id": "num-002",
+        "correctness": "correct",
+        "faithful": true,
+        "appropriate_refusal": null,
+        "fabricated": null,
+        "unsupported_claims": [],
+        "reasoning": "The system correctly identified the amount of unrecorded/unrecognized compensation cost related to outstanding RSUs as $21.8 billion, which matches the ground truth and is fully supported by source [1].",
+        "error": null,
+        "hallucinated": false
+      }
+    },
+    {
+      "id": "num-003",
+      "category": "numeric",
+      "question": "For Apple in fiscal year 2025, what was the total amount of manufacturing purchase commitments that were scheduled to be paid within the upcoming twelve months?",
+      "answerable": true,
+      "coverage_rank": 3,
+      "answer": "As of September 27, 2025, Apple had **$55.4 billion** of manufacturing purchase obligations payable within 12 months (out of $56.2 billion in total manufacturing purchase obligations) [3].",
+      "answered": true,
+      "error": null,
+      "server_ms": 19233.4,
+      "estimated_cost_usd": 0.00394155,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:52",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.78654
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:72",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.781261
+        },
+        {
+          "n": 3,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:51",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.774687
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:60",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.774159
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:74",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.76676
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:75",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.765379
+        }
+      ],
+      "judgment": {
+        "item_id": "num-003",
+        "correctness": "correct",
+        "faithful": true,
+        "appropriate_refusal": null,
+        "fabricated": null,
+        "unsupported_claims": [],
+        "reasoning": "The system correctly identified that Apple had $55.4 billion of manufacturing purchase obligations payable within 12 months, which matches the ground truth. This fact is directly supported by Source [3].",
+        "error": null,
+        "hallucinated": false
+      }
+    },
+    {
+      "id": "num-004",
+      "category": "numeric",
+      "question": "How much did Microsoft record for its depreciation expense during fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": 3,
+      "answer": "Microsoft recorded **$34.3 billion** for depreciation expense during fiscal year 2026 [3].",
+      "answered": true,
+      "error": null,
+      "server_ms": 5593.4,
+      "estimated_cost_usd": 0.0044787,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:123",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.788601
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:99",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.774275
+        },
+        {
+          "n": 3,
+          "cited": true,
+          "chunk_id": "0001193125-26-323660:106",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.771891
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:109",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.768047
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:100",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.766579
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:116",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.766196
+        }
+      ],
+      "judgment": {
+        "item_id": "num-004",
+        "correctness": "correct",
+        "faithful": true,
+        "appropriate_refusal": null,
+        "fabricated": null,
+        "unsupported_claims": [],
+        "reasoning": "The system correctly identified the depreciation expense for fiscal year 2026 as $34.3 billion, which matches the reference answer and is supported by source [3].",
+        "error": null,
+        "hallucinated": false
+      }
+    },
+    {
+      "id": "num-005",
+      "category": "numeric",
+      "question": "What was the total amount of aggregate legal liabilities that Microsoft had accrued by the end of fiscal year 2026?",
+      "answerable": true,
+      "coverage_rank": 2,
+      "answer": "As of June 30, 2026 (the end of fiscal year 2026), Microsoft had accrued aggregate legal liabilities of $553 million [2].",
+      "answered": true,
+      "error": null,
+      "server_ms": 1429.5,
+      "estimated_cost_usd": 0.00445725,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:60",
+          "ticker": "MSFT",
+          "item": "3",
+          "score": 0.783359
+        },
+        {
+          "n": 2,
+          "cited": true,
+          "chunk_id": "0001193125-26-323660:116",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.774138
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:109",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.749795
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:77",
+          "ticker": "MSFT",
+          "item": "7",
+          "score": 0.749492
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:114",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.749413
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0001193125-26-323660:122",
+          "ticker": "MSFT",
+          "item": "8",
+          "score": 0.747377
+        }
+      ],
+      "judgment": {
+        "item_id": "num-005",
+        "correctness": "correct",
+        "faithful": true,
+        "appropriate_refusal": null,
+        "fabricated": null,
+        "unsupported_claims": [],
+        "reasoning": "The system correctly identified the accrued aggregate legal liabilities as $553 million, matching both the reference answer and the provided source text.",
+        "error": null,
+        "hallucinated": false
+      }
+    }
+  ]
+}

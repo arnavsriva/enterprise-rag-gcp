@@ -81,6 +81,15 @@ resource "google_service_account_iam_member" "eval_act_as_self" {
   member             = google_service_account.this["eval"].member
 }
 
+# The eval pipeline calls the IAM-protected API. Vertex AI custom jobs' metadata server does not
+# issue ID tokens (404), so the eval SA mints its own via the IAM Credentials API. This narrow
+# role allows only OIDC ID tokens (not access tokens), and only for itself.
+resource "google_service_account_iam_member" "eval_id_token_self" {
+  service_account_id = google_service_account.this["eval"].name
+  role               = "roles/iam.serviceAccountOpenIdTokenCreator"
+  member             = google_service_account.this["eval"].member
+}
+
 output "emails" {
   description = "Service account email per workload (api, ingest, eval)."
   value       = { for k, sa in google_service_account.this : k => sa.email }

@@ -81,7 +81,25 @@ cost estimate first.
 
 ## Evaluation
 
-_Golden set (~100 questions), metrics, and gating logic — documented in the eval phase._
+- **Golden set:** [`eval/golden_set/golden_v1.jsonl`](eval/golden_set/golden_v1.jsonl), 99
+  questions, human-approved ([`REVIEW.md`](eval/golden_set/REVIEW.md)):
+  - 60 numeric and 20 narrative single-company questions,
+  - 9 two-company comparisons,
+  - 10 unanswerable questions.
+- **Relevance labels:** each answerable item carries a verbatim evidence quote from the filing,
+  so retrieval is scored by evidence rather than chunk IDs.
+- **Metrics:**
+  - retrieval: recall@1/3/6 and MRR;
+  - answers, graded by an **LLM judge** (Gemini 3.1 Pro, a different model from the generator):
+    correctness against the reference, faithfulness to the retrieved sources, hallucination rate,
+    refusal accuracy, false refusals and invalid citations;
+  - ops: errors, latency and cost.
+- **Gate:** [`eval/gate.py`](eval/gate.py) compares each run with
+  [`eval/baseline.json`](eval/baseline.json), using noise tolerances plus hard limits
+  (hallucination ≤ 10%, refusal accuracy ≥ 80%).
+- **Release:** `make release` deploys a no-traffic candidate revision and runs the evaluation as
+  a **Vertex AI Pipelines (KFP v2)** job against it. It promotes the candidate only if the gate
+  passes. See [ADR-0008](docs/adr/0008-evaluation-and-release-gate.md).
 
 ## Results
 
@@ -111,6 +129,43 @@ global endpoint, thinking LOW, hybrid retrieval, top-k 6):
 
 This is a smoke test (small n, no ground truth), not an evaluation. Retrieval recall and answer
 faithfulness come from the Phase 5 golden set.
+
+### Golden-set evaluation (Phase 5)
+
+**Baseline:** [`results/eval/20261002T135259Z_api_pgvector_vector_baseline.json`](results/eval/20261002T135259Z_api_pgvector_vector_baseline.json).
+99 questions against the deployed API (Cloud Run → Cloud SQL pgvector, vector retrieval,
+`gemini-3.8-flash`), judged by `gemini-3.1-pro-preview`, with 0 request errors.
+
+| Retrieval recall@1 / @3 / @6 | MRR | Correctness | Hallucination rate | Faithfulness | Refusal accuracy | False refusals | Cost / 1K queries |
+|---|---|---|---|---|---|---|---|
+| 0.596 / 0.742 / 0.854 | 0.686 | 0.938 (93.3% fully correct) | 0.0% | 100% | 10 / 10 | 4.5% | $4.33 |
+
+- **By category:** recall@6 is 0.90 for numeric, 0.90 for narrative and **0.44 for comparisons**
+  (both companies must be retrieved in one search).
+- **All 5 wrong answers trace to retrieval misses.** In each case the system refused (4) or
+  faithfully reported what it did retrieve (1). None were hallucinated.
+- **Server latency** was p50 4.9 s / p95 37.1 s during this run (Gemini endpoint congestion; see
+  ADR-0007).
+
+**Evaluation-gated release** ([`results/eval/20261002T170420Z_release-22331e5.json`](results/eval/20261002T170420Z_release-22331e5.json)):
+`make release` deployed a no-traffic candidate and evaluated it on **Vertex AI Pipelines**.
+- **Gate passed, and the candidate was promoted to 100% of traffic.**
+- **Retrieval** was identical to the baseline (recall@6 0.854, MRR 0.686; it's deterministic).
+- **Correctness** was 0.927 vs 0.938, and false refusals 5.6% vs 4.5%: about one question of
+  run-to-run variation from generation at temperature 1.0 and the LLM judge, within the gate's
+  tolerances.
+- **Unchanged:** hallucination 0%, refusal accuracy 10/10, 0 errors.
+- **Latency:** p50 1.8 s / p95 7.0 s in this window.
+- An earlier release attempt was correctly **blocked** by the gate: 99/99 requests failed with
+  401, because ID tokens were minted for the tag URL. Fixed (ADR-0008).
+
+**Retrieval mode** (retrieval only, same golden set, `results/eval/*_retrieval.json`):
+
+| Mode | recall@1 | recall@6 | MRR |
+|---|---|---|---|
+| vector (default) | 0.596 | 0.843 | 0.683 |
+| hybrid, vector weight 0.7 | 0.573 | 0.843 | 0.671 |
+| hybrid, vector weight 0.5 | 0.494 | 0.798 | 0.600 |
 
 ### On GCP (Phase 4)
 

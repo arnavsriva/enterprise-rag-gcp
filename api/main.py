@@ -106,6 +106,13 @@ def create_app(
             status_code=502, content={"detail": f"upstream model error ({exc.code})"}
         )
 
+    @app.exception_handler(TimeoutError)
+    async def model_timeout(request: Request, exc: TimeoutError) -> JSONResponse:
+        log.warning("model timeout after retries", extra={"request_id": request.state.request_id})
+        return JSONResponse(
+            status_code=504, content={"detail": "model timed out after retries; try again"}
+        )
+
     @app.exception_handler(NotImplementedError)
     async def not_implemented(request: Request, exc: NotImplementedError) -> JSONResponse:
         return JSONResponse(status_code=501, content={"detail": str(exc)})
@@ -167,7 +174,8 @@ def create_app(
             answer=result.answer,
             answered=result.answered,
             sources=[
-                Source.from_chunk(i, c, i in cited) for i, c in enumerate(result.chunks, start=1)
+                Source.from_chunk(i, c, i in cited, full_text=body.include_source_text)
+                for i, c in enumerate(result.chunks, start=1)
             ],
             invalid_citations=result.invalid_citations,
             usage=UsageOut.from_usage(result.usage),

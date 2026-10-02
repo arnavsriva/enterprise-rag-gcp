@@ -1,0 +1,22 @@
+{
+  "started_at": "2026-10-02T13:19:04+00:00",
+  "drafting_model": "gemini-3.1-pro-preview",
+  "seed": 20261002,
+  "counts": {
+    "numeric": 60,
+    "narrative": 20,
+    "comparison": 9,
+    "unanswerable": 10
+  },
+  "llm_calls": 92,
+  "accepted": 89,
+  "rejections": {
+    "model_skipped": 3
+  },
+  "tokens": {
+    "input": 129092,
+    "output": 9344,
+    "thinking": 49066
+  },
+  "estimated_cost_usd": 0.9591
+}

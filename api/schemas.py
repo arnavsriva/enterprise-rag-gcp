@@ -21,6 +21,10 @@ class QueryRequest(BaseModel):
     backend: Literal["pgvector", "vertex_vector_search"] | None = Field(
         default=None, description="Override the vector backend for this request (A/B comparisons)"
     )
+    include_source_text: bool = Field(
+        default=False,
+        description="Return each source's full text (used by the evaluation pipeline)",
+    )
 
 
 class AgentRequest(BaseModel):
@@ -41,9 +45,12 @@ class Source(BaseModel):
     source_url: str
     score: float
     excerpt: str
+    text: str | None = None
 
     @classmethod
-    def from_chunk(cls, n: int, chunk: RetrievedChunk, cited: bool) -> Source:
+    def from_chunk(
+        cls, n: int, chunk: RetrievedChunk, cited: bool, full_text: bool = False
+    ) -> Source:
         excerpt = " ".join(chunk.content.split())
         return cls(
             n=n,
@@ -57,6 +64,7 @@ class Source(BaseModel):
             source_url=chunk.source_url,
             score=round(chunk.score, 6),
             excerpt=excerpt[:300] + ("…" if len(excerpt) > 300 else ""),
+            text=chunk.content if full_text else None,
         )
 
 

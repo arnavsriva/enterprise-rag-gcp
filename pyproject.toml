@@ -49,6 +49,13 @@ warn_unused_configs = false  # overrides below pre-declare libs used in later ph
 exclude = ["^\\.venv/", "^infra/"]
 
 [[tool.mypy.overrides]]
+module = ["eval.pipelines.eval_pipeline"]
+# KFP's @dsl decorators are untyped and the DSL relies on runtime annotations.
+disallow_untyped_decorators = false
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[[tool.mypy.overrides]]
 module = [
   "google.*",
   "vertexai.*",

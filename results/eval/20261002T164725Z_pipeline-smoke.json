@@ -1,0 +1,382 @@
+{
+  "label": "pipeline-smoke",
+  "started_at": "2026-10-02T16:47:25+00:00",
+  "finished_at": "2026-10-02T16:51:07+00:00",
+  "golden_set": "eval/golden_set/golden_v1.jsonl",
+  "n_items": 3,
+  "config": {
+    "target": "api",
+    "url": "https://rag-dev-api-lmjqazpplq-uc.a.run.app",
+    "mode": "",
+    "backend": "",
+    "limit": 3,
+    "runner": "vertex-ai-pipelines",
+    "judge_model": "gemini-3.1-pro-preview"
+  },
+  "metrics": {
+    "retrieval": {
+      "n": 3,
+      "recall@1": 0.3333,
+      "recall@3": 0.6667,
+      "recall@6": 1.0,
+      "mrr": 0.5278,
+      "by_category": {
+        "numeric": {
+          "n": 3,
+          "recall@6": 1.0
+        },
+        "narrative": {
+          "n": 0,
+          "recall@6": null
+        },
+        "comparison": {
+          "n": 0,
+          "recall@6": null
+        }
+      }
+    },
+    "ops": {
+      "n": 3,
+      "errors": 0,
+      "retried_requests": 0,
+      "latency_ms_p50": 3100.8,
+      "latency_ms_p95": 5238.4,
+      "mean_cost_usd": 0.004834,
+      "cost_per_1k_queries_usd": 4.83
+    },
+    "answers": {
+      "n_judged": 3,
+      "correctness_score": 1.0,
+      "accuracy": 1.0,
+      "false_refusal_rate": 0.0,
+      "refusal_accuracy": null,
+      "hallucination_rate": 0.0,
+      "faithfulness_rate": 1.0,
+      "invalid_citations_total": 0,
+      "by_category": {
+        "numeric": {
+          "n": 3,
+          "correctness_score": 1.0
+        },
+        "narrative": {
+          "n": 0,
+          "correctness_score": null
+        },
+        "comparison": {
+          "n": 0,
+          "correctness_score": null
+        }
+      }
+    }
+  },
+  "gate": {
+    "baseline": "/app/eval/baseline.json",
+    "passed": false,
+    "failures": [
+      "retrieval.mrr: 0.5278 vs baseline 0.6856 (worse by 0.1578 > 0.05)"
+    ],
+    "checks": [
+      {
+        "metric": "retrieval.recall@6",
+        "current": 1.0,
+        "baseline": 0.8539,
+        "delta": 0.1461,
+        "tolerance": 0.03,
+        "status": "pass"
+      },
+      {
+        "metric": "retrieval.mrr",
+        "current": 0.5278,
+        "baseline": 0.6856,
+        "delta": -0.1578,
+        "tolerance": 0.05,
+        "status": "fail"
+      },
+      {
+        "metric": "answers.correctness_score",
+        "current": 1.0,
+        "baseline": 0.9382,
+        "delta": 0.0618,
+        "tolerance": 0.05,
+        "status": "pass"
+      },
+      {
+        "metric": "answers.hallucination_rate",
+        "current": 0.0,
+        "baseline": 0.0,
+        "delta": 0.0,
+        "tolerance": 0.03,
+        "status": "pass"
+      },
+      {
+        "metric": "answers.false_refusal_rate",
+        "current": 0.0,
+        "baseline": 0.0449,
+        "delta": -0.0449,
+        "tolerance": 0.05,
+        "status": "pass"
+      },
+      {
+        "metric": "answers.refusal_accuracy",
+        "current": null,
+        "baseline": 1.0,
+        "status": "skipped"
+      },
+      {
+        "metric": "answers.invalid_citations_total",
+        "current": 0.0,
+        "baseline": 0.0,
+        "delta": 0.0,
+        "tolerance": 2,
+        "status": "pass"
+      },
+      {
+        "metric": "answers.hallucination_rate",
+        "current": 0.0,
+        "limit": "max 0.1",
+        "status": "pass"
+      },
+      {
+        "metric": "ops.errors",
+        "current": 0.0,
+        "limit": "max 2",
+        "status": "pass"
+      }
+    ]
+  },
+  "cost_usd": {
+    "system_estimated": 0.0145,
+    "judge_estimated": 0.0415
+  },
+  "judge": {
+    "model": "gemini-3.1-pro-preview",
+    "usage": {
+      "embedding_tokens": 0,
+      "input_tokens": 17957,
+      "output_tokens": 225,
+      "thinking_tokens": 237,
+      "model_calls": 3
+    }
+  },
+  "items": [
+    {
+      "id": "num-001",
+      "category": "numeric",
+      "question": "How much money did Apple Inc. spend on buying back its own common stock during the 2025 fiscal year?",
+      "answerable": true,
+      "coverage_rank": 4,
+      "answer": "Depending on the statement or disclosure referenced, Apple Inc. reported the following for common stock repurchases during the 2025 fiscal year:\n\n* **$90,711 million** ($90.711 billion) under \"Repurchases of common stock\" in the Consolidated Statements of Cash Flows financing activities [2].\n* **$90,052 million** under \"Common stock repurchased\" within accumulated deficit in the Consolidated Statements of Shareholders\u2019 Equity [3].\n* **$89.3 billion** repurchased (402 million shares) as disclosed in Note 10 (Shareholders\u2019 Equity) and Management's Discussion and Analysis [4][5].",
+      "answered": true,
+      "error": null,
+      "server_ms": 3100.8,
+      "estimated_cost_usd": 0.00537525,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:45",
+          "ticker": "AAPL",
+          "item": "5",
+          "score": 0.797889
+        },
+        {
+          "n": 2,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:60",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.78632
+        },
+        {
+          "n": 3,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:59",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.780211
+        },
+        {
+          "n": 4,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:52",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.776947
+        },
+        {
+          "n": 5,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:73",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.773519
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:57",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.750054
+        }
+      ],
+      "judgment": {
+        "item_id": "num-001",
+        "correctness": "correct",
+        "faithful": true,
+        "appropriate_refusal": null,
+        "fabricated": null,
+        "unsupported_claims": [],
+        "reasoning": "The system correctly identifies the $89.3 billion figure matching the reference answer. It also accurately extracts other related figures from the provided SEC filings (the cash flow statement and the statement of shareholders' equity), which are fully supported by the retrieved excerpts.",
+        "error": null,
+        "hallucinated": false
+      }
+    },
+    {
+      "id": "num-002",
+      "category": "numeric",
+      "question": "What was the total amount of Apple's unrecorded compensation expenses tied to unvested restricted stock units at the end of fiscal 2025?",
+      "answerable": true,
+      "coverage_rank": 1,
+      "answer": "As of September 27, 2025, the total unrecognized compensation cost related to outstanding RSUs was $21.8 billion [1]. The Company expects to recognize this cost over a weighted-average period of 2.5 years [1].",
+      "answered": true,
+      "error": null,
+      "server_ms": 5238.4,
+      "estimated_cost_usd": 0.00519255,
+      "sources": [
+        {
+          "n": 1,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:74",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.819224
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:73",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.780355
+        },
+        {
+          "n": 3,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:64",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.757751
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:58",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.75238
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:68",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.752369
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:70",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.751586
+        }
+      ],
+      "judgment": {
+        "item_id": "num-002",
+        "correctness": "correct",
+        "faithful": true,
+        "appropriate_refusal": null,
+        "fabricated": null,
+        "unsupported_claims": [],
+        "reasoning": "The system correctly identified the amount as $21.8 billion, matching the reference answer. The answer is completely faithful to the text in Source [1].",
+        "error": null,
+        "hallucinated": false
+      }
+    },
+    {
+      "id": "num-003",
+      "category": "numeric",
+      "question": "For Apple in fiscal year 2025, what was the total amount of manufacturing purchase commitments that were scheduled to be paid within the upcoming twelve months?",
+      "answerable": true,
+      "coverage_rank": 3,
+      "answer": "As of September 27, 2025, Apple had **$55.4 billion** of manufacturing purchase obligations payable within 12 months (out of a total of $56.2 billion) [3].",
+      "answered": true,
+      "error": null,
+      "server_ms": 2127.9,
+      "estimated_cost_usd": 0.00393405,
+      "sources": [
+        {
+          "n": 1,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:52",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.78654
+        },
+        {
+          "n": 2,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:72",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.781261
+        },
+        {
+          "n": 3,
+          "cited": true,
+          "chunk_id": "0000320193-25-000079:51",
+          "ticker": "AAPL",
+          "item": "7",
+          "score": 0.774687
+        },
+        {
+          "n": 4,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:60",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.774159
+        },
+        {
+          "n": 5,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:74",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.76676
+        },
+        {
+          "n": 6,
+          "cited": false,
+          "chunk_id": "0000320193-25-000079:75",
+          "ticker": "AAPL",
+          "item": "8",
+          "score": 0.765379
+        }
+      ],
+      "judgment": {
+        "item_id": "num-003",
+        "correctness": "correct",
+        "faithful": true,
+        "appropriate_refusal": null,
+        "fabricated": null,
+        "unsupported_claims": [],
+        "reasoning": "The system correctly identified that Apple had $55.4 billion in manufacturing purchase obligations payable within 12 months, perfectly matching the reference answer and fully supported by source [3].",
+        "error": null,
+        "hallucinated": false
+      }
+    }
+  ]
+}

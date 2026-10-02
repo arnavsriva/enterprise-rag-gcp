@@ -49,6 +49,22 @@ resource "google_artifact_registry_repository" "this" {
   }
 }
 
+variable "readers" {
+  description = "IAM members allowed to pull images (e.g. the Vertex AI custom-code service agent)."
+  type        = list(string)
+  default     = []
+}
+
+resource "google_artifact_registry_repository_iam_member" "reader" {
+  for_each = toset(var.readers)
+
+  project    = var.project_id
+  location   = var.region
+  repository = google_artifact_registry_repository.this.name
+  role       = "roles/artifactregistry.reader"
+  member     = each.value
+}
+
 resource "google_artifact_registry_repository_iam_member" "writer" {
   for_each = toset(var.writers)
 
