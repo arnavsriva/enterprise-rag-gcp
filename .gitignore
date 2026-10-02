@@ -66,8 +66,9 @@ eval/pipelines/*.yaml.compiled
 .ipynb_checkpoints/
 */.ipynb_checkpoints/
 
-# ---------------------------------------------------------------- Local AI-assistant instructions
+# ---------------------------------------------------------------- Local-only notes and AI-assistant instructions
 CLAUDE.md
+notes/
 
 # ---------------------------------------------------------------- OS / editors
 .DS_Store
