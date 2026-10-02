@@ -11,6 +11,7 @@ are therefore not deterministic run-to-run; see docs/exec_brief.md.
 
 from __future__ import annotations
 
+import asyncio
 import re
 from dataclasses import dataclass, field
 from typing import Any
@@ -93,12 +94,14 @@ class Generator:
         thinking_level: str = "LOW",
         max_output_tokens: int = 2048,
         max_retries: int = 3,
+        timeout_s: float = 15.0,
     ) -> None:
         self._client = client
         self.model = model
         self._thinking_level = thinking_level
         self._max_output_tokens = max_output_tokens
         self._max_retries = max_retries
+        self._timeout_s = timeout_s
 
     async def generate(self, question: str, chunks: list[RetrievedChunk]) -> Generation:
         config = types.GenerateContentConfig(
@@ -107,11 +110,17 @@ class Generator:
                 thinking_level=types.ThinkingLevel(self._thinking_level)
             ),
             max_output_tokens=self._max_output_tokens,
+            # No tools are passed; disabling AFC also silences a per-request SDK warning.
+            automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
         )
         async for attempt in retrying(self._max_retries):
             with attempt:
-                response = await self._client.aio.models.generate_content(
-                    model=self.model, contents=build_prompt(question, chunks), config=config
+                # TimeoutError is retryable (common.genai.is_retryable), so a queued call is retried.
+                response = await asyncio.wait_for(
+                    self._client.aio.models.generate_content(
+                        model=self.model, contents=build_prompt(question, chunks), config=config
+                    ),
+                    timeout=self._timeout_s,
                 )
         text = (response.text or "").strip()
         meta = response.usage_metadata

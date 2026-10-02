@@ -35,6 +35,9 @@ class Settings(BaseSettings):
     generation_thinking_level: Literal["LOW", "MEDIUM", "HIGH"] = "LOW"
     generation_max_output_tokens: int = Field(default=2048, gt=0)
     agent_thinking_budget: int = Field(default=512, ge=0)
+    # Per-attempt timeout: a call stuck in the shared global endpoint's queue is abandoned and
+    # retried (usually ~2 s) instead of waiting 25 s+. See ADR-0007.
+    generation_timeout_s: float = Field(default=15.0, gt=0)
     judge_model: str = "gemini-3.1-pro-preview"
 
     # --- Retrieval
@@ -71,6 +74,10 @@ class Settings(BaseSettings):
     embed_batch_max_texts: int = Field(default=100, gt=0, le=250)
     embed_batch_max_tokens: int = Field(default=15_000, gt=0, le=20_000)
     embed_max_concurrency: int = Field(default=4, gt=0, le=32)
+    # Cloud Run Job: cache raw filings in / upload reports to GCS_BUCKET (local disk is ephemeral)
+    ingest_use_gcs: bool = False
+    # Also upsert chunks to Vertex AI Vector Search (needs VECTOR_SEARCH_INDEX_ID)
+    ingest_vector_search: bool = False
 
     # --- Logging
     log_level: str = "INFO"

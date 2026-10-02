@@ -1,0 +1,18 @@
+# Files uploaded to Cloud Build by `make image` (gcloud builds submit).
+# Allow-list: only what the Dockerfile needs. Never upload .env, state or data.
+*
+!Dockerfile
+!.dockerignore
+!cloudbuild.yaml
+!requirements.txt
+!common/
+!common/**
+!ingest/
+!ingest/**
+!rag/
+!rag/**
+!api/
+!api/**
+!eval/
+!eval/**
+**/__pycache__/

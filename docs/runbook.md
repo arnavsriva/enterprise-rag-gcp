@@ -55,7 +55,25 @@ To stop the largest idle cost without tearing everything down, set
 `vector_search_deployed = false`, then run `make tf-plan` and `make up`.
 
 ## 4. Build and deploy images
-_TBD (Phase 4)_
+
+```bash
+make image          # Cloud Build -> Artifact Registry, tagged with the git commit (-dirty if uncommitted)
+make deploy         # roll the API service and the ingest job to that image
+```
+
+- The build runs as the dedicated `rag-dev-build` service account. It can push only to this
+  repository, read the build source from the bucket, and write logs.
+- Terraform ignores image and traffic on Cloud Run, so `terraform apply` never rolls back a
+  deployed image.
+- First apply: Cloud Run starts on Google's placeholder images until `make deploy`.
+- **First deployment order matters.** The API needs the pgvector extension and schema, which the
+  ingest job's migrations create. On a fresh Cloud SQL instance:
+  1. `make image`
+  2. `gcloud run jobs update rag-dev-ingest --image $(cat .last-image) --region us-central1`
+  3. `make ingest-cloud`
+  4. `make deploy`
+
+  Otherwise the API exits at startup with "pgvector extension/schema missing".
 
 ## 5. Ingest
 
@@ -76,7 +94,25 @@ make ingest ARGS="--force"        # re-embed everything
 - The exit code is non-zero if any filing failed. The others are still ingested, and re-running
   retries only the missing or changed ones.
 
-**On GCP:** _TBD (Phase 4)_. It runs as the `rag-dev-ingest` Cloud Run Job inside the VPC.
+**On GCP:** run it as the `rag-dev-ingest` Cloud Run Job inside the VPC (it can reach
+private-IP Cloud SQL):
+
+```bash
+make ingest-cloud   # execute the job and wait; copies its report into results/ingest/
+```
+
+- **What the job does:** applies migrations, ingests into Cloud SQL, and upserts to Vector Search.
+  - Raw filings are archived to `gs://<bucket>/raw/` and read back from there on later runs.
+  - Reports go to `gs://<bucket>/results/ingest/`.
+- **First run:** re-embeds the corpus (~$0.44), because Cloud SQL starts empty.
+- **Later runs:** skip unchanged filings and sync any that are missing from Vector Search from
+  the stored vectors, without re-embedding.
+
+**Query the deployed API** (IAM-only; your identity token is attached):
+
+```bash
+make cloud-ask Q="What were Apple's total net sales in fiscal 2025?"
+```
 
 ## 5b. Query locally
 
@@ -92,6 +128,26 @@ make smoke                     # ~$0.07: latency/cost/refusal checks -> results/
   `GENAI_LOCATION=us-central1` and `GENERATION_MODEL=gemini-2.5-flash`.
 - Logs are one JSON line per request (`message: "request served"`), with latency, tokens and
   `estimated_cost_usd`. Question text is never logged.
+
+## 5c. Vector Search: deploy only when needed (BILLABLE while deployed)
+
+The index and its endpoint always exist at no cost. Only the *deployed* index bills:
+$0.094/hr for the e2-standard-2 node plus $0.01/hr for the PSC endpoint, about $2.50/day.
+
+```bash
+# deploy (20-60 min): in terraform.tfvars set
+vector_search_deployed = true
+make tf-plan && make up        # adds the deployed index, PSC IP and forwarding rule;
+                               # the API switches to RETRIEVAL_BACKEND=vertex_vector_search
+make cloud-ask Q="..."         # answers now come from Vector Search (+ Postgres for text)
+
+# undeploy as soon as you're done: set it back to false
+make tf-plan && make up        # removes the 3 resources; the API goes back to pgvector
+make status                    # the index endpoint should list no deployed indexes
+```
+
+Vectors stay in the index while undeployed (upserts work without a deployment), so redeploying
+doesn't need re-ingestion.
 
 ## 6. Evaluate
 `make eval` — _TBD (Phase 5)_
@@ -124,4 +180,9 @@ These are intentionally kept after `make down`:
   (Phase 4). Use `pgvector` locally.
 - **SEC 403 errors:** `SEC_USER_AGENT` must be `"Name email"`. SEC blocks anonymous or
   generic agents.
+- **API revision fails to start, "pgvector extension/schema missing":** migrations haven't run on
+  this Cloud SQL instance yet. Run the ingest job first (`make ingest-cloud`), then `make deploy`.
+- **Cloud ingest exited non-zero but data looks complete:** check the run report in
+  `gs://<bucket>/results/ingest/` and `/health` counts. Cloud Run retries a failed task once, and
+  ingestion is idempotent, so retries are safe.
 - **Local DB port conflict:** the project uses 5433. Change `PG_PORT` in `.env` if that's taken too.

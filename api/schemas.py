@@ -18,6 +18,9 @@ class QueryRequest(BaseModel):
     )
     top_k: int | None = Field(default=None, ge=1, le=20)
     mode: Literal["vector", "hybrid"] | None = None
+    backend: Literal["pgvector", "vertex_vector_search"] | None = Field(
+        default=None, description="Override the vector backend for this request (A/B comparisons)"
+    )
 
 
 class AgentRequest(BaseModel):

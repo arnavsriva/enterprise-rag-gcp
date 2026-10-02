@@ -1,0 +1,9 @@
+*
+!requirements.txt
+!common/
+!ingest/
+!rag/
+!api/
+!eval/
+**/__pycache__
+**/*.pyc

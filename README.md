@@ -3,7 +3,7 @@
 > Document Q&A over SEC 10-K filings, provisioned end-to-end with Terraform on Google Cloud,
 > with automated evaluation gating deployments.
 
-**Status:** 🚧 Phase 3 (RAG + agent + API) complete locally. Terraform written and validated, not yet applied.
+**Status:** 🚧 Phase 4: deployed to GCP (Terraform-provisioned, private networking, Cloud Run, Cloud SQL, Vector Search).
 
 ## Overview
 
@@ -60,12 +60,23 @@ curl -s localhost:8080/query -H 'content-type: application/json' \
 
 The response includes the answer, numbered sources (company, fiscal year, 10-K Item, SEC URL,
 cited flag), token usage, per-stage latency and estimated cost. `POST /agent` takes
-`{"question": ...}` for comparisons across companies.
+`{"question": ...}` for comparisons across companies. `/query` also accepts
+`"backend": "pgvector" | "vertex_vector_search"` to compare vector stores per request.
 
 ## Deploy
 
-_See [`docs/runbook.md`](docs/runbook.md)._ Outline: `scripts/bootstrap_state.sh` → `make tf-init` →
-`make tf-plan` → `make up` → `make ingest` → `make eval`. **Every apply creates billable resources** — review the plan and
+See [`docs/runbook.md`](docs/runbook.md). From an empty project:
+
+```bash
+scripts/bootstrap_state.sh <PROJECT_ID>   # one-time: versioned Terraform state bucket
+make tf-init && make tf-plan              # review the plan and the cost
+make up                                   # [billable] VPC, Cloud SQL, Vector Search, Cloud Run, IAM...
+make image                                # Cloud Build -> Artifact Registry
+gcloud run jobs update rag-dev-ingest --image $(cat .last-image) --region us-central1
+make ingest-cloud                         # migrations + ingestion inside the VPC
+make deploy                               # roll the API to the image
+make cloud-ask Q="What were Apple's total net sales in fiscal 2025?"
+``` **Every apply creates billable resources** — review the plan and
 cost estimate first.
 
 ## Evaluation
@@ -100,6 +111,38 @@ global endpoint, thinking LOW, hybrid retrieval, top-k 6):
 
 This is a smoke test (small n, no ground truth), not an evaluation. Retrieval recall and answer
 faithfulness come from the Phase 5 golden set.
+
+### On GCP (Phase 4)
+
+**Cloud ingestion.** Cloud Run Job inside the VPC → Cloud SQL + Vector Search. Source:
+[`results/ingest/20261002T110300Z_ingest_cloud.json`](results/ingest/20261002T110300Z_ingest_cloud.json),
+reconstructed from Cloud Logging (see the provenance note in the file).
+
+| Filings | Chunks | Embedding tokens | Wall time | Throughput | Est. cost |
+|---|---|---|---|---|---|
+| 20 / 20 | 4,340 | 2,907,624 (identical to the local run) | 109.3 s | 11.0 docs/min | $0.44 |
+
+**Re-run (idempotency).** [`results/ingest/20261002T112206Z_ingest.json`](results/ingest/20261002T112206Z_ingest.json):
+20/20 skipped, $0.00, 3.5 s.
+
+**Deployed API smoke tests.** Same 14 questions against Cloud Run (pgvector backend on Cloud SQL),
+run 4 minutes apart. Latency is the API's server-side total.
+
+| Run | `/query` p50 | `/query` p95 | Est. cost / 1K | Checks passed | Invalid citations |
+|---|---|---|---|---|---|
+| [`20261002T112326Z_cloud`](results/smoke/20261002T112326Z_cloud.json) | 2.6 s | 26.0 s | $4.59 | 11 / 12 ¹ | 0 |
+| [`20261002T112745Z_cloud`](results/smoke/20261002T112745Z_cloud.json) | 5.5 s | 18.3 s | $4.54 | 11 / 11 | 0 |
+
+- **¹ The one failed check is an ambiguous question.** For a metric ExxonMobil doesn't report
+  under that name, the model answered with correctly labelled related measures instead of
+  refusing. It's faithful either way, and the question is now marked "either acceptable".
+- **Vector Search verified.** The same 5 questions through the deployed API with
+  `backend=vertex_vector_search` and with `backend=pgvector` returned identical top-6 chunks and
+  the same figures ([`20261002T130420Z_backend_ab_cloud`](results/smoke/20261002T130420Z_backend_ab_cloud.json)).
+  The index was undeployed afterwards to stop its $0.104/hr cost.
+- **Tail latency is Gemini queueing** on the shared global endpoint: embedding takes about
+  0.1–0.4 s and retrieval about 0.01–0.15 s inside GCP. See ADR-0007 for the analysis and the
+  options (Provisioned Throughput or a regional model).
 
 ## Cost
 

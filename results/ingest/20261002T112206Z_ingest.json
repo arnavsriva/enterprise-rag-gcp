@@ -1,0 +1,347 @@
+{
+  "mode": "ingest",
+  "embedding_model": "gemini-embedding-001",
+  "chunker_version": "v2-c3000-t1200-o400",
+  "started_at": "2026-10-02T11:22:06+00:00",
+  "vector_search_index": "2751301349114118144",
+  "finished_at": "2026-10-02T11:22:10+00:00",
+  "wall_seconds": 3.527850354000009,
+  "docs": [
+    {
+      "ticker": "AAPL",
+      "document_id": "0000320193-25-000079",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 2.574
+      },
+      "error": null
+    },
+    {
+      "ticker": "MSFT",
+      "document_id": "0001193125-26-323660",
+      "fiscal_year": 2026,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 2.868
+      },
+      "error": null
+    },
+    {
+      "ticker": "AMZN",
+      "document_id": "0001018724-26-000004",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 2.552
+      },
+      "error": null
+    },
+    {
+      "ticker": "GOOGL",
+      "document_id": "0001652044-26-000018",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 2.589
+      },
+      "error": null
+    },
+    {
+      "ticker": "META",
+      "document_id": "0001628280-26-003942",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 2.57
+      },
+      "error": null
+    },
+    {
+      "ticker": "NVDA",
+      "document_id": "0001045810-26-000021",
+      "fiscal_year": 2026,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 2.577
+      },
+      "error": null
+    },
+    {
+      "ticker": "JPM",
+      "document_id": "0001628280-26-008131",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 2.535
+      },
+      "error": null
+    },
+    {
+      "ticker": "BAC",
+      "document_id": "0000070858-26-000157",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 2.937
+      },
+      "error": null
+    },
+    {
+      "ticker": "GS",
+      "document_id": "0000886982-26-000091",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.462
+      },
+      "error": null
+    },
+    {
+      "ticker": "JNJ",
+      "document_id": "0000200406-26-000016",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.425
+      },
+      "error": null
+    },
+    {
+      "ticker": "PFE",
+      "document_id": "0000078003-26-000026",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.551
+      },
+      "error": null
+    },
+    {
+      "ticker": "UNH",
+      "document_id": "0000731766-26-000062",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.376
+      },
+      "error": null
+    },
+    {
+      "ticker": "XOM",
+      "document_id": "0000034088-26-000045",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.593
+      },
+      "error": null
+    },
+    {
+      "ticker": "CVX",
+      "document_id": "0000093410-26-000078",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.484
+      },
+      "error": null
+    },
+    {
+      "ticker": "WMT",
+      "document_id": "0000104169-26-000055",
+      "fiscal_year": 2026,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.414
+      },
+      "error": null
+    },
+    {
+      "ticker": "KO",
+      "document_id": "0001628280-26-010047",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.559
+      },
+      "error": null
+    },
+    {
+      "ticker": "PG",
+      "document_id": "0000080424-26-000103",
+      "fiscal_year": 2026,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.216
+      },
+      "error": null
+    },
+    {
+      "ticker": "CAT",
+      "document_id": "0000018230-26-000008",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.367
+      },
+      "error": null
+    },
+    {
+      "ticker": "BA",
+      "document_id": "0001628280-26-004357",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.225
+      },
+      "error": null
+    },
+    {
+      "ticker": "DIS",
+      "document_id": "0001744489-25-000155",
+      "fiscal_year": 2025,
+      "status": "skipped",
+      "from_cache": true,
+      "items": [],
+      "chunks": 0,
+      "chars": 0,
+      "tokens": 0,
+      "tokens_estimated": false,
+      "seconds": {
+        "fetch": 0.236
+      },
+      "error": null
+    }
+  ],
+  "summary": {
+    "docs_total": 20,
+    "docs_processed": 0,
+    "docs_synced_to_vector_search": 0,
+    "docs_skipped": 20,
+    "docs_failed": 0,
+    "chunks": 0,
+    "chars_embedded": 0,
+    "tokens": 0,
+    "tokens_estimated": false,
+    "estimated_cost_usd": 0.0,
+    "wall_seconds": 3.53,
+    "docs_per_min": 0.0,
+    "chunks_per_min": 0.0,
+    "stage_seconds_total": {}
+  }
+}

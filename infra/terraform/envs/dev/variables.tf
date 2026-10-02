@@ -61,6 +61,23 @@ variable "sec_user_agent" {
   default     = ""
 }
 
+variable "embedding_model" {
+  description = "Vertex AI embedding model (must match what the corpus was embedded with)."
+  type        = string
+  default     = "gemini-embedding-001"
+}
+
+variable "genai_location" {
+  description = "Endpoint for Gemini generation. Gemini 3.x is served from \"global\" only; use a region + regional model for data residency."
+  type        = string
+  default     = "global"
+}
+
+variable "generation_model" {
+  type    = string
+  default = "gemini-3.8-flash"
+}
+
 variable "embedding_dim" {
   description = "Embedding dimension; must match common/migrations and the embedding model."
   type        = number

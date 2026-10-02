@@ -1,0 +1,321 @@
+{
+  "started_at": "2026-10-02T13:04:20+00:00",
+  "purpose": "Phase 4 verification: same questions, vector mode, Vertex AI Vector Search (PSC) vs Cloud SQL pgvector, via the deployed API's per-request backend override. Not a benchmark (n=5); Phase 6 measures recall and latency properly.",
+  "rows": [
+    {
+      "question": "What were Apple's total net sales in fiscal 2025?",
+      "tickers": [
+        "AAPL"
+      ],
+      "top_k": 6,
+      "overlap_at_k": 6,
+      "same_top1": true,
+      "vertex_vector_search": {
+        "chunk_ids": [
+          "0000320193-25-000079:49",
+          "0000320193-25-000079:63",
+          "0000320193-25-000079:77",
+          "0000320193-25-000079:57",
+          "0000320193-25-000079:50",
+          "0000320193-25-000079:48"
+        ],
+        "scores": [
+          0.797726,
+          0.787982,
+          0.786051,
+          0.779898,
+          0.770256,
+          0.765508
+        ],
+        "answered": true,
+        "answer": "Apple's total net sales in fiscal 2025 were $416,161 million [1][2][3][4][6].",
+        "latency_ms": {
+          "embed": 331.0,
+          "retrieve": 7444.2,
+          "generate": 1811.5,
+          "total": 9586.7
+        },
+        "backend_reported": "vertex_vector_search"
+      },
+      "pgvector": {
+        "chunk_ids": [
+          "0000320193-25-000079:49",
+          "0000320193-25-000079:63",
+          "0000320193-25-000079:77",
+          "0000320193-25-000079:57",
+          "0000320193-25-000079:50",
+          "0000320193-25-000079:48"
+        ],
+        "scores": [
+          0.797726,
+          0.787983,
+          0.786051,
+          0.779898,
+          0.770256,
+          0.765508
+        ],
+        "answered": true,
+        "answer": "Apple's total net sales in fiscal 2025 were $416,161 million [1][4].",
+        "latency_ms": {
+          "embed": 137.8,
+          "retrieve": 9.6,
+          "generate": 1657.0,
+          "total": 1804.4
+        },
+        "backend_reported": "pgvector"
+      }
+    },
+    {
+      "question": "How much net interest income did JPMorgan Chase report for 2025?",
+      "tickers": [
+        "JPM"
+      ],
+      "top_k": 6,
+      "overlap_at_k": 6,
+      "same_top1": true,
+      "vertex_vector_search": {
+        "chunk_ids": [
+          "0001628280-26-008131:98",
+          "0001628280-26-008131:115",
+          "0001628280-26-008131:128",
+          "0001628280-26-008131:109",
+          "0001628280-26-008131:114",
+          "0001628280-26-008131:120"
+        ],
+        "scores": [
+          0.824782,
+          0.812442,
+          0.811675,
+          0.81025,
+          0.80453,
+          0.804357
+        ],
+        "answered": true,
+        "answer": "For 2025, JPMorgan Chase reported net interest income of **$95,443 million** [1][4]. \n\n*(Note: On a managed basis, net interest income was $95,868 million, or $92,591 million excluding Markets) [4].*",
+        "latency_ms": {
+          "embed": 128.4,
+          "retrieve": 28.0,
+          "generate": 1536.9,
+          "total": 1693.3
+        },
+        "backend_reported": "vertex_vector_search"
+      },
+      "pgvector": {
+        "chunk_ids": [
+          "0001628280-26-008131:98",
+          "0001628280-26-008131:115",
+          "0001628280-26-008131:128",
+          "0001628280-26-008131:109",
+          "0001628280-26-008131:114",
+          "0001628280-26-008131:120"
+        ],
+        "scores": [
+          0.824782,
+          0.812442,
+          0.811675,
+          0.81025,
+          0.80453,
+          0.804357
+        ],
+        "answered": true,
+        "answer": "For the year ended December 31, 2025, JPMorgan Chase reported **$95,443 million** in net interest income [1][4]. \n\n*(Note: On a managed basis, net interest income was $95,868 million, or $92,591 million excluding Markets [4]).*",
+        "latency_ms": {
+          "embed": 153.9,
+          "retrieve": 380.0,
+          "generate": 2156.3,
+          "total": 2690.3
+        },
+        "backend_reported": "pgvector"
+      }
+    },
+    {
+      "question": "What was NVIDIA's Data Center revenue in its latest fiscal year?",
+      "tickers": [
+        "NVDA"
+      ],
+      "top_k": 6,
+      "overlap_at_k": 6,
+      "same_top1": true,
+      "vertex_vector_search": {
+        "chunk_ids": [
+          "0001045810-26-000021:89",
+          "0001045810-26-000021:146",
+          "0001045810-26-000021:85",
+          "0001045810-26-000021:145",
+          "0001045810-26-000021:90",
+          "0001045810-26-000021:11"
+        ],
+        "scores": [
+          0.773386,
+          0.763679,
+          0.762886,
+          0.750575,
+          0.749463,
+          0.746747
+        ],
+        "answered": true,
+        "answer": "For fiscal year 2026 (the year ended January 25, 2026), NVIDIA's Data Center revenue was $193,737 million [2].",
+        "latency_ms": {
+          "embed": 122.0,
+          "retrieve": 12.2,
+          "generate": 1285.1,
+          "total": 1419.3
+        },
+        "backend_reported": "vertex_vector_search"
+      },
+      "pgvector": {
+        "chunk_ids": [
+          "0001045810-26-000021:89",
+          "0001045810-26-000021:146",
+          "0001045810-26-000021:85",
+          "0001045810-26-000021:145",
+          "0001045810-26-000021:90",
+          "0001045810-26-000021:11"
+        ],
+        "scores": [
+          0.773386,
+          0.763679,
+          0.762886,
+          0.750575,
+          0.749463,
+          0.746747
+        ],
+        "answered": true,
+        "answer": "For fiscal year 2026 (the period ended January 25, 2026), NVIDIA's Data Center revenue was $193,737 million [2]. \n\nThis comprised:\n* **Compute:** $162,361 million [2]\n* **Networking:** $31,376 million [2]",
+        "latency_ms": {
+          "embed": 94.8,
+          "retrieve": 6.8,
+          "generate": 2108.6,
+          "total": 2210.1
+        },
+        "backend_reported": "pgvector"
+      }
+    },
+    {
+      "question": "How many employees did Walmart have at fiscal year end?",
+      "tickers": [
+        "WMT"
+      ],
+      "top_k": 6,
+      "overlap_at_k": 6,
+      "same_top1": true,
+      "vertex_vector_search": {
+        "chunk_ids": [
+          "0000104169-26-000055:18",
+          "0000104169-26-000055:8",
+          "0000104169-26-000055:83",
+          "0000104169-26-000055:142",
+          "0000104169-26-000055:81",
+          "0000104169-26-000055:19"
+        ],
+        "scores": [
+          0.718768,
+          0.709591,
+          0.691831,
+          0.691158,
+          0.690989,
+          0.687947
+        ],
+        "answered": true,
+        "answer": "Walmart refers to its employees as \"associates\" and reports having approximately 2.1 million associates around the world, consisting of approximately 1.6 million associates in the U.S. and approximately 0.5 million associates internationally [1].",
+        "latency_ms": {
+          "embed": 121.5,
+          "retrieve": 11.3,
+          "generate": 1599.2,
+          "total": 1732.0
+        },
+        "backend_reported": "vertex_vector_search"
+      },
+      "pgvector": {
+        "chunk_ids": [
+          "0000104169-26-000055:18",
+          "0000104169-26-000055:8",
+          "0000104169-26-000055:83",
+          "0000104169-26-000055:142",
+          "0000104169-26-000055:81",
+          "0000104169-26-000055:19"
+        ],
+        "scores": [
+          0.718768,
+          0.709591,
+          0.691831,
+          0.691158,
+          0.690989,
+          0.687947
+        ],
+        "answered": true,
+        "answer": "Walmart refers to its employees as \"associates\" and reports having **approximately 2.1 million associates around the world**, which includes approximately 1.6 million associates in the U.S. and approximately 0.5 million associates internationally [1]. In the U.S., approximately 92% are hourly and approximately 68% are full-time [1].",
+        "latency_ms": {
+          "embed": 163.4,
+          "retrieve": 16.3,
+          "generate": 3097.2,
+          "total": 3277.0
+        },
+        "backend_reported": "pgvector"
+      }
+    },
+    {
+      "question": "What risks does Boeing describe about 737 production?",
+      "tickers": [
+        "BA"
+      ],
+      "top_k": 6,
+      "overlap_at_k": 6,
+      "same_top1": true,
+      "vertex_vector_search": {
+        "chunk_ids": [
+          "0001628280-26-004357:16",
+          "0001628280-26-004357:15",
+          "0001628280-26-004357:17",
+          "0001628280-26-004357:80",
+          "0001628280-26-004357:24",
+          "0001628280-26-004357:79"
+        ],
+        "scores": [
+          0.817665,
+          0.78328,
+          0.783041,
+          0.780757,
+          0.776376,
+          0.774529
+        ],
+        "answered": true,
+        "answer": "Boeing identifies several risks regarding 737 production:\n\n* **Production Rate Increase Delays and FAA Concurrence:** Plans to increase the 737 production rate to 47 per month in 2026, as well as further increases requiring a new production line, may be delayed or fail to occur if production health key performance indicators and the rate readiness process (guided by the Safety Management System) do not support them, or if Boeing cannot obtain FAA concurrence [1]. Since the January 2024 737-9 door plug accident, the 737 program may only increase production rates and/or implement new production lines with FAA concurrence; failing to increase rates consistent with assumptions could materially impact financial position, results of operations, and cash flows [6].\n* **Operational and Supply Chain Disruption:** If production rate changes are delayed or disrupt the production system, or if suppliers fail to deliver compliant components on time, at expected costs, or at required rates, Boeing may fail to meet delivery schedules and program financial performance could suffer [1]. Boeing and its suppliers have experienced supply chain disruptions, labor instability, and inflationary pressures [3].\n* **Traveled Work and Prior Slowdowns:** Following the 737-9 accident, Boeing slowed 737 production rates and delayed planned increases to reduce traveled work in factories and at suppliers, which\u2014along with the Spirit Acquisition\u2014significantly impacted its financial position, results of operations, and cash flows [3].\n* **Certification Delays for Derivative Models:** The 737-7 and 737-10 development programs face significant risks and certification delays under global regulatory scrutiny, where timing is determined by the FAA and other regulators [2][4]. Additional delays in certification, failure to address testing issues, or inability to efficiently incorporate required design changes could harm financials, cash flows, and program status [2][5].\n* **Customer Remedies:** Delays on the 737 program have resulted in, and may continue to result in, customers having the right to terminate orders, receive compensation for late deliveries, or substitute orders for other Boeing aircraft [2].",
+        "latency_ms": {
+          "embed": 121.7,
+          "retrieve": 16.3,
+          "generate": 5286.7,
+          "total": 5424.7
+        },
+        "backend_reported": "vertex_vector_search"
+      },
+      "pgvector": {
+        "chunk_ids": [
+          "0001628280-26-004357:16",
+          "0001628280-26-004357:15",
+          "0001628280-26-004357:17",
+          "0001628280-26-004357:80",
+          "0001628280-26-004357:24",
+          "0001628280-26-004357:79"
+        ],
+        "scores": [
+          0.817665,
+          0.78328,
+          0.783041,
+          0.780757,
+          0.776376,
+          0.774529
+        ],
+        "answered": true,
+        "answer": "Boeing describes several risks regarding 737 production:\n\n* **Production Rate Increase Delays and FAA Concurrence:** Boeing plans to increase the 737 production rate to 47 per month in 2026, with further increases requiring a new production line [1]. However, since the 737-9 door plug accident in January 2024, the program may only increase production rates and/or implement new production lines with the concurrence of the FAA [6]. Planned rate increases may be delayed or not occur if production health key performance indicators and rate readiness processes guided by its Safety Management System do not support them, or if Boeing cannot obtain FAA concurrence [1]. Inability to increase rates consistent with assumptions could materially impact financial position, results of operations, and cash flows [6].\n* **Disruptions and Supplier Issues:** If production rate changes are delayed or disrupt the production system, or if suppliers cannot deliver compliant components on time, at required costs and rates, Boeing may fail to meet delivery schedules and program financial performance may suffer [1]. Boeing and its suppliers have experienced supply chain disruptions and constraints, labor instability, and inflationary pressures [3].\n* **Traveled Work and Prior Slowdowns:** Following the January 2024 door plug accident, Boeing slowed 737 production rates and delayed planned increases to reduce traveled work in factories and at suppliers, which\u2014along with the Spirit acquisition\u2014significantly impacted its financial position, results of operations, and cash flows [3].\n* **Certification Delays for Derivatives:** Derivative models (the 737-7 and 737-10) face significant risks and delays regarding development, testing, certification, and production schedules under global regulatory scrutiny [2][4]. Risks also include potential gaps between certifications across jurisdictions, changes in certification processes, and revisions to certification timing estimates [5].\n* **Customer Remedies:** Delays on the 737 program have resulted in, and may continue to result in, customers having contractual rights to terminate orders, receive compensation for late deliveries, reject individual airplane deliveries, or substitute orders for other Boeing aircraft [2].",
+        "latency_ms": {
+          "embed": 155.4,
+          "retrieve": 88.1,
+          "generate": 9475.5,
+          "total": 9719.0
+        },
+        "backend_reported": "pgvector"
+      }
+    }
+  ]
+}

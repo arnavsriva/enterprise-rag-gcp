@@ -11,6 +11,11 @@ output "artifact_registry" {
   value       = module.artifact_registry.repository_url
 }
 
+output "build_service_account" {
+  description = "Cloud Build runs as this account (make image)."
+  value       = module.iam.emails["build"]
+}
+
 output "bucket" {
   value = module.storage.name
 }

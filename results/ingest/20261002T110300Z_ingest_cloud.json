@@ -1,0 +1,254 @@
+{
+  "mode": "ingest",
+  "environment": "Cloud Run Job rag-dev-ingest (2 vCPU / 2 GiB, us-central1) -> Cloud SQL db-f1-micro + Vertex AI Vector Search (not deployed)",
+  "execution": "rag-dev-ingest-c8rk6",
+  "logged_at": "2026-10-02T11:12:35.655824Z",
+  "embedding_model": "gemini-embedding-001",
+  "chunker_version": "v2-c3000-t1200-o400",
+  "provenance": "Reconstructed from this execution's Cloud Logging entries ('ingest run complete' summary + per-filing 'filing done'): the job's own report upload failed (bug fixed in ingest/run.py). Cloud Run retried the task once (job max_retries=1) after that error; the retry skipped every already-ingested filing (idempotency), so no extra embedding cost. Only the first attempt's per-filing rows are kept. Per-filing 'filing done' lines exist for 17 of 20 filings (CAT, GS and MSFT are missing from Cloud Logging); the summary covers all 20, and the API's /health on Cloud SQL afterwards reported 20 documents and 4,340 chunks.",
+  "summary": {
+    "chars_embedded": 11457543,
+    "chunks": 4340,
+    "chunks_per_min": 2382.6,
+    "docs_failed": 0,
+    "docs_per_min": 10.98,
+    "docs_processed": 20,
+    "docs_skipped": 0,
+    "docs_synced_to_vector_search": 0,
+    "docs_total": 20,
+    "estimated_cost_usd": 0.436144,
+    "stage_seconds_total": {
+      "embed": 211.82,
+      "fetch": 28.12,
+      "parse_chunk": 547.15,
+      "store": 16.53,
+      "vector_search": 20.64
+    },
+    "tokens": 2907624,
+    "tokens_estimated": false,
+    "wall_seconds": 109.29
+  },
+  "docs": [
+    {
+      "ticker": "AAPL",
+      "status": "ingested",
+      "chunks": 97,
+      "tokens": 59477,
+      "seconds": {
+        "embed": 2.658,
+        "fetch": 0.782,
+        "parse_chunk": 4.804,
+        "store": 0.382,
+        "vector_search": 0.517
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "status": "ingested",
+      "chunks": 128,
+      "tokens": 77541,
+      "seconds": {
+        "embed": 4.63,
+        "fetch": 0.937,
+        "parse_chunk": 9.712,
+        "store": 0.329,
+        "vector_search": 0.408
+      }
+    },
+    {
+      "ticker": "BA",
+      "status": "ingested",
+      "chunks": 180,
+      "tokens": 117113,
+      "seconds": {
+        "embed": 13.96,
+        "fetch": 2.246,
+        "parse_chunk": 9.521,
+        "store": 0.761,
+        "vector_search": 0.38
+      }
+    },
+    {
+      "ticker": "BAC",
+      "status": "ingested",
+      "chunks": 375,
+      "tokens": 281670,
+      "seconds": {
+        "embed": 17.768,
+        "fetch": 2.418,
+        "parse_chunk": 70.925,
+        "store": 1.47,
+        "vector_search": 0.938
+      }
+    },
+    {
+      "ticker": "CVX",
+      "status": "ingested",
+      "chunks": 216,
+      "tokens": 158874,
+      "seconds": {
+        "embed": 15.434,
+        "fetch": 1.085,
+        "parse_chunk": 39.043,
+        "store": 0.492,
+        "vector_search": 0.481
+      }
+    },
+    {
+      "ticker": "DIS",
+      "status": "ingested",
+      "chunks": 190,
+      "tokens": 123569,
+      "seconds": {
+        "embed": 11.561,
+        "fetch": 0.8,
+        "parse_chunk": 6.597,
+        "store": 0.58,
+        "vector_search": 0.423
+      }
+    },
+    {
+      "ticker": "GOOGL",
+      "status": "ingested",
+      "chunks": 150,
+      "tokens": 95203,
+      "seconds": {
+        "embed": 6.651,
+        "fetch": 0.828,
+        "parse_chunk": 11.977,
+        "store": 0.396,
+        "vector_search": 1.664
+      }
+    },
+    {
+      "ticker": "JNJ",
+      "status": "ingested",
+      "chunks": 186,
+      "tokens": 123998,
+      "seconds": {
+        "embed": 5.209,
+        "fetch": 2.147,
+        "parse_chunk": 24.042,
+        "store": 0.488,
+        "vector_search": 0.496
+      }
+    },
+    {
+      "ticker": "JPM",
+      "status": "ingested",
+      "chunks": 487,
+      "tokens": 373402,
+      "seconds": {
+        "embed": 18.755,
+        "fetch": 3.129,
+        "parse_chunk": 75.897,
+        "store": 1.471,
+        "vector_search": 1.028
+      }
+    },
+    {
+      "ticker": "KO",
+      "status": "ingested",
+      "chunks": 262,
+      "tokens": 158765,
+      "seconds": {
+        "embed": 16.197,
+        "fetch": 1.046,
+        "parse_chunk": 23.892,
+        "store": 0.909,
+        "vector_search": 0.68
+      }
+    },
+    {
+      "ticker": "META",
+      "status": "ingested",
+      "chunks": 228,
+      "tokens": 127583,
+      "seconds": {
+        "embed": 8.961,
+        "fetch": 2.015,
+        "parse_chunk": 12.687,
+        "store": 0.579,
+        "vector_search": 0.666
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "status": "ingested",
+      "chunks": 152,
+      "tokens": 87058,
+      "seconds": {
+        "embed": 5.5,
+        "fetch": 1.439,
+        "parse_chunk": 9.782,
+        "store": 0.317,
+        "vector_search": 1.357
+      }
+    },
+    {
+      "ticker": "PFE",
+      "status": "ingested",
+      "chunks": 273,
+      "tokens": 172717,
+      "seconds": {
+        "embed": 7.141,
+        "fetch": 1.031,
+        "parse_chunk": 30.455,
+        "store": 0.638,
+        "vector_search": 1.204
+      }
+    },
+    {
+      "ticker": "PG",
+      "status": "ingested",
+      "chunks": 133,
+      "tokens": 85003,
+      "seconds": {
+        "embed": 16.46,
+        "fetch": 0.651,
+        "parse_chunk": 16.368,
+        "store": 0.371,
+        "vector_search": 0.332
+      }
+    },
+    {
+      "ticker": "UNH",
+      "status": "ingested",
+      "chunks": 149,
+      "tokens": 91448,
+      "seconds": {
+        "embed": 3.666,
+        "fetch": 1.207,
+        "parse_chunk": 17.398,
+        "store": 0.383,
+        "vector_search": 1.996
+      }
+    },
+    {
+      "ticker": "WMT",
+      "status": "ingested",
+      "chunks": 158,
+      "tokens": 94612,
+      "seconds": {
+        "embed": 9.44,
+        "fetch": 0.67,
+        "parse_chunk": 15.838,
+        "store": 1.198,
+        "vector_search": 3.443
+      }
+    },
+    {
+      "ticker": "XOM",
+      "status": "ingested",
+      "chunks": 189,
+      "tokens": 141489,
+      "seconds": {
+        "embed": 6.684,
+        "fetch": 0.918,
+        "parse_chunk": 33.807,
+        "store": 0.766,
+        "vector_search": 2.598
+      }
+    }
+  ]
+}

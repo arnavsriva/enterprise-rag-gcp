@@ -16,6 +16,7 @@ from pgvector.asyncpg import register_vector
 
 from ingest.chunk import Chunk
 from ingest.corpus import CorpusEntry
+from rag.vector_search import DatapointSpec
 
 
 @dataclass(frozen=True)
@@ -23,6 +24,8 @@ class IngestState:
     content_sha256: str
     chunker_version: str | None
     embedding_model: str | None
+    chunk_count: int | None = None
+    vector_search_index: str | None = None
 
 
 async def create_pool(dsn: str, **kwargs: Any) -> asyncpg.Pool:
@@ -35,10 +38,39 @@ class PgVectorStore:
 
     async def get_state(self, document_id: str) -> IngestState | None:
         row = await self._pool.fetchrow(
-            "SELECT content_sha256, chunker_version, embedding_model FROM documents WHERE id = $1",
+            """
+            SELECT content_sha256, chunker_version, embedding_model, chunk_count, vector_search_index
+            FROM documents WHERE id = $1
+            """,
             document_id,
         )
         return IngestState(*row) if row else None
+
+    async def load_datapoints(self, document_id: str) -> list[DatapointSpec]:
+        """Stored vectors + metadata for one document, to sync Vector Search without re-embedding."""
+        rows = await self._pool.fetch(
+            """
+            SELECT c.id, c.embedding, d.ticker, c.item, d.fiscal_year
+            FROM chunks c JOIN documents d ON d.id = c.document_id
+            WHERE c.document_id = $1 ORDER BY c.chunk_index
+            """,
+            document_id,
+        )
+        return [
+            DatapointSpec(
+                r["id"],
+                [float(x) for x in r["embedding"].to_list()],  # pgvector codec returns Vector
+                r["ticker"],
+                r["item"],
+                r["fiscal_year"],
+            )
+            for r in rows
+        ]
+
+    async def mark_synced(self, document_id: str, index_id: str | None) -> None:
+        await self._pool.execute(
+            "UPDATE documents SET vector_search_index = $2 WHERE id = $1", document_id, index_id
+        )
 
     async def replace_document(
         self,
@@ -82,7 +114,8 @@ class PgVectorStore:
                     content_sha256 = EXCLUDED.content_sha256,
                     chunker_version = EXCLUDED.chunker_version,
                     embedding_model = EXCLUDED.embedding_model,
-                    chunk_count = EXCLUDED.chunk_count, ingested_at = now()
+                    chunk_count = EXCLUDED.chunk_count, ingested_at = now(),
+                    vector_search_index = NULL
                 """,
                 entry.document_id,
                 entry.ticker,

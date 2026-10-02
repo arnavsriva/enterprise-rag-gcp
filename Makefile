@@ -17,7 +17,7 @@ GCP_REGION     ?= $(or $(call env_var,GCP_REGION),us-central1)
 .DEFAULT_GOAL := help
 .PHONY: help setup lock lint fmt test test-db db-up db-down migrate \
         tf-init tf-validate tf-plan up down status corpus ingest-dry ingest \
-        serve ask smoke eval bench
+        serve ask smoke smoke-cloud image deploy ingest-cloud cloud-ask eval bench
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -107,6 +107,40 @@ ask: ## [BILLABLE, <$0.01] Ask one question. Q="..." ARGS="--agent | --tickers J
 
 smoke: ## [BILLABLE, ~$0.07] Fixed question set -> results/smoke/<ts>.json (latency, cost, refusals)
 	$(BIN)/python scripts/smoke_queries.py
+
+smoke-cloud: ## [BILLABLE, ~$0.07] Same question set against the deployed API -> results/smoke/<ts>_cloud.json
+	$(BIN)/python scripts/smoke_queries.py --api $$($(TF_OUT) api_url)
+
+# ---------------------------------------------------------------- cloud (after `make up`)
+
+TF_OUT  = terraform -chdir=$(TF_DIR) output -raw
+GIT_SHA = $(shell git log -1 --format=%h 2>/dev/null)$(shell git diff --quiet HEAD 2>/dev/null || echo -dirty)
+
+image: ## [BILLABLE, ~free tier] Build + push the image with Cloud Build (as the build SA)
+	@REPO=$$($(TF_OUT) artifact_registry) && SA=$$($(TF_OUT) build_service_account) && \
+	BUCKET=$$($(TF_OUT) bucket) && IMAGE=$$REPO/rag:$(GIT_SHA) && echo "building $$IMAGE" && \
+	gcloud builds submit --project $(GCP_PROJECT_ID) --region $(GCP_REGION) \
+	  --config cloudbuild.yaml --substitutions _IMAGE=$$IMAGE \
+	  --service-account projects/$(GCP_PROJECT_ID)/serviceAccounts/$$SA \
+	  --gcs-source-staging-dir gs://$$BUCKET/cloudbuild-source . && \
+	echo $$IMAGE > .last-image
+
+deploy: ## Roll the ingest job, then the API, to the image from `make image` (first time: run ingest-cloud in between)
+	@test -f .last-image || { echo "run 'make image' first"; exit 1; }
+	gcloud run jobs update $$($(TF_OUT) ingest_job) --image $$(cat .last-image) \
+	  --region $(GCP_REGION) --project $(GCP_PROJECT_ID)
+	gcloud run services update $$($(TF_OUT) api_service) --image $$(cat .last-image) \
+	  --region $(GCP_REGION) --project $(GCP_PROJECT_ID)
+
+ingest-cloud: ## [BILLABLE, ~$0.45 first run] Run the ingest job in the VPC; copy its report to results/
+	gcloud run jobs execute $$($(TF_OUT) ingest_job) --region $(GCP_REGION) --project $(GCP_PROJECT_ID) --wait
+	gcloud storage cp -n "gs://$$($(TF_OUT) bucket)/results/ingest/*.json" results/ingest/
+
+cloud-ask: ## [BILLABLE, <$0.01] Ask the deployed API. Q="..." (uses your identity token)
+	@test -n "$(Q)" || { echo 'usage: make cloud-ask Q="..."'; exit 1; }
+	@curl -sS "$$($(TF_OUT) api_url)/query" -H "Authorization: Bearer $$(gcloud auth print-identity-token)" \
+	  -H 'content-type: application/json' -d "$$(python3 -c 'import json,sys; print(json.dumps({"question": sys.argv[1]}))' "$(Q)")" \
+	  | python3 -m json.tool
 
 # ---------------------------------------------------------------- workloads (later phases)
 

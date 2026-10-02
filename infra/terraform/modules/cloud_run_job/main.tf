@@ -41,6 +41,18 @@ variable "secret_env" {
   default     = {}
 }
 
+variable "command" {
+  description = "Container entrypoint override, e.g. [\"python\"]."
+  type        = list(string)
+  default     = null
+}
+
+variable "args" {
+  description = "Arguments, e.g. [\"-m\", \"ingest.job\"]."
+  type        = list(string)
+  default     = null
+}
+
 variable "timeout" {
   type    = string
   default = "3600s"
@@ -76,7 +88,9 @@ resource "google_cloud_run_v2_job" "this" {
       }
 
       containers {
-        image = var.image
+        image   = var.image
+        command = var.command
+        args    = var.args
 
         resources {
           limits = {

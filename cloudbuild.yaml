@@ -1,0 +1,14 @@
+# Builds and pushes the app image. Invoked by `make image`, which passes _IMAGE
+# (REGION-docker.pkg.dev/PROJECT/REPO/rag:<git sha>) and runs as the dedicated build service
+# account created by Terraform (least privilege: push to this repo, write logs, read source).
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "--tag", "${_IMAGE}", "."]
+
+images:
+  - "${_IMAGE}"
+
+options:
+  logging: CLOUD_LOGGING_ONLY # required when building as a user-specified service account
+
+timeout: 1200s

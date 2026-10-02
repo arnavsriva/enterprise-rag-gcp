@@ -59,6 +59,7 @@ module "artifact_registry" {
   region        = var.region
   repository_id = local.name_prefix
   labels        = local.labels
+  writers       = [module.iam.members["build"]]
 
   depends_on = [module.project_services]
 }
@@ -106,7 +107,10 @@ locals {
     GCP_PROJECT_ID                  = var.project_id
     GCP_REGION                      = var.region
     GCS_BUCKET                      = module.storage.name
+    EMBEDDING_MODEL                 = var.embedding_model
     EMBEDDING_DIM                   = tostring(var.embedding_dim)
+    GENAI_LOCATION                  = var.genai_location
+    GENERATION_MODEL                = var.generation_model
     RETRIEVAL_BACKEND               = var.vector_search_deployed ? "vertex_vector_search" : "pgvector"
     VECTOR_SEARCH_INDEX_ID          = module.vector_search.index_id
     VECTOR_SEARCH_INDEX_ENDPOINT_ID = module.vector_search.index_endpoint_id
@@ -150,9 +154,16 @@ module "ingest_job" {
   service_account_email = module.iam.emails["ingest"]
   network_id            = module.network.network_id
   subnet_id             = module.network.subnet_id
-  env                   = merge(local.app_env, { SEC_USER_AGENT = var.sec_user_agent })
-  secret_env            = local.app_secret_env
-  labels                = local.labels
+  command               = ["python"]
+  args                  = ["-m", "ingest.job"]
+  env = merge(local.app_env, {
+    SEC_USER_AGENT       = var.sec_user_agent
+    INGEST_USE_GCS       = "true" # cache raw filings + upload run reports (job disk is ephemeral)
+    INGEST_VECTOR_SEARCH = "true" # upsert to Vector Search as well as pgvector
+    DATA_DIR             = "/tmp/data"
+  })
+  secret_env = local.app_secret_env
+  labels     = local.labels
 
   depends_on = [module.cloud_sql]
 }

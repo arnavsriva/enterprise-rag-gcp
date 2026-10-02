@@ -31,7 +31,7 @@ from api.schemas import (
     Source,
     UsageOut,
 )
-from common.config import Settings, get_settings
+from common.config import RetrievalBackend, Settings, get_settings
 from common.logging import configure_logging
 from rag.factory import Services, build_services
 from rag.service import QueryOptions
@@ -139,7 +139,13 @@ def create_app(
             items=tuple(i.strip().upper() for i in body.items),
         )
         result = await svc.service.answer(
-            body.question, QueryOptions(filters=filters, top_k=body.top_k, mode=body.mode)
+            body.question,
+            QueryOptions(
+                filters=filters,
+                top_k=body.top_k,
+                mode=body.mode,
+                backend=RetrievalBackend(body.backend) if body.backend else None,
+            ),
         )
         request.state.log_fields = {
             "endpoint": "query",

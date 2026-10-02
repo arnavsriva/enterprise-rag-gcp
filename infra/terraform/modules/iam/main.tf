@@ -1,4 +1,6 @@
 # One service account per workload, with only the roles that workload needs.
+# "build" is the Cloud Build identity: logs + read build source from the bucket; push rights
+# are granted on the Artifact Registry repository itself (artifact_registry module).
 # Bucket access is granted on the bucket, not the project. Secret access is granted
 # per secret (cloud_sql module), and Cloud Run invoker per service (cloud_run_service module).
 
@@ -32,6 +34,11 @@ locals {
       description   = "Evaluation pipeline (Vertex AI Pipelines)"
       project_roles = concat(local.observability, ["roles/aiplatform.user"])
       bucket_role   = "roles/storage.objectAdmin"
+    }
+    build = {
+      description   = "Cloud Build: builds and pushes the app image"
+      project_roles = ["roles/logging.logWriter"]
+      bucket_role   = "roles/storage.objectViewer"
     }
   }
 

@@ -141,7 +141,7 @@ async def test_hybrid_fusion_dedupes_and_respects_top_k(
 
 
 def test_vertex_backend_not_available_locally() -> None:
-    with pytest.raises(NotImplementedError, match="Phase 4"):
+    with pytest.raises(NotImplementedError, match="deployed index"):
         build_retriever(
             backend=RetrievalBackend.VERTEX_VECTOR_SEARCH,
             mode="vector",
@@ -150,3 +150,37 @@ def test_vertex_backend_not_available_locally() -> None:
             top_k=3,
             candidates=10,
         )
+
+
+class FakeMatcher:
+    def __init__(self, hits: list[tuple[str, float]]) -> None:
+        self.hits = hits
+        self.calls: list[tuple[Filters, int]] = []
+
+    async def search(
+        self, vector: list[float], filters: Filters, k: int
+    ) -> list[tuple[str, float]]:
+        self.calls.append((filters, k))
+        return self.hits
+
+
+@pytest.mark.db
+async def test_vertex_retriever_hydrates_from_postgres_in_index_order(
+    seeded: tuple[PgSearch, FakeEmbedder],
+) -> None:
+    search, _ = seeded
+    ids = [f"{AAA.accession}:3", f"{AAA.accession}:0", "not-in-postgres:9", f"{AAA.accession}:1"]
+    matcher = FakeMatcher([(cid, 0.9 - i / 10) for i, cid in enumerate(ids)])
+    retriever = build_retriever(
+        backend=RetrievalBackend.VERTEX_VECTOR_SEARCH,
+        mode="vector",
+        search=search,
+        filters=Filters(tickers=("AAA",)),
+        top_k=4,
+        candidates=10,
+        matcher=matcher,  # type: ignore[arg-type]
+    )
+    hits = await retrieve(retriever, "q", [0.0] * 768)
+    assert [h.chunk_id for h in hits] == [ids[0], ids[1], ids[3]]  # unknown id dropped, order kept
+    assert [round(h.score, 2) for h in hits] == [0.9, 0.8, 0.6]
+    assert matcher.calls == [(Filters(tickers=("AAA",)), 4)]

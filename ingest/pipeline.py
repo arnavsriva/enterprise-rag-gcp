@@ -1,5 +1,9 @@
 """Ingestion pipeline: fetch -> parse -> chunk -> embed -> store, per filing, concurrently.
 
+Sinks: Postgres/pgvector always (system of record); Vertex AI Vector Search optionally. A
+filing already embedded in Postgres but not yet in the configured index is synced from the
+stored vectors, with no re-embedding (status "synced").
+
 Concurrency is bounded at every external boundary: SEC requests by a rate limiter (inside
 EdgarClient), embedding calls by a semaphore (inside the embedder), and filings in flight by
 `max_concurrency` here. CPU-heavy HTML parsing runs in a worker thread so it doesn't block
@@ -12,10 +16,10 @@ import asyncio
 import hashlib
 import logging
 import time
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Sequence
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
-from typing import Any, Literal
+from typing import Any, Literal, Protocol
 
 from common.pricing import embedding_cost_usd
 from ingest.chunk import CHUNKER_VERSION, chunk_document, embedding_text, estimate_tokens
@@ -23,11 +27,21 @@ from ingest.corpus import CorpusEntry
 from ingest.embed import Embedder
 from ingest.parse import parse_10k
 from ingest.store import PgVectorStore
+from rag.vector_search import DatapointSpec
 
 log = logging.getLogger(__name__)
 
 Fetcher = Callable[[CorpusEntry], Awaitable[tuple[bytes, bool]]]
-Status = Literal["ingested", "skipped", "dry_run", "failed"]
+Status = Literal["ingested", "synced", "skipped", "dry_run", "failed"]
+
+
+class IndexWriter(Protocol):
+    @property
+    def index_id(self) -> str: ...
+
+    async def upsert(self, specs: Sequence[DatapointSpec]) -> int: ...
+
+    async def remove(self, chunk_ids: Sequence[str]) -> int: ...
 
 
 @dataclass
@@ -52,6 +66,7 @@ class RunReport:
     embedding_model: str
     chunker_version: str
     started_at: str
+    vector_search_index: str | None = None
     finished_at: str = ""
     wall_seconds: float = 0.0
     docs: list[DocReport] = field(default_factory=list)
@@ -69,6 +84,7 @@ class RunReport:
         return {
             "docs_total": len(self.docs),
             "docs_processed": len(done),
+            "docs_synced_to_vector_search": sum(d.status == "synced" for d in self.docs),
             "docs_skipped": sum(d.status == "skipped" for d in self.docs),
             "docs_failed": sum(d.status == "failed" for d in self.docs),
             "chunks": sum(d.chunks for d in done),
@@ -93,6 +109,7 @@ async def _process(
     embedder: Embedder | None,
     store: PgVectorStore | None,
     force: bool,
+    index_writer: IndexWriter | None = None,
 ) -> DocReport:
     report = DocReport(entry.ticker, entry.document_id, entry.fiscal_year, status="failed")
     timings: dict[str, float] = {}
@@ -102,15 +119,30 @@ async def _process(
         sha = hashlib.sha256(raw).hexdigest()
         timings["fetch"] = time.monotonic() - t
 
-        if store is not None and embedder is not None and not force:
-            state = await store.get_state(entry.document_id)
-            if state and (state.content_sha256, state.chunker_version, state.embedding_model) == (
-                sha,
-                CHUNKER_VERSION,
-                embedder.model,
-            ):
+        state = await store.get_state(entry.document_id) if store is not None else None
+        unchanged = (
+            embedder is not None
+            and state is not None
+            and (state.content_sha256, state.chunker_version, state.embedding_model)
+            == (sha, CHUNKER_VERSION, embedder.model)
+        )
+        if store is not None and unchanged and not force:
+            synced = state is not None and state.vector_search_index == getattr(
+                index_writer, "index_id", None
+            )
+            if index_writer is None or synced:
                 report.status = "skipped"
                 return report
+            # Already embedded in Postgres: sync Vector Search from the stored vectors.
+            t = time.monotonic()
+            specs = await store.load_datapoints(entry.document_id)
+            await index_writer.upsert(specs)
+            await store.mark_synced(entry.document_id, index_writer.index_id)
+            timings["vector_search"] = time.monotonic() - t
+            report.chunks = len(specs)
+            report.status = "synced"
+            return report
+        previous_chunks = state.chunk_count if state else None
 
         t = time.monotonic()
         sections = await asyncio.to_thread(parse_10k, raw)
@@ -147,6 +179,21 @@ async def _process(
             token_counts=result.token_counts,
         )
         timings["store"] = time.monotonic() - t
+
+        if index_writer is not None:
+            t = time.monotonic()
+            await index_writer.upsert(
+                [
+                    DatapointSpec(c.id, v, entry.ticker, c.item, entry.fiscal_year)
+                    for c, v in zip(chunks, result.vectors, strict=True)
+                ]
+            )
+            if previous_chunks and previous_chunks > len(chunks):  # drop now-orphaned datapoints
+                await index_writer.remove(
+                    [f"{entry.document_id}:{i}" for i in range(len(chunks), previous_chunks)]
+                )
+            await store.mark_synced(entry.document_id, index_writer.index_id)
+            timings["vector_search"] = time.monotonic() - t
         report.status = "ingested"
         return report
     except Exception as exc:
@@ -181,19 +228,28 @@ async def run_ingest(
     embedding_model: str,
     max_concurrency: int = 8,
     force: bool = False,
+    index_writer: IndexWriter | None = None,
 ) -> RunReport:
     dry = embedder is None or store is None
     report = RunReport(
         mode="dry_run" if dry else "ingest",
         embedding_model=embedding_model,
         chunker_version=CHUNKER_VERSION,
+        vector_search_index=index_writer.index_id if index_writer and not dry else None,
         started_at=datetime.now(UTC).isoformat(timespec="seconds"),
     )
     semaphore = asyncio.Semaphore(max_concurrency)
 
     async def bounded(entry: CorpusEntry) -> DocReport:
         async with semaphore:
-            return await _process(entry, fetch=fetch, embedder=embedder, store=store, force=force)
+            return await _process(
+                entry,
+                fetch=fetch,
+                embedder=embedder,
+                store=store,
+                force=force,
+                index_writer=None if dry else index_writer,
+            )
 
     t = time.monotonic()
     report.docs = list(await asyncio.gather(*(bounded(e) for e in entries)))

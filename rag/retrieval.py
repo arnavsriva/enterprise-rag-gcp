@@ -8,13 +8,15 @@
   (min-max normalised scores, vector 0.7 / keyword 0.3 by default). Equal-weight reciprocal
   rank fusion was tried first and demoted correct vector hits when keyword search matched
   the wrong vocabulary ("employees" vs the filing's "associates"); see ADR-0006.
-- The Vertex AI Vector Search backend plugs in here (Phase 4); it is only reachable from
-  inside the VPC (ADR-0002).
+- Backend "vertex_vector_search" swaps the vector half for Vertex AI Vector Search (queried
+  over PSC, so only from inside the VPC; ADR-0002). Results are hydrated from Postgres, and
+  hybrid mode still fuses them with Postgres full-text search.
 """
 
 from __future__ import annotations
 
 import logging
+from dataclasses import replace
 from typing import Any
 
 import asyncpg
@@ -26,6 +28,7 @@ from pgvector.asyncpg import register_vector
 
 from common.config import RetrievalBackend
 from rag.types import Filters, RetrievedChunk
+from rag.vector_search import VertexMatcher
 
 log = logging.getLogger(__name__)
 
@@ -36,7 +39,13 @@ _COLUMNS = """
 
 
 async def _init_connection(conn: asyncpg.Connection) -> None:
-    await register_vector(conn)
+    try:
+        await register_vector(conn)
+    except ValueError as exc:  # raised by pgvector when the extension isn't installed yet
+        raise RuntimeError(
+            "pgvector extension/schema missing: run migrations first "
+            "(locally `make migrate`; on GCP the ingest job applies them: `make ingest-cloud`)"
+        ) from exc
     # Higher ef_search = better recall for a few extra ms. Iterative scans (pgvector >= 0.8)
     # keep scanning the HNSW graph until enough rows pass the WHERE filters.
     await conn.execute("SET hnsw.ef_search = 100")
@@ -82,6 +91,28 @@ def _row_to_chunk(row: asyncpg.Record) -> RetrievedChunk:
 class PgSearch:
     def __init__(self, pool: asyncpg.Pool) -> None:
         self._pool = pool
+
+    async def by_ids(self, scored_ids: list[tuple[str, float]]) -> list[RetrievedChunk]:
+        """Hydrate chunks found by another index, keeping its order and scores."""
+        if not scored_ids:
+            return []
+        rows = await self._pool.fetch(
+            f"""
+            SELECT {_COLUMNS}, 0.0 AS score
+            FROM chunks c JOIN documents d ON d.id = c.document_id
+            WHERE c.id = ANY($1)
+            """,  # noqa: S608 - only placeholders are interpolated, values are bound
+            [cid for cid, _ in scored_ids],
+        )
+        by_id = {r["id"]: r for r in rows}
+        missing = [cid for cid, _ in scored_ids if cid not in by_id]
+        if missing:
+            log.warning("vector search ids not in postgres", extra={"count": len(missing)})
+        return [
+            replace(_row_to_chunk(by_id[cid]), score=score)
+            for cid, score in scored_ids
+            if cid in by_id
+        ]
 
     async def vector(
         self, embedding: list[float], filters: Filters, k: int
@@ -187,6 +218,20 @@ class PgVectorRetriever(_AsyncOnlyRetriever):
         return [to_node(r) for r in rows]
 
 
+class VertexVectorRetriever(_AsyncOnlyRetriever):
+    """Vertex AI Vector Search (PSC) for candidates, Postgres for text and metadata."""
+
+    def __init__(self, matcher: VertexMatcher, search: PgSearch, filters: Filters, k: int) -> None:
+        super().__init__()
+        self._matcher, self._search, self._filters, self._k = matcher, search, filters, k
+
+    async def _aretrieve(self, query_bundle: QueryBundle) -> list[NodeWithScore]:
+        if query_bundle.embedding is None:
+            raise ValueError("QueryBundle.embedding is required")
+        hits = await self._matcher.search(list(query_bundle.embedding), self._filters, self._k)
+        return [to_node(c) for c in await self._search.by_ids(hits)]
+
+
 class PgKeywordRetriever(_AsyncOnlyRetriever):
     def __init__(self, search: PgSearch, filters: Filters, k: int) -> None:
         super().__init__()
@@ -206,18 +251,22 @@ def build_retriever(
     top_k: int,
     candidates: int,
     vector_weight: float = 0.7,
+    matcher: VertexMatcher | None = None,
 ) -> BaseRetriever:
-    if backend is RetrievalBackend.VERTEX_VECTOR_SEARCH:
-        raise NotImplementedError(
-            "vertex_vector_search backend is added in Phase 4 (only reachable inside the VPC)"
-        )
+    def vector_retriever(k: int) -> BaseRetriever:
+        if backend is RetrievalBackend.VERTEX_VECTOR_SEARCH:
+            if matcher is None:
+                raise NotImplementedError(
+                    "vertex_vector_search needs a deployed index and PSC IP "
+                    "(vector_search_deployed = true; only reachable inside the VPC)"
+                )
+            return VertexVectorRetriever(matcher, search, filters, k)
+        return PgVectorRetriever(search, filters, k)
+
     if mode == "vector":
-        return PgVectorRetriever(search, filters, top_k)
+        return vector_retriever(top_k)
     return QueryFusionRetriever(
-        [
-            PgVectorRetriever(search, filters, candidates),
-            PgKeywordRetriever(search, filters, candidates),
-        ],
+        [vector_retriever(candidates), PgKeywordRetriever(search, filters, candidates)],
         llm=MockLLM(),  # never called: num_queries=1 disables LLM query rewriting
         mode=FUSION_MODES.RELATIVE_SCORE,
         retriever_weights=[vector_weight, 1.0 - vector_weight],

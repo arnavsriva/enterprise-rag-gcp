@@ -17,6 +17,12 @@ variable "labels" {
   default = {}
 }
 
+variable "writers" {
+  description = "IAM members allowed to push images (the Cloud Build service account)."
+  type        = list(string)
+  default     = []
+}
+
 resource "google_artifact_registry_repository" "this" {
   project       = var.project_id
   location      = var.region
@@ -41,6 +47,16 @@ resource "google_artifact_registry_repository" "this" {
       older_than = "1209600s" # 14 days
     }
   }
+}
+
+resource "google_artifact_registry_repository_iam_member" "writer" {
+  for_each = toset(var.writers)
+
+  project    = var.project_id
+  location   = var.region
+  repository = google_artifact_registry_repository.this.name
+  role       = "roles/artifactregistry.writer"
+  member     = each.value
 }
 
 output "repository_url" {

@@ -18,6 +18,7 @@ from rag.agent import FilingsAgent
 from rag.generate import Generator
 from rag.retrieval import PgSearch, create_retrieval_pool
 from rag.service import QueryEncoder, RAGService
+from rag.vector_search import VertexMatcher, config_from_settings
 
 
 @dataclass
@@ -52,8 +53,13 @@ async def build_services(s: Settings) -> Services:
         model=s.generation_model,
         thinking_level=s.generation_thinking_level,
         max_output_tokens=s.generation_max_output_tokens,
+        timeout_s=s.generation_timeout_s,
     )
-    service = RAGService(settings=s, search=PgSearch(pool), encoder=encoder, generator=generator)
+    vs_config = config_from_settings(s)
+    matcher = VertexMatcher(vs_config) if vs_config and vs_config.queryable else None
+    service = RAGService(
+        settings=s, search=PgSearch(pool), encoder=encoder, generator=generator, matcher=matcher
+    )
     chat = ChatGoogleGenerativeAI(
         model=s.generation_model,
         vertexai=True,

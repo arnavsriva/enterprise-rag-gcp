@@ -15,6 +15,7 @@ from ingest.embed import Embedder
 from rag.generate import Generation, Generator
 from rag.retrieval import PgSearch, build_retriever, retrieve
 from rag.types import Filters, RetrievedChunk, Timings, Usage
+from rag.vector_search import VertexMatcher
 
 
 @dataclass
@@ -71,10 +72,17 @@ class QueryEncoder:
 
 class RAGService:
     def __init__(
-        self, *, settings: Settings, search: PgSearch, encoder: QueryEncoder, generator: Generator
+        self,
+        *,
+        settings: Settings,
+        search: PgSearch,
+        encoder: QueryEncoder,
+        generator: Generator,
+        matcher: VertexMatcher | None = None,
     ) -> None:
         self.settings = settings
         self.search = search
+        self.matcher = matcher
         self.encoder = encoder
         self.generator = generator
 
@@ -96,6 +104,7 @@ class RAGService:
             top_k=options.top_k or s.retrieval_top_k,
             candidates=s.retrieval_candidates,
             vector_weight=s.retrieval_vector_weight,
+            matcher=self.matcher,
         )
         chunks = await retrieve(retriever, question, vector)
         timings.record("retrieve", (time.perf_counter() - t) * 1000)

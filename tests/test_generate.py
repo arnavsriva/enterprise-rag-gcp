@@ -112,3 +112,23 @@ def test_generation_cost_includes_thinking_and_promo_window() -> None:
         1.50 + 7.50
     )
     assert generation_cost_usd("unknown", **kw) is None
+
+
+async def test_generation_attempt_times_out_and_is_retried(monkeypatch: pytest.MonkeyPatch) -> None:
+    import asyncio
+
+    monkeypatch.setattr("common.genai.wait_random_exponential", lambda **_: lambda _rs: 0)
+    fake = FakeClient("Answer [1].")
+    real = fake._gen
+    calls = 0
+
+    async def sometimes_stuck(**kw: Any) -> Any:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            await asyncio.sleep(10)  # stuck in the queue
+        return await real(**kw)
+
+    fake.aio.models.generate_content = sometimes_stuck
+    gen = await Generator(fake, model="m", timeout_s=0.05).generate("q", [chunk(1)])
+    assert gen.answered and calls == 2
