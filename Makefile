@@ -2,29 +2,36 @@
 # Targets marked [BILLABLE] create or modify paid GCP resources — review the plan + cost first.
 
 SHELL      := /bin/bash
-PYTHON     ?= python3.11
 VENV       := .venv
 BIN        := $(VENV)/bin
 TF_DIR     := infra/terraform/envs/dev
 TF_VARS    := terraform.tfvars
 TF_PLAN    := tfplan
-PY_SRC     := ingest rag api eval tests
+PY_SRC     := common ingest rag api eval tests
+
+# Read only what `make status` needs from .env (not the whole file: quoting differs from make's).
+env_var = $(shell test -f .env && sed -n 's/^$(1)=//p' .env | tr -d '"')
+GCP_PROJECT_ID ?= $(call env_var,GCP_PROJECT_ID)
+GCP_REGION     ?= $(or $(call env_var,GCP_REGION),us-central1)
 
 .DEFAULT_GOAL := help
-.PHONY: help setup lint fmt test tf-init tf-plan up ingest eval bench down
+.PHONY: help setup lock lint fmt test test-db db-up db-down migrate \
+        tf-init tf-validate tf-plan up down status ingest eval bench
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
-		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
+		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
 
 # ---------------------------------------------------------------- local dev
 
-setup: ## Create venv, install dev deps, install pre-commit hooks
-	$(PYTHON) -m venv $(VENV)
-	$(BIN)/pip install --upgrade pip
-	$(BIN)/pip install -r requirements-dev.txt
-	$(BIN)/pip install -e .
+setup: ## Create Python 3.11 venv (via uv), install locked deps, install pre-commit hooks
+	uv venv --python 3.11 --allow-existing $(VENV)
+	uv pip install --python $(BIN)/python -r requirements-dev.txt -e .
 	$(BIN)/pre-commit install
+
+lock: ## Re-resolve requirements*.in into pinned requirements*.txt
+	uv pip compile requirements.in --universal --python-version 3.11 -o requirements.txt
+	uv pip compile requirements-dev.in --universal --python-version 3.11 -o requirements-dev.txt
 
 lint: ## Ruff lint + format check + mypy
 	$(BIN)/ruff check $(PY_SRC)
@@ -36,14 +43,31 @@ fmt: ## Auto-format Python and Terraform
 	$(BIN)/ruff format $(PY_SRC)
 	terraform fmt -recursive infra/terraform
 
-test: ## Run unit tests (no cloud credentials needed)
+test: ## Unit tests (no cloud credentials, no database)
 	$(BIN)/pytest
+
+test-db: ## Tests against local Postgres (run `make db-up` first)
+	$(BIN)/pytest -m db
+
+db-up: ## Start local Postgres + pgvector in Docker and wait until healthy
+	docker compose up -d --wait
+
+db-down: ## Stop local Postgres (data kept in the `pgdata` volume)
+	docker compose down
+
+migrate: ## Apply SQL migrations to the database in .env
+	$(BIN)/python -m common.migrate
 
 # ---------------------------------------------------------------- infrastructure
 
 tf-init: ## terraform init with the GCS remote-state backend (needs backend.hcl)
 	@test -f $(TF_DIR)/backend.hcl || { echo "Missing $(TF_DIR)/backend.hcl (copy backend.hcl.example)"; exit 1; }
 	terraform -chdir=$(TF_DIR) init -backend-config=backend.hcl
+
+tf-validate: ## terraform fmt check + validate, no backend, no credentials (same as CI)
+	terraform fmt -check -recursive infra/terraform
+	terraform -chdir=$(TF_DIR) init -backend=false -input=false >/dev/null
+	terraform -chdir=$(TF_DIR) validate
 
 tf-plan: ## terraform plan -> tfplan (no changes applied)
 	@test -f $(TF_DIR)/$(TF_VARS) || { echo "Missing $(TF_DIR)/$(TF_VARS) (copy terraform.tfvars.example)"; exit 1; }
@@ -59,13 +83,25 @@ down: ## Destroy ALL dev resources (stops idle billing)
 	@test -f $(TF_DIR)/$(TF_VARS) || { echo "Missing $(TF_DIR)/$(TF_VARS)"; exit 1; }
 	terraform -chdir=$(TF_DIR) destroy -var-file=$(TF_VARS)
 
+status: ## List billable resources still running in the project (read-only)
+	@test -n "$(GCP_PROJECT_ID)" || { echo "Set GCP_PROJECT_ID in .env"; exit 1; }
+	@echo "== Vertex AI index endpoints (bill per node-hour while an index is deployed)"
+	@gcloud ai index-endpoints list --project=$(GCP_PROJECT_ID) --region=$(GCP_REGION) \
+		--format="table(displayName,deployedIndexes[].id)" 2>/dev/null || true
+	@echo "== Cloud SQL instances"
+	@gcloud sql instances list --project=$(GCP_PROJECT_ID) --format="table(name,state,settings.tier)" 2>/dev/null || true
+	@echo "== Cloud Run services"
+	@gcloud run services list --project=$(GCP_PROJECT_ID) --region=$(GCP_REGION) --format="table(metadata.name,status.url)" 2>/dev/null || true
+	@echo "== PSC forwarding rules"
+	@gcloud compute forwarding-rules list --project=$(GCP_PROJECT_ID) --format="table(name,region,IPAddress)" 2>/dev/null || true
+
 # ---------------------------------------------------------------- workloads (later phases)
 
 ingest: ## [BILLABLE] Download, chunk, embed, upsert filings
-	@echo "ingest: not implemented yet (ingestion phase)"; exit 1
+	@echo "ingest: not implemented yet (Phase 2)"; exit 1
 
 eval: ## [BILLABLE] Run the evaluation pipeline against the golden set
-	@echo "eval: not implemented yet (eval phase)"; exit 1
+	@echo "eval: not implemented yet (Phase 5)"; exit 1
 
 bench: ## [BILLABLE] Benchmark Vector Search vs pgvector
-	@echo "bench: not implemented yet (comparison phase)"; exit 1
+	@echo "bench: not implemented yet (Phase 6)"; exit 1

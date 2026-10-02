@@ -33,11 +33,19 @@ Conventions and guardrails for working on this repository.
 ## Common commands
 
 ```bash
-make setup    # venv + deps + pre-commit hooks
+make setup    # Python 3.11 venv (uv) + locked deps + pre-commit hooks
 make lint     # ruff + mypy
 make fmt      # auto-format Python and Terraform
 make test     # unit tests
+make db-up    # local Postgres + pgvector (port 5433)
+make migrate  # apply SQL migrations
+make test-db  # tests against the local database
+make lock     # re-pin requirements*.txt after editing requirements*.in
 ```
 
-Infrastructure: `make tf-init`, `make tf-plan`, `make up`, `make down`. Workloads:
-`make ingest`, `make eval`, `make bench`. Run `make help` for the full list.
+- **Dependencies:** edit `requirements.in` / `requirements-dev.in`, never the generated `.txt`
+  lockfiles, then run `make lock`.
+- **Infrastructure:** `make tf-validate` (offline), `make tf-init`, `make tf-plan`, `make up`,
+  `make down`, `make status`.
+- **Workloads:** `make ingest`, `make eval`, `make bench`.
+- Run `make help` for the full list.

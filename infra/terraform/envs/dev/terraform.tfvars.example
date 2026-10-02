@@ -5,7 +5,21 @@ region     = "us-central1"
 env        = "dev"
 
 labels = {
-  project = "enterprise-rag"
-  env     = "dev"
-  owner   = "your-name"
+  owner = "your-name"
 }
+
+# --- Cost switches
+# BILLABLE per node-hour while true (even idle). Flip to true only for work sessions.
+vector_search_deployed = false
+cloud_sql_tier         = "db-f1-micro"
+
+# Budget alert (tracks gross spend, excluding credits). Leave empty to skip.
+billing_account_id = ""
+budget_amount      = 120
+
+# --- Workloads
+# Who may call the API besides the eval service account.
+api_invokers = ["user:you@example.com"]
+
+# SEC EDGAR requires a descriptive User-Agent: "Name email".
+sec_user_agent = "Your Name you@example.com"

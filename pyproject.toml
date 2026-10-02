@@ -12,7 +12,10 @@ requires-python = ">=3.11,<3.13"
 # Dependencies are managed in requirements.txt (runtime) and requirements-dev.txt (dev/CI).
 
 [tool.setuptools.packages.find]
-include = ["ingest*", "rag*", "api*", "eval*"]
+include = ["common*", "ingest*", "rag*", "api*", "eval*"]
+
+[tool.setuptools.package-data]
+common = ["migrations/*.sql"]
 
 # ---------------------------------------------------------------- ruff
 [tool.ruff]
@@ -35,13 +38,13 @@ select = [
 ignore = ["E501"]  # line length handled by the formatter
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101"]  # asserts are fine in tests
+"tests/**" = ["S101", "S105", "S106"]  # asserts and dummy passwords are fine in tests
 
 # ---------------------------------------------------------------- mypy
 [tool.mypy]
 python_version = "3.11"
 strict = true
-warn_unused_configs = true
+warn_unused_configs = false  # overrides below pre-declare libs used in later phases
 exclude = ["^\\.venv/", "^infra/"]
 
 [[tool.mypy.overrides]]
@@ -63,7 +66,8 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
-addopts = "-ra -m 'not integration'"
+addopts = "-ra -m 'not integration and not db'"
 markers = [
   "integration: requires GCP credentials / billable resources (deselected by default)",
+  "db: requires local Postgres + pgvector, see `make db-up` (deselected by default)",
 ]

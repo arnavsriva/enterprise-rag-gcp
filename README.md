@@ -3,7 +3,7 @@
 > Document Q&A over SEC 10-K filings, provisioned end-to-end with Terraform on Google Cloud,
 > with automated evaluation gating deployments.
 
-**Status:** 🚧 Scaffold only (Phase 0). Sections below are placeholders until each phase lands.
+**Status:** 🚧 Phase 1 (foundations): local dev stack and Terraform modules (not yet applied).
 
 ## Overview
 
@@ -36,18 +36,20 @@ Design decisions are recorded in [`docs/adr/`](docs/adr/).
 
 ## Quickstart
 
-_Local development (no cloud resources) — filled in during the foundations/ingestion phases._
+Local development: no cloud resources, no cost. Needs [uv](https://docs.astral.sh/uv/) and Docker.
 
 ```bash
-cp .env.example .env          # fill in placeholders
-make setup                    # create venv, install deps, install pre-commit hooks
-make lint test
+cp .env.example .env          # local defaults work as-is
+make setup                    # Python 3.11 venv, locked deps, pre-commit hooks
+make db-up                    # Postgres 16 + pgvector on localhost:5433
+make migrate                  # apply schema
+make lint test test-db
 ```
 
 ## Deploy
 
-_See [`docs/runbook.md`](docs/runbook.md)._ Outline: `make tf-init` → `make tf-plan` → `make up`
-→ `make ingest` → `make eval`. **Every apply creates billable resources** — review the plan and
+_See [`docs/runbook.md`](docs/runbook.md)._ Outline: `scripts/bootstrap_state.sh` → `make tf-init` →
+`make tf-plan` → `make up` → `make ingest` → `make eval`. **Every apply creates billable resources** — review the plan and
 cost estimate first.
 
 ## Evaluation
@@ -79,6 +81,7 @@ Destroys all Terraform-managed resources in the dev environment. See
 ```
 .
 ├── api/                    # FastAPI service (Cloud Run)
+├── common/                 # Settings, JSON logging, SQL migrations
 ├── bench/                  # Vector Search vs pgvector benchmark
 ├── CONTRIBUTING.md         # Conventions and guardrails
 ├── docs/
