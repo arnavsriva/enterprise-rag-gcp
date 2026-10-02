@@ -16,6 +16,7 @@ include = ["common*", "ingest*", "rag*", "api*", "eval*"]
 
 [tool.setuptools.package-data]
 common = ["migrations/*.sql"]
+ingest = ["corpus.toml"]
 
 # ---------------------------------------------------------------- ruff
 [tool.ruff]

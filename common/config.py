@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from enum import StrEnum
 from functools import lru_cache
+from pathlib import Path
 from typing import Literal
 
 from pydantic import Field, SecretStr
@@ -24,7 +25,7 @@ class Settings(BaseSettings):
     gcs_bucket: str | None = None
 
     # --- Models
-    embedding_model: str = "text-embedding-005"
+    embedding_model: str = "gemini-embedding-001"
     embedding_dim: int = Field(default=768, gt=0)
     generation_model: str = "gemini-2.5-flash"
     judge_model: str = "gemini-2.5-pro"
@@ -47,12 +48,18 @@ class Settings(BaseSettings):
     pg_password: SecretStr = SecretStr("")
     pg_sslmode: Literal["disable", "prefer", "require", "verify-ca", "verify-full"] = "prefer"
 
-    # --- SEC EDGAR (fair-access policy requires "Name email")
+    # --- SEC EDGAR (fair-access policy requires "Name email"; limit is 10 requests/s)
     sec_user_agent: str = ""
+    sec_requests_per_second: float = Field(default=5.0, gt=0, le=10)
 
     # --- Ingestion
+    data_dir: Path = Path("data")
     ingest_max_concurrency: int = Field(default=8, gt=0, le=64)
     ingest_max_retries: int = Field(default=5, ge=0)
+    # Embedding API limits: 250 texts and 20,000 tokens per request, 2,048 tokens per text.
+    embed_batch_max_texts: int = Field(default=100, gt=0, le=250)
+    embed_batch_max_tokens: int = Field(default=15_000, gt=0, le=20_000)
+    embed_max_concurrency: int = Field(default=4, gt=0, le=32)
 
     # --- Logging
     log_level: str = "INFO"

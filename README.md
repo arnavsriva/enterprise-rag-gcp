@@ -3,14 +3,15 @@
 > Document Q&A over SEC 10-K filings, provisioned end-to-end with Terraform on Google Cloud,
 > with automated evaluation gating deployments.
 
-**Status:** 🚧 Phase 1 (foundations): local dev stack and Terraform modules (not yet applied).
+**Status:** 🚧 Phase 2 (ingestion) complete locally. Terraform written and validated, not yet applied.
 
 ## Overview
 
 An enterprise-style Retrieval-Augmented Generation (RAG) system deployed the way a Forward
 Deployed Engineer would deploy it inside a client's Google Cloud environment:
 
-- **Corpus:** public SEC 10-K filings (EDGAR) for ~20 large companies.
+- **Corpus:** the latest 10-K for 20 large US companies across sectors, pinned by accession
+  number ([`ingest/corpus.toml`](ingest/corpus.toml)): FY2025, plus FY2026 where already filed.
 - **Retrieval:** LlamaIndex over two switchable vector backends — Vertex AI Vector Search and
   Cloud SQL Postgres + pgvector.
 - **Generation:** Gemini on Vertex AI, with a small LangChain agent layer
@@ -44,6 +45,8 @@ make setup                    # Python 3.11 venv, locked deps, pre-commit hooks
 make db-up                    # Postgres 16 + pgvector on localhost:5433
 make migrate                  # apply schema
 make lint test test-db
+make ingest-dry               # free: download + parse + chunk the 20 pinned 10-Ks
+make ingest                   # embed with Vertex AI (~$0.45) into local pgvector
 ```
 
 ## Deploy
@@ -58,9 +61,20 @@ _Golden set (~100 questions), metrics, and gating logic — documented in the ev
 
 ## Results
 
-_No results yet._ Every number in this section will be copied from a saved run in
-[`results/`](results/), with the command and timestamp that produced it. No metric here is
-estimated or invented.
+Every number here is copied from a saved run in [`results/`](results/). Nothing is estimated or
+invented.
+
+### Ingestion (local, Phase 2)
+
+From [`results/ingest/20261002T090735Z_ingest.json`](results/ingest/20261002T090735Z_ingest.json)
+(`python -m ingest.run`: all 20 filings re-processed after the chunker v2 change.
+Chunker `v2-c3000-t1200-o400`, `gemini-embedding-001` @ 768-d, local Docker pgvector, MacBook.)
+
+| Filings | Chunks | Embedding tokens (API-reported) | Wall time | Throughput | Est. embedding cost |
+|---|---|---|---|---|---|
+| 20 / 20 ingested | 4,340 | 2,907,624 | 49.8 s | 24.1 docs/min · 5,228 chunks/min | $0.44 |
+
+_Retrieval and answer quality results will be added from the Phase 5 evaluation runs._
 
 ## Cost
 

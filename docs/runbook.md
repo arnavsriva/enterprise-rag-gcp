@@ -58,7 +58,25 @@ To stop the largest idle cost without tearing everything down, set
 _TBD (Phase 4)_
 
 ## 5. Ingest
-`make ingest` — _TBD (Phase 2 locally, Phase 4 on GCP)_
+
+**Locally** (into Docker pgvector). Needs `GCP_PROJECT_ID`, `SEC_USER_AGENT`, and application
+default credentials for the embedding API.
+
+```bash
+make corpus                       # the pinned filings (ingest/corpus.toml)
+make ingest-dry                   # free: download + parse + chunk, check Item coverage, estimate cost
+make ingest ARGS="--tickers AAPL" # small real run first
+make ingest                       # full corpus (~$0.45); unchanged filings are skipped
+make ingest ARGS="--force"        # re-embed everything
+```
+
+- Raw filings are cached in `data/raw/` (git-ignored) and never re-downloaded.
+- Every run writes `results/ingest/<UTC timestamp>_<mode>.json`, with per-filing status,
+  chunk/token counts and stage timings.
+- The exit code is non-zero if any filing failed. The others are still ingested, and re-running
+  retries only the missing or changed ones.
+
+**On GCP:** _TBD (Phase 4)_. It runs as the `rag-dev-ingest` Cloud Run Job inside the VPC.
 
 ## 6. Evaluate
 `make eval` — _TBD (Phase 5)_
@@ -81,4 +99,9 @@ These are intentionally kept after `make down`:
 - **Cloud SQL instance name already exists:** names are reserved for about a week after deletion.
   The module adds a random suffix, so this shouldn't happen. If it does, run
   `terraform -chdir=infra/terraform/envs/dev apply -replace=module.cloud_sql.random_id.suffix`.
+- **Embedding error "longer than the maximum number of tokens (2048)":** a chunk exceeded the
+  model limit. The chunker's token cap (ADR-0005) should prevent this. If it happens, lower
+  `MAX_TOKENS` in `ingest/chunk.py` and bump `CHUNKER_VERSION`.
+- **SEC 403 errors:** `SEC_USER_AGENT` must be `"Name email"`. SEC blocks anonymous or
+  generic agents.
 - **Local DB port conflict:** the project uses 5433. Change `PG_PORT` in `.env` if that's taken too.

@@ -16,7 +16,7 @@ GCP_REGION     ?= $(or $(call env_var,GCP_REGION),us-central1)
 
 .DEFAULT_GOAL := help
 .PHONY: help setup lock lint fmt test test-db db-up db-down migrate \
-        tf-init tf-validate tf-plan up down status ingest eval bench
+        tf-init tf-validate tf-plan up down status corpus ingest-dry ingest eval bench
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -97,8 +97,14 @@ status: ## List billable resources still running in the project (read-only)
 
 # ---------------------------------------------------------------- workloads (later phases)
 
-ingest: ## [BILLABLE] Download, chunk, embed, upsert filings
-	@echo "ingest: not implemented yet (Phase 2)"; exit 1
+corpus: ## Show the pinned 10-K corpus (re-pin: python -m ingest.corpus resolve)
+	$(BIN)/python -m ingest.corpus show
+
+ingest-dry: ## Download + parse + chunk; estimate tokens/cost (no API calls, no DB writes)
+	$(BIN)/python -m ingest.run --dry-run $(ARGS)
+
+ingest: ## [BILLABLE, ~$0.45 full corpus] Embed + store filings; unchanged ones are skipped. ARGS="--tickers AAPL"
+	$(BIN)/python -m ingest.run $(ARGS)
 
 eval: ## [BILLABLE] Run the evaluation pipeline against the golden set
 	@echo "eval: not implemented yet (Phase 5)"; exit 1

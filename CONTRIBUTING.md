@@ -41,6 +41,8 @@ make db-up    # local Postgres + pgvector (port 5433)
 make migrate  # apply SQL migrations
 make test-db  # tests against the local database
 make lock     # re-pin requirements*.txt after editing requirements*.in
+make corpus      # show the pinned 10-K corpus
+make ingest-dry  # parse + chunk + cost estimate, no API calls
 ```
 
 - **Dependencies:** edit `requirements.in` / `requirements-dev.in`, never the generated `.txt`
@@ -48,4 +50,6 @@ make lock     # re-pin requirements*.txt after editing requirements*.in
 - **Infrastructure:** `make tf-validate` (offline), `make tf-init`, `make tf-plan`, `make up`,
   `make down`, `make status`.
 - **Workloads:** `make ingest`, `make eval`, `make bench`.
+- **Chunking changes:** bump `CHUNKER_VERSION` in `ingest/chunk.py` whenever chunk output could
+  change, so the next ingest re-processes every filing.
 - Run `make help` for the full list.
