@@ -1,0 +1,429 @@
+{
+  "started_at": "2026-10-02T09:33:45+00:00",
+  "config": {
+    "generation_model": "gemini-3.8-flash",
+    "genai_location": "global",
+    "thinking_level": "LOW",
+    "embedding_model": "gemini-embedding-001",
+    "retrieval_backend": "pgvector",
+    "retrieval_mode": "hybrid",
+    "top_k": 6,
+    "environment": "local laptop -> Vertex AI; local Docker pgvector"
+  },
+  "summary": {
+    "direct": {
+      "n": 10,
+      "latency_ms_p50": 2869.5,
+      "latency_ms_p95": 23324.3,
+      "latency_ms_max": 23324.3,
+      "mean_cost_usd": 0.004342,
+      "cost_per_1k_queries_usd": 4.34,
+      "refusal_checks_passed": 8,
+      "invalid_citations_total": 0
+    },
+    "agent": {
+      "n": 2,
+      "latency_ms_p50": 7678.4,
+      "latency_ms_p95": 8757.1,
+      "latency_ms_max": 8757.1,
+      "mean_cost_usd": 0.006236,
+      "cost_per_1k_queries_usd": 6.24,
+      "refusal_checks_passed": 2,
+      "invalid_citations_total": 0
+    }
+  },
+  "queries": [
+    {
+      "question": "What were Apple's total net sales in fiscal 2025, and how much did they grow?",
+      "kind": "direct",
+      "tickers": [],
+      "expect_refusal": false,
+      "answered": true,
+      "refusal_as_expected": true,
+      "cited": [
+        1,
+        6
+      ],
+      "invalid_citations": [],
+      "latency_ms": 3490.2,
+      "stage_ms": {
+        "embed": 994.0,
+        "retrieve": 57.0,
+        "generate": 2439.0,
+        "total": 3490.1
+      },
+      "usage": {
+        "embedding_tokens": 23,
+        "input_tokens": 6609,
+        "output_tokens": 68,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.0052152,
+      "answer": "Apple's total net sales in fiscal 2025 were $416,161 million, representing a growth of 6% (or an increase of $25,126 million) compared to $391,035 million in fiscal 2024 [1][6]."
+    },
+    {
+      "question": "How much net interest income did JPMorgan Chase report for 2025?",
+      "kind": "direct",
+      "tickers": [],
+      "expect_refusal": false,
+      "answered": true,
+      "refusal_as_expected": true,
+      "cited": [
+        1,
+        2,
+        5
+      ],
+      "invalid_citations": [],
+      "latency_ms": 1852.4,
+      "stage_ms": {
+        "embed": 305.7,
+        "retrieve": 49.0,
+        "generate": 1497.6,
+        "total": 1852.3
+      },
+      "usage": {
+        "embedding_tokens": 16,
+        "input_tokens": 7151,
+        "output_tokens": 57,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.0055794,
+      "answer": "JPMorgan Chase reported **$95,443 million** of net interest income for 2025 [1][2][5]. \n\n*(Note: On a managed basis, net interest income was $95,868 million [2].)*"
+    },
+    {
+      "question": "What was NVIDIA's Data Center revenue in its latest fiscal year?",
+      "kind": "direct",
+      "tickers": [
+        "NVDA"
+      ],
+      "expect_refusal": false,
+      "answered": true,
+      "refusal_as_expected": true,
+      "cited": [
+        2
+      ],
+      "invalid_citations": [],
+      "latency_ms": 23324.3,
+      "stage_ms": {
+        "embed": 174.7,
+        "retrieve": 9.8,
+        "generate": 23139.7,
+        "total": 23324.2
+      },
+      "usage": {
+        "embedding_tokens": 14,
+        "input_tokens": 4614,
+        "output_tokens": 70,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.0037251,
+      "answer": "For fiscal year 2026 (the year ended January 25, 2026), NVIDIA's Data Center revenue was $193,737 million [2]. This consisted of $162,361 million from Compute and $31,376 million from Networking [2]."
+    },
+    {
+      "question": "What risks does Pfizer describe related to patent expirations and loss of exclusivity?",
+      "kind": "direct",
+      "tickers": [
+        "PFE"
+      ],
+      "expect_refusal": false,
+      "answered": true,
+      "refusal_as_expected": true,
+      "cited": [
+        1,
+        2,
+        6,
+        5,
+        4
+      ],
+      "invalid_citations": [],
+      "latency_ms": 11027.4,
+      "stage_ms": {
+        "embed": 368.7,
+        "retrieve": 10.0,
+        "generate": 10648.6,
+        "total": 11027.3
+      },
+      "usage": {
+        "embedding_tokens": 15,
+        "input_tokens": 3943,
+        "output_tokens": 560,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.0050595,
+      "answer": "Pfizer describes several risks associated with patent expirations and the loss of exclusivity:\n\n* **Material Revenue Reductions and Sales Erosion:** The loss, expiration, or invalidation of intellectual property rights, patent litigation settlements/judgments, and the expiration of co-promotion or licensing rights can have a material adverse effect on revenues [1][2]. Once market exclusivity is lost, generic and biosimilar competitors generally introduce identical or highly similar products at lower prices, leading to price competition that can substantially decrease product revenues\u2014often in a very short period of time [1].\n* **Accelerating Expirations (2026\u20132030):** Pfizer anticipates a significant reduction in revenue from patent-based or regulatory exclusivity expiries between 2026 and 2030 across several in-line products, with the rate of reduction expected to significantly accelerate over the next few years [1][2][6]. In 2026 alone, the revenue impact from these expiries is expected to be $1.5 billion [2].\n* **High Revenue Concentration Risk:** Pfizer recorded revenues exceeding $1 billion for each of 12 products that collectively accounted for 65% of Total revenues in 2025 (e.g., Eliquis accounted for 13%), meaning a loss of patent protection on these or other major products could lead to significant adverse revenue impacts and cause revenue forecasts to be inaccurate or unmet [5].\n* **Legal Challenges and \"At-Risk\" Launches:** Competitors and generic manufacturers employ aggressive tactics\u2014including \"at-risk\" launches\u2014and file suits asserting that Pfizer\u2019s patents covering products, uses, processes, or dosage forms are invalid or not infringed [4]. If patents are invalidated through court, regulatory, or administrative proceedings (such as inter partes review, post-grant review, re-examination, or oppositions), generic or biosimilar market entry and sales erosion can occur earlier than expected [1][4].\n* **Litigation and Damages Claims:** Pfizer faces claims alleging that enforcing its patent rights constitutes unfair competition or antitrust violations, as well as damages suits from generic manufacturers, payors, or governments for alleged delays of generic entry [4]. Pfizer could also face claims that its intellectual property infringes third-party patents [1].\n* **Country-Specific Enforcement and Compulsory Licensing:** Enforcing patents depends on varying laws across individual countries, some of which pursue policies that weaken intellectual property frameworks (such as broad discretion to issue compulsory licenses) [4].\n* **Legal or Regulatory Restrictions:** Regulatory or legal actions by governments or stakeholders could restrict Pfizer from enforcing its intellectual property or cause it to agree not to enforce or seek patent protection [4]."
+    },
+    {
+      "question": "How many employees did Walmart have at fiscal year end?",
+      "kind": "direct",
+      "tickers": [
+        "WMT"
+      ],
+      "expect_refusal": false,
+      "answered": false,
+      "refusal_as_expected": false,
+      "cited": [
+        1
+      ],
+      "invalid_citations": [],
+      "latency_ms": 2018.6,
+      "stage_ms": {
+        "embed": 301.2,
+        "retrieve": 5.0,
+        "generate": 1712.3,
+        "total": 2018.6
+      },
+      "usage": {
+        "embedding_tokens": 11,
+        "input_tokens": 4807,
+        "output_tokens": 69,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.00386565,
+      "answer": "I could not find this in the provided filings. The sources state that Walmart's business is delivered by approximately 2.1 million associates around the world (approximately 1.6 million in the U.S. and approximately 0.5 million internationally), but do not specify an exact employee count as of fiscal year end [1]."
+    },
+    {
+      "question": "What does Microsoft say about capital expenditures for AI infrastructure?",
+      "kind": "direct",
+      "tickers": [
+        "MSFT"
+      ],
+      "expect_refusal": false,
+      "answered": true,
+      "refusal_as_expected": true,
+      "cited": [
+        1,
+        2,
+        4,
+        3
+      ],
+      "invalid_citations": [],
+      "latency_ms": 3511.1,
+      "stage_ms": {
+        "embed": 306.3,
+        "retrieve": 6.9,
+        "generate": 3197.8,
+        "total": 3511.0
+      },
+      "usage": {
+        "embedding_tokens": 11,
+        "input_tokens": 4423,
+        "output_tokens": 235,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.00420015,
+      "answer": "Microsoft states that its investments to develop, train, deploy, and support AI models and related cloud-based services\u2014including building and expanding datacenters, acquiring components, and securing energy resources\u2014are being made at significant scale, on an accelerated timeline, and require substantial and increasing capital expenditures and continued access to capital in advance of fully developed revenue streams [1]. \n\nAdditionally, Microsoft notes that:\n* It will continue to invest in capital expenditures to support growth in its cloud offerings and its investments in AI training and other infrastructure [2].\n* Overestimation of demand or misalignment of capacity investments could lead to underutilization of infrastructure and potential asset impairments, while demand exceeding capacity limits its ability to timely meet customer needs [1].\n* Continued investments in AI infrastructure have partially offset gross margin percentage gains and contributed to a slight decrease in overall gross margin percentage, as well as a decrease in Microsoft Cloud gross margin percentage to 66% [4].\n* AI infrastructure investments drove a $2.6 billion (12%) increase in Productivity and Business Processes cost of revenue to support Microsoft 365 Copilot seat and usage growth [3]."
+    },
+    {
+      "question": "How does Coca-Cola manage cybersecurity risk?",
+      "kind": "direct",
+      "tickers": [
+        "KO"
+      ],
+      "expect_refusal": false,
+      "answered": true,
+      "refusal_as_expected": true,
+      "cited": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "invalid_citations": [],
+      "latency_ms": 4975.3,
+      "stage_ms": {
+        "embed": 300.3,
+        "retrieve": 8.5,
+        "generate": 4666.3,
+        "total": 4975.2
+      },
+      "usage": {
+        "embedding_tokens": 9,
+        "input_tokens": 2678,
+        "output_tokens": 435,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.0036411,
+      "answer": "The Coca-Cola Company manages cybersecurity risk through a multilayered, proactive risk management program that is integrated into its broader Enterprise Risk Management (ERM) program [1]. Key components of its approach include:\n\n* **Frameworks and Safeguards:** The company implements physical, administrative, and technical safeguards benchmarked against recognized frameworks, such as the National Institute of Standards and Technology (NIST) Cybersecurity Framework [1].\n* **Audits and Vulnerability Testing:** The internal audit team evaluates internal controls, while outside advisors and consultants are engaged to assist with risk management and conduct external penetration testing, tabletop exercises, and other vulnerability tests [2].\n* **Third-Party Risk Management:** Coca-Cola maintains a program to oversee risks from business partners, independent bottlers, and vendors, which includes requiring key third-party service providers to complete initial and periodic security assessments [2]. The CISO and senior leaders also meet regularly with key bottling partners to share guidelines and best practices [2].\n* **Governance and Oversight:** \n  * The program is supervised by the Chief Information Security Officer (CISO), who reports to the Chief Information Officer (CIO) and leads enterprise-wide cybersecurity strategy and processes [3].\n  * The CISO chairs the cross-functional **Cybersecurity Oversight Council**, which meets at least quarterly, aligns with the Risk Steering Committee, and is sponsored by the Global General Counsel and CIO [3].\n  * The **Audit Committee of the Board of Directors** oversees cybersecurity matters, receives regular reports from the CISO and CIO, and is promptly informed of potentially material incidents; the Chair of the Audit Committee briefs the full Board, which also periodically receives direct updates from management [3].\n* **Incident Response and Mitigation:** Coca-Cola maintains a cyber incident response plan to triage, assess, escalate, contain, investigate, and remediate incidents across consolidated entities [1][3], and it maintains cybersecurity insurance coverage [2].\n* **Employee Training:** The company provides annual cybersecurity and data protection training covering topics such as phishing, social engineering, deepfakes, password protection, and prompt incident reporting [4]."
+    },
+    {
+      "question": "What were ExxonMobil's capital and exploration expenditures in 2025?",
+      "kind": "direct",
+      "tickers": [
+        "XOM"
+      ],
+      "expect_refusal": false,
+      "answered": false,
+      "refusal_as_expected": false,
+      "cited": [
+        2,
+        3,
+        4
+      ],
+      "invalid_citations": [],
+      "latency_ms": 2248.8,
+      "stage_ms": {
+        "embed": 148.4,
+        "retrieve": 7.1,
+        "generate": 2093.2,
+        "total": 2248.7
+      },
+      "usage": {
+        "embedding_tokens": 17,
+        "input_tokens": 5798,
+        "output_tokens": 93,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.0046998,
+      "answer": "I could not find this in the provided filings. The sources provide ExxonMobil's Cash Capex of $29.0 billion (or $28,997 million) for 2025, additions to property, plant, and equipment of $31,476 million, and total exploration costs incurred of $1,618 million for consolidated subsidiaries ($1 million for equity companies) [2][3][4]."
+    },
+    {
+      "question": "What was Tesla's total revenue in 2025?",
+      "kind": "direct",
+      "tickers": [],
+      "expect_refusal": true,
+      "answered": false,
+      "refusal_as_expected": true,
+      "cited": [],
+      "invalid_citations": [],
+      "latency_ms": 1576.3,
+      "stage_ms": {
+        "embed": 166.5,
+        "retrieve": 36.3,
+        "generate": 1373.3,
+        "total": 1576.2
+      },
+      "usage": {
+        "embedding_tokens": 14,
+        "input_tokens": 6951,
+        "output_tokens": 31,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.0053316,
+      "answer": "I could not find this in the provided filings. The provided sources contain financial information for Caterpillar Inc. and Meta Platforms, Inc., but none for Tesla."
+    },
+    {
+      "question": "What is the name of Apple's CEO's dog?",
+      "kind": "direct",
+      "tickers": [
+        "AAPL"
+      ],
+      "expect_refusal": true,
+      "answered": false,
+      "refusal_as_expected": true,
+      "cited": [
+        6
+      ],
+      "invalid_citations": [],
+      "latency_ms": 1609.0,
+      "stage_ms": {
+        "embed": 166.6,
+        "retrieve": 6.2,
+        "generate": 1436.1,
+        "total": 1608.9
+      },
+      "usage": {
+        "embedding_tokens": 13,
+        "input_tokens": 2613,
+        "output_tokens": 37,
+        "thinking_tokens": 0,
+        "model_calls": 1
+      },
+      "estimated_cost_usd": 0.00210045,
+      "answer": "I could not find this in the provided filings. The sources identify Apple's Chief Executive Officer as Timothy D. Cook, but make no mention of a pet or dog [6]."
+    },
+    {
+      "question": "Compare research and development spending at Microsoft and Alphabet.",
+      "kind": "agent",
+      "tickers": [],
+      "expect_refusal": false,
+      "answered": true,
+      "refusal_as_expected": true,
+      "cited": [
+        1,
+        5,
+        2,
+        6,
+        7
+      ],
+      "invalid_citations": [],
+      "latency_ms": 6599.6,
+      "stage_ms": {
+        "embed": 482.5,
+        "retrieve": 16.1,
+        "total": 6599.5
+      },
+      "usage": {
+        "embedding_tokens": 8,
+        "input_tokens": 6029,
+        "output_tokens": 552,
+        "thinking_tokens": 0,
+        "model_calls": 2
+      },
+      "estimated_cost_usd": 0.00659295,
+      "answer": "### Comparison of Research and Development (R&D) Spending\n\n#### **1. Spending Amounts and Growth**\n* **Microsoft (Fiscal Years ended June 30)**:\n  * **FY2026**: $35,562 million (11% of revenue) [S1].\n  * **FY2025**: $32,488 million (12% of revenue) [S1].\n  * **Change**: An increase of $3.1 billion, or 9% [S1].\n* **Alphabet (Fiscal Years ended December 31)**:\n  * **FY2025**: $61,087 million (15% of revenue) [S5].\n  * **FY2024**: $49,326 million (14% of revenue) [S5].\n  * **Change**: An increase of $11.8 billion, or 24% [S5].\n\n---\n\n#### **2. Key Drivers of R&D Spending**\n* **Microsoft**: \n  * The increase was primarily driven by continued investments in compute capacity, AI talent, and data to support product development across the entire portfolio, along with impairment and other related expenses in its Xbox business [S1].\n* **Alphabet**: \n  * The increase was driven primarily by a $6.9 billion increase in employee compensation expenses (chiefly a $4.2 billion rise in stock-based compensation, which included a valuation-based charge related to Waymo) and a $2.4 billion increase in depreciation expense [S5].\n\n---\n\n#### **3. Composition and Scope**\n* **Microsoft**: R&D expenses include payroll, stock-based compensation, employee benefits, headcount-related expenses, technology development costs (such as AI training and infrastructure), third-party development and programming costs, and depreciation and amortization of R&D assets [S1, S2].\n* **Alphabet**: R&D expenses mainly consist of depreciation expense (primarily related to technical infrastructure), employee compensation for engineering and technical staff, other technical infrastructure operation costs (energy, equipment, network capacity), and third-party consulting/outsourced service fees [S6, S7]. Alphabet also notes that shared AI R&D expenses are tracked as Alphabet-level activities ($16,760 million in FY2025) [S5].",
+      "tool_calls": [
+        {
+          "tool": "compare_companies",
+          "args": {
+            "topic": "research and development expense",
+            "ticker_a": "MSFT",
+            "ticker_b": "GOOGL"
+          }
+        }
+      ]
+    },
+    {
+      "question": "Compare how Chevron and ExxonMobil describe climate-related regulatory risk.",
+      "kind": "agent",
+      "tickers": [],
+      "expect_refusal": false,
+      "answered": true,
+      "refusal_as_expected": true,
+      "cited": [
+        2,
+        7,
+        6,
+        5,
+        3,
+        4,
+        1,
+        8
+      ],
+      "invalid_citations": [],
+      "latency_ms": 8757.1,
+      "stage_ms": {
+        "embed": 417.6,
+        "retrieve": 6.8,
+        "total": 8757.1
+      },
+      "usage": {
+        "embedding_tokens": 10,
+        "input_tokens": 4232,
+        "output_tokens": 721,
+        "thinking_tokens": 0,
+        "model_calls": 2
+      },
+      "estimated_cost_usd": 0.00587925,
+      "answer": "Both **Chevron** and **ExxonMobil** identify climate-related regulatory and policy actions as material risks to demand, compliance costs, operations, and profitability, but they structure and emphasize these risks with different focuses in their FY2025 Form 10-K filings:\n\n---\n\n### 1. **Specific Regulatory Mechanisms and Policies**\n* **Chevron** focuses on:\n  * Policies capping emissions and mandating short-, medium-, and long-term greenhouse gas (GHG) reductions at the asset or facility level that may not be technologically feasible, increase production costs, or trigger asset impairments [S2].\n  * Retroactive liability enacted or considered in some jurisdictions on estimated past GHG emissions of energy producers and refiners [S2].\n  * The role of standardized carbon accounting, credit generation/purchasing/retirement, credit availability and pricing, and recovery of costs in the competitive marketplace [S2].\n* **ExxonMobil** details a broader, explicit inventory of policy mechanisms:\n  * Cap-and-trade regimes, carbon taxes, carbon accounting, carbon-based import duties or trade tariffs, minimum renewable usage requirements, restrictive permitting, vehicle mileage/efficiency standards, EV mandates, and bans/restrictions on gasoline-only vehicles [S7].\n  * Non-technology-neutral policies or regulatory interpretations that disfavor its products in emerging low-carbon markets [S6].\n  * Policies pausing, reducing, or retracting government incentives for emissions reductions [S6].\n\n---\n\n### 2. **Financial Modeling and Carbon Pricing**\n* **Chevron** emphasizes that the ultimate financial impact of GHG legislation remains highly uncertain due to unpredictable political decision-making processes across multiple jurisdictions [S2].\n* **ExxonMobil** specifically integrates regulatory risk into its long-term *Outlook* by incorporating explicit proxy carbon costs on energy-related $\\text{CO}_2$ emissions that reach up to **$150 per metric ton for OECD nations** and up to **$100 per metric ton for non-OECD nations by 2050** [S5].\n\n---\n\n### 3. **Disclosure, Standards, and Reporting Mandates**\n* **Chevron** highlights the lack of harmonized global standards for tracking, reporting, disclosing, marketing, and advertising ESG and GHG matters, noting that changing voluntary frameworks create comparability issues and that targets may be altered or eliminated due to changing conditions [S3, S4].\n* **ExxonMobil** emphasizes the legal, operational, and competitive risks of emerging disclosure regulations\u2014such as having to disclose competitively sensitive information, rely on uncertain third-party estimates (e.g., Scope 3 emissions), make statements it disagrees with, or risk violating foreign non-disclosure laws [S6].\n\n---\n\n### 4. **Indirect Regulatory, Activist, and Litigation Risks**\n* **Chevron** notes risks from Congressional investigations, ESG-driven divestment movements, activist proxy fights, and capital screening by lenders and institutional funds [S1, S3].\n* **ExxonMobil** explicitly warns against public policy agendas pursued through the court system, highlighting state, local, or private plaintiffs attempting to restrict hydrocarbon sales via litigation, and notes the risk of these liability practices expanding into the European Union [S6, S8].",
+      "tool_calls": [
+        {
+          "tool": "compare_companies",
+          "args": {
+            "topic": "climate-related regulatory risk",
+            "ticker_b": "XOM",
+            "ticker_a": "CVX"
+          }
+        }
+      ]
+    }
+  ]
+}

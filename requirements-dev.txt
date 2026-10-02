@@ -52,10 +52,6 @@ beautifulsoup4==4.15.0
     # via
     #   -c requirements.txt
     #   -r requirements.in
-bottleneck==1.6.0
-    # via
-    #   -c requirements.txt
-    #   langchain-google-vertexai
 certifi==2026.7.22
     # via
     #   -c requirements.txt
@@ -148,6 +144,7 @@ filetype==1.2.0
     # via
     #   -c requirements.txt
     #   banks
+    #   langchain-google-genai
     #   llama-index-core
 frozenlist==1.8.0
     # via
@@ -167,7 +164,6 @@ google-api-core==2.40.0
     #   google-cloud-pipeline-components
     #   google-cloud-resource-manager
     #   google-cloud-storage
-    #   google-cloud-vectorsearch
     #   kfp
 google-auth==2.59.1
     # via
@@ -178,7 +174,6 @@ google-auth==2.59.1
     #   google-cloud-core
     #   google-cloud-resource-manager
     #   google-cloud-storage
-    #   google-cloud-vectorsearch
     #   google-genai
     #   kfp
     #   kubernetes
@@ -187,7 +182,6 @@ google-cloud-aiplatform==1.165.1
     #   -c requirements.txt
     #   -r requirements.in
     #   google-cloud-pipeline-components
-    #   langchain-google-vertexai
 google-cloud-bigquery==3.46.0
     # via
     #   -c requirements.txt
@@ -209,11 +203,6 @@ google-cloud-storage==3.16.0
     #   -r requirements.in
     #   google-cloud-aiplatform
     #   kfp
-    #   langchain-google-vertexai
-google-cloud-vectorsearch==0.11.5
-    # via
-    #   -c requirements.txt
-    #   langchain-google-vertexai
 google-crc32c==1.9.0
     # via
     #   -c requirements.txt
@@ -224,6 +213,7 @@ google-genai==2.27.0
     #   -c requirements.txt
     #   -r requirements.in
     #   google-cloud-aiplatform
+    #   langchain-google-genai
 google-resumable-media==2.11.0
     # via
     #   -c requirements.txt
@@ -261,7 +251,6 @@ grpcio==1.84.0
     #   -c requirements.txt
     #   google-api-core
     #   google-cloud-resource-manager
-    #   google-cloud-vectorsearch
     #   googleapis-common-protos
     #   grpc-google-iam-v1
     #   grpcio-status
@@ -293,13 +282,8 @@ httpx==0.28.1
     #   -r requirements.in
     #   google-genai
     #   langchain-core
-    #   langchain-google-vertexai
     #   langgraph-sdk
     #   llama-index-core
-httpx-sse==0.4.3
-    # via
-    #   -c requirements.txt
-    #   langchain-google-vertexai
 httpx2==2.13.1
     # via
     #   -c requirements.txt
@@ -355,12 +339,12 @@ langchain-core==1.6.6
     # via
     #   -c requirements.txt
     #   langchain
-    #   langchain-google-vertexai
+    #   langchain-google-genai
     #   langgraph
     #   langgraph-checkpoint
     #   langgraph-prebuilt
     #   langgraph-sdk
-langchain-google-vertexai==3.2.4
+langchain-google-genai==4.4.0
     # via
     #   -c requirements.txt
     #   -r requirements.in
@@ -451,22 +435,14 @@ nltk==3.10.3
     #   llama-index-core
 nodeenv==1.11.0
     # via pre-commit
-numexpr==2.14.2
-    # via
-    #   -c requirements.txt
-    #   langchain-google-vertexai
 numpy==2.4.6 ; python_full_version < '3.12'
     # via
     #   -c requirements.txt
-    #   bottleneck
     #   llama-index-core
-    #   numexpr
 numpy==2.5.3 ; python_full_version >= '3.12'
     # via
     #   -c requirements.txt
-    #   bottleneck
     #   llama-index-core
-    #   numexpr
 oauthlib==4.0.0
     # via
     #   kubernetes
@@ -529,14 +505,12 @@ proto-plus==1.29.0
     #   google-api-core
     #   google-cloud-aiplatform
     #   google-cloud-resource-manager
-    #   google-cloud-vectorsearch
 protobuf==6.33.6
     # via
     #   -c requirements.txt
     #   google-api-core
     #   google-cloud-aiplatform
     #   google-cloud-resource-manager
-    #   google-cloud-vectorsearch
     #   googleapis-common-protos
     #   grpc-google-iam-v1
     #   grpcio-status
@@ -555,10 +529,6 @@ psycopg2-binary==2.9.13
     # via
     #   -c requirements.txt
     #   llama-index-vector-stores-postgres
-pyarrow==23.0.1
-    # via
-    #   -c requirements.txt
-    #   langchain-google-vertexai
 pyasn1==0.6.4
     # via
     #   -c requirements.txt
@@ -581,7 +551,7 @@ pydantic==2.13.5
     #   google-genai
     #   langchain
     #   langchain-core
-    #   langchain-google-vertexai
+    #   langchain-google-genai
     #   langgraph
     #   langsmith
     #   llama-index-core
@@ -777,10 +747,6 @@ uvloop==0.23.0 ; platform_python_implementation != 'PyPy' and sys_platform != 'c
     # via
     #   -c requirements.txt
     #   uvicorn
-validators==0.35.0
-    # via
-    #   -c requirements.txt
-    #   langchain-google-vertexai
 virtualenv==21.14.3
     # via pre-commit
 watchfiles==1.3.0

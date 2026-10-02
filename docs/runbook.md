@@ -78,6 +78,21 @@ make ingest ARGS="--force"        # re-embed everything
 
 **On GCP:** _TBD (Phase 4)_. It runs as the `rag-dev-ingest` Cloud Run Job inside the VPC.
 
+## 5b. Query locally
+
+```bash
+make ask Q="What were Apple's total net sales in fiscal 2025?"
+make ask Q="Compare R&D spending at Microsoft and Alphabet" ARGS="--agent"
+make serve                     # http://127.0.0.1:8080/docs
+make smoke                     # ~$0.07: latency/cost/refusal checks -> results/smoke/
+```
+
+- Generation uses Gemini on the **global** endpoint (`GENAI_LOCATION=global`), because Gemini 3.x
+  isn't served regionally in this project. For data-residency requirements, set
+  `GENAI_LOCATION=us-central1` and `GENERATION_MODEL=gemini-2.5-flash`.
+- Logs are one JSON line per request (`message: "request served"`), with latency, tokens and
+  `estimated_cost_usd`. Question text is never logged.
+
 ## 6. Evaluate
 `make eval` — _TBD (Phase 5)_
 
@@ -102,6 +117,11 @@ These are intentionally kept after `make down`:
 - **Embedding error "longer than the maximum number of tokens (2048)":** a chunk exceeded the
   model limit. The chunker's token cap (ADR-0005) should prevent this. If it happens, lower
   `MAX_TOKENS` in `ingest/chunk.py` and bump `CHUNKER_VERSION`.
+- **Slow answers (10 s+) with low token counts:** these are service-side queueing on the
+  shared-capacity global endpoint. Look for `"model call retry"` log lines. If there are none,
+  it's queueing rather than retries. The production fix is Provisioned Throughput.
+- **`/query` returns 501:** `RETRIEVAL_BACKEND=vertex_vector_search` only works inside the VPC
+  (Phase 4). Use `pgvector` locally.
 - **SEC 403 errors:** `SEC_USER_AGENT` must be `"Name email"`. SEC blocks anonymous or
   generic agents.
 - **Local DB port conflict:** the project uses 5433. Change `PG_PORT` in `.env` if that's taken too.

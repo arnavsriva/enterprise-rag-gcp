@@ -43,6 +43,8 @@ make test-db  # tests against the local database
 make lock     # re-pin requirements*.txt after editing requirements*.in
 make corpus      # show the pinned 10-K corpus
 make ingest-dry  # parse + chunk + cost estimate, no API calls
+make serve       # API on :8080 (needs make db-up, ingested data, gcloud ADC)
+make ask Q="…"   # one question from the terminal
 ```
 
 - **Dependencies:** edit `requirements.in` / `requirements-dev.in`, never the generated `.txt`
@@ -50,6 +52,11 @@ make ingest-dry  # parse + chunk + cost estimate, no API calls
 - **Infrastructure:** `make tf-validate` (offline), `make tf-init`, `make tf-plan`, `make up`,
   `make down`, `make status`.
 - **Workloads:** `make ingest`, `make eval`, `make bench`.
+- **Prompt or retrieval changes:** run `make smoke` before and after, and compare the saved
+  JSON reports (refusal checks, invalid citations, cost). Phase 5's evaluation gate will
+  formalise this.
+- **Migrations are immutable once applied,** including comments, because checksums are
+  enforced. Add a new `NNNN_*.sql` instead.
 - **Chunking changes:** bump `CHUNKER_VERSION` in `ingest/chunk.py` whenever chunk output could
   change, so the next ingest re-processes every filing.
 - Run `make help` for the full list.

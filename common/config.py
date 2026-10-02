@@ -27,12 +27,23 @@ class Settings(BaseSettings):
     # --- Models
     embedding_model: str = "gemini-embedding-001"
     embedding_dim: int = Field(default=768, gt=0)
-    generation_model: str = "gemini-2.5-flash"
-    judge_model: str = "gemini-2.5-pro"
+    # Gemini 3.x is served from the global endpoint only (404 in us-central1, checked
+    # 2026-10-02). Clients needing regional processing: set GENAI_LOCATION=us-central1 and a
+    # regional model such as gemini-2.5-flash. Embeddings stay regional (gcp_region).
+    genai_location: str = "global"
+    generation_model: str = "gemini-3.8-flash"
+    generation_thinking_level: Literal["LOW", "MEDIUM", "HIGH"] = "LOW"
+    generation_max_output_tokens: int = Field(default=2048, gt=0)
+    agent_thinking_budget: int = Field(default=512, ge=0)
+    judge_model: str = "gemini-3.1-pro-preview"
 
     # --- Retrieval
     retrieval_backend: RetrievalBackend = RetrievalBackend.PGVECTOR
-    retrieval_top_k: int = Field(default=5, gt=0, le=50)
+    retrieval_mode: Literal["vector", "hybrid"] = "hybrid"
+    retrieval_top_k: int = Field(default=6, gt=0, le=50)
+    retrieval_candidates: int = Field(default=30, gt=0, le=200)  # per retriever, before fusion
+    # Hybrid fusion weight for the vector retriever (keyword gets 1 - this). See ADR-0006.
+    retrieval_vector_weight: float = Field(default=0.7, ge=0.0, le=1.0)
 
     # --- Vertex AI Vector Search (from terraform outputs)
     vector_search_index_id: str | None = None

@@ -17,21 +17,12 @@ import math
 from dataclasses import dataclass, field
 from typing import Any, Protocol, cast
 
-from google import genai
-from google.genai import errors as genai_errors
 from google.genai import types
-from tenacity import (
-    AsyncRetrying,
-    retry_if_exception,
-    stop_after_attempt,
-    wait_random_exponential,
-)
 
+from common import genai as genai_helpers
 from ingest.chunk import estimate_tokens
 
 log = logging.getLogger(__name__)
-
-RETRYABLE_STATUS = {408, 429, 500, 502, 503, 504}
 
 
 @dataclass
@@ -75,12 +66,6 @@ def make_batches(texts: list[str], max_texts: int, max_tokens: int) -> list[list
     return batches
 
 
-def _is_retryable(exc: BaseException) -> bool:
-    if isinstance(exc, genai_errors.APIError):
-        return exc.code in RETRYABLE_STATUS
-    return isinstance(exc, (TimeoutError, ConnectionError))
-
-
 class VertexEmbedder:
     def __init__(
         self,
@@ -98,7 +83,7 @@ class VertexEmbedder:
     ) -> None:
         self.model = model
         self.dim = dim
-        self._client = client or genai.Client(vertexai=True, project=project, location=location)
+        self._client = client or genai_helpers.client(project, location)
         self._max_texts = max_texts
         self._max_tokens = max_tokens
         self._semaphore = asyncio.Semaphore(max_concurrency)
@@ -110,12 +95,7 @@ class VertexEmbedder:
     ) -> tuple[list[list[float]], list[int], int, int, int]:
         attempts = 0
         async with self._semaphore:
-            async for attempt in AsyncRetrying(
-                retry=retry_if_exception(_is_retryable),
-                stop=stop_after_attempt(self._max_retries + 1),
-                wait=wait_random_exponential(multiplier=1, max=60),
-                reraise=True,
-            ):
+            async for attempt in genai_helpers.retrying(self._max_retries, max_wait=60):
                 with attempt:
                     attempts += 1
                     response = await self._client.aio.models.embed_content(

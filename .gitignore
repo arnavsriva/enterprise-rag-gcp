@@ -69,6 +69,7 @@ eval/pipelines/*.yaml.compiled
 # ---------------------------------------------------------------- Local-only notes and AI-assistant instructions
 CLAUDE.md
 notes/
+.claude/
 
 # ---------------------------------------------------------------- OS / editors
 .DS_Store

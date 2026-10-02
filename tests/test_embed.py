@@ -64,7 +64,7 @@ async def test_vectors_normalised_tokens_counted_order_kept() -> None:
 
 
 async def test_retries_retryable_errors(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr("ingest.embed.wait_random_exponential", lambda **_: lambda _rs: 0)
+    monkeypatch.setattr("common.genai.wait_random_exponential", lambda **_: lambda _rs: 0)
     fake = FakeGenaiClient(fail_first=2, status=429)
     result = await embedder(fake).embed_documents(["a"])
     assert len(fake.calls) == 3
@@ -72,7 +72,7 @@ async def test_retries_retryable_errors(monkeypatch: pytest.MonkeyPatch) -> None
 
 
 async def test_does_not_retry_client_errors(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr("ingest.embed.wait_random_exponential", lambda **_: lambda _rs: 0)
+    monkeypatch.setattr("common.genai.wait_random_exponential", lambda **_: lambda _rs: 0)
     fake = FakeGenaiClient(fail_first=1, status=400)
     with pytest.raises(genai_errors.APIError):
         await embedder(fake).embed_documents(["a"])

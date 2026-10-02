@@ -20,7 +20,7 @@ google-genai>=1.0
 llama-index-core>=0.12
 llama-index-vector-stores-postgres>=0.4
 langchain>=0.3
-langchain-google-vertexai>=2.0
+langchain-google-genai>=4.0  # ChatGoogleGenerativeAI (Vertex AI backend); ChatVertexAI is deprecated
 
 # --- Postgres + pgvector
 psycopg[binary]>=3.2

@@ -16,7 +16,8 @@ GCP_REGION     ?= $(or $(call env_var,GCP_REGION),us-central1)
 
 .DEFAULT_GOAL := help
 .PHONY: help setup lock lint fmt test test-db db-up db-down migrate \
-        tf-init tf-validate tf-plan up down status corpus ingest-dry ingest eval bench
+        tf-init tf-validate tf-plan up down status corpus ingest-dry ingest \
+        serve ask smoke eval bench
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -94,6 +95,18 @@ status: ## List billable resources still running in the project (read-only)
 	@gcloud run services list --project=$(GCP_PROJECT_ID) --region=$(GCP_REGION) --format="table(metadata.name,status.url)" 2>/dev/null || true
 	@echo "== PSC forwarding rules"
 	@gcloud compute forwarding-rules list --project=$(GCP_PROJECT_ID) --format="table(name,region,IPAddress)" 2>/dev/null || true
+
+# ---------------------------------------------------------------- query
+
+serve: ## Run the API locally on :8080 (needs make db-up + ingested data + gcloud ADC)
+	$(BIN)/uvicorn api.main:app --host 127.0.0.1 --port 8080 --reload
+
+ask: ## [BILLABLE, <$0.01] Ask one question. Q="..." ARGS="--agent | --tickers JPM | --json"
+	@test -n "$(Q)" || { echo 'usage: make ask Q="What were Apple net sales in fiscal 2025?"'; exit 1; }
+	$(BIN)/python -m rag.ask $(ARGS) "$(Q)"
+
+smoke: ## [BILLABLE, ~$0.07] Fixed question set -> results/smoke/<ts>.json (latency, cost, refusals)
+	$(BIN)/python scripts/smoke_queries.py
 
 # ---------------------------------------------------------------- workloads (later phases)
 
