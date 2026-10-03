@@ -1,6 +1,6 @@
 # ADR-0006: Retrieval, generation, agent and API
 
-- **Status:** Accepted
+- **Status:** Accepted. The retrieval *default* was later changed to vector-only on golden-set evidence (see ADR-0008). Hybrid remains available.
 - **Date:** 2026-10-02
 
 ## Context

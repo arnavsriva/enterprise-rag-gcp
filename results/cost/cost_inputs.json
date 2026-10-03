@@ -1,0 +1,64 @@
+{
+  "prices_checked": "2026-10-02",
+  "per_query_direct_eval": {
+    "n": 198,
+    "mean_usd": 0.004331,
+    "median_usd": 0.004436,
+    "p95_usd": 0.005672,
+    "per_1k_usd": 4.33,
+    "sources": [
+      "results/eval/20261002T135259Z_api_pgvector_vector_baseline.json",
+      "results/eval/20261002T170420Z_release-22331e5.json"
+    ]
+  },
+  "direct_token_mix": {
+    "n": 24,
+    "mean_tokens": {
+      "embedding_tokens": 14.5,
+      "input_tokens": 5233.5,
+      "output_tokens": 170.3,
+      "thinking_tokens": 0,
+      "model_calls": 1
+    },
+    "mean_cost_usd": 0.004566,
+    "per_1k_usd": 4.57,
+    "sources": [
+      "results/smoke/20261002T112326Z_cloud.json",
+      "results/smoke/20261002T112745Z_cloud.json"
+    ]
+  },
+  "agent_token_mix": {
+    "n": 4,
+    "mean_tokens": {
+      "embedding_tokens": 10.5,
+      "input_tokens": 5121.8,
+      "output_tokens": 577.5,
+      "thinking_tokens": 13,
+      "model_calls": 2
+    },
+    "mean_cost_usd": 0.006057,
+    "per_1k_usd": 6.06,
+    "sources": [
+      "results/smoke/20261002T112326Z_cloud.json",
+      "results/smoke/20261002T112745Z_cloud.json"
+    ]
+  },
+  "direct_cost_split_promo_prices": {
+    "input_usd_per_query": 0.003925,
+    "output_usd_per_query": 0.000639,
+    "embedding_usd_per_query": 2.17e-06
+  },
+  "direct_per_1k_after_promo_usd": 9.13,
+  "one_off": {
+    "ingest_full_corpus_usd": 0.436144,
+    "golden_set_draft_usd": 0.9591,
+    "eval_run_usd": [
+      1.7445,
+      1.7443
+    ]
+  },
+  "fixed_monthly_usd": {
+    "cloud_sql_db_f1_micro_10gib": 9.37,
+    "vector_search_node_plus_psc_optional": 75.78
+  }
+}

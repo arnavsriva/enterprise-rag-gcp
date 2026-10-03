@@ -1,6 +1,8 @@
 # Deployment Runbook
 
-Sections marked _TBD_ are completed in later phases.
+From an empty GCP project to a deployed, evaluated system, and back to nothing. Costs are list
+prices checked 2026-10-02 (see [`cost_model.md`](cost_model.md)). **Every `make up` creates or
+changes billable resources: read the plan first.**
 
 ## 0. Prerequisites
 
@@ -9,7 +11,11 @@ Sections marked _TBD_ are completed in later phases.
 | uv | any recent | Creates the Python 3.11 venv (`make setup`) |
 | Docker | any recent | Local Postgres + pgvector (`make db-up`) |
 | Terraform | ≥ 1.11 | Ephemeral values / write-only args |
-| gcloud CLI | any recent | Auth, state bootstrap, `make status` |
+| gcloud CLI | any recent | Auth, state bootstrap, Cloud Build, `make status` |
+
+**Project setup** (console, once): create a project, link billing, and create a **budget alert**
+with credits *excluded* (untick free-tier and promotional credits), so the alert tracks real usage
+while credits last.
 
 ## 1. Local development (no GCP cost)
 
@@ -31,6 +37,7 @@ scripts/bootstrap_state.sh <PROJECT_ID>          # versioned state bucket + back
 cp infra/terraform/envs/dev/terraform.tfvars.example infra/terraform/envs/dev/terraform.tfvars
 # edit terraform.tfvars
 make tf-init
+gcloud services enable aiplatform.googleapis.com   # embeddings/Gemini for local dev before `make up`
 ```
 
 ## 3. Apply (BILLABLE)
@@ -40,13 +47,14 @@ make tf-plan      # review every resource in the plan
 make up           # applies the saved plan; asks you to type 'apply'
 ```
 
-What gets created, and what bills while idle:
+What gets created (about 55 resources, ~10 min; Cloud SQL alone ~7 min), and what bills while idle:
 - **Always on after `make up`:**
-  - Cloud SQL `db-f1-micro`.
+  - Cloud SQL `db-f1-micro` + 10 GiB SSD: **$0.013/hr, about $9.37/month**.
   - Bucket, Artifact Registry, Secret Manager (cents).
 - **Only when `vector_search_deployed = true`:**
-  - Deployed index on one `e2-standard-2` node, billed per node-hour.
-  - The PSC forwarding rule.
+  - Deployed index on one `e2-standard-2` node: $0.0938/hr.
+  - The PSC forwarding rule: $0.01/hr.
+  - About $75.78/month together. Deploying takes ~30 min.
 - **Scale-to-zero (no idle cost):**
   - Cloud Run API.
   - Cloud Run ingest job.
@@ -186,9 +194,34 @@ make release                         # ~$2: build -> no-traffic candidate -> pip
 ## 7. Teardown
 
 ```bash
-make down         # terraform destroy for everything in envs/dev
+make down         # terraform destroy for everything in envs/dev (asks for confirmation)
 make status       # should list no index endpoints, SQL instances, Cloud Run services, PSC rules
 ```
+
+**Verify that nothing billable remains:**
+- [ ] `make status`: every section is empty.
+- [ ] `gcloud run jobs list --region us-central1`: no `rag-dev-*` jobs.
+- [ ] `gcloud artifacts repositories list --location us-central1`: no `rag-dev`.
+- [ ] `gcloud storage ls`: only `<project>-tfstate` (plus `<project>_cloudbuild`, if Cloud Build
+      created one).
+- [ ] Billing → Reports over the next 1–2 days: daily cost drops to ~$0.
+
+**Kept on purpose:**
+- the state bucket (a few KB), so the next `make up` works;
+- enabled APIs (free).
+
+**To remove the project entirely:** `gcloud projects delete <PROJECT_ID>`. That's irreversible
+after the 30-day recovery window.
+
+**Rebuilding later:**
+1. `make tf-plan && make up`
+2. `make image`
+3. Update the ingest job image.
+4. `make ingest-cloud` (re-embeds, ~$0.44).
+5. `make deploy`
+
+The Cloud SQL instance name gets a fresh random suffix, so the 7-day name-reuse block doesn't
+apply.
 
 These are intentionally kept after `make down`:
 - **The state bucket `<PROJECT_ID>-tfstate`:** a few KB, so the next `make up` works.
