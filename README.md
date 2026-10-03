@@ -3,7 +3,7 @@
 > Document Q&A over SEC 10-K filings, provisioned end-to-end with Terraform on Google Cloud,
 > with automated evaluation gating deployments.
 
-**Status:** 🚧 Phase 4: deployed to GCP (Terraform-provisioned, private networking, Cloud Run, Cloud SQL, Vector Search).
+**Status:** 🚧 Phase 6 complete: deployed, evaluated (gated releases), and both vector stores benchmarked. Docs phase next.
 
 ## Overview
 
@@ -129,6 +129,21 @@ global endpoint, thinking LOW, hybrid retrieval, top-k 6):
 
 This is a smoke test (small n, no ground truth), not an evaluation. Retrieval recall and answer
 faithfulness come from the Phase 5 golden set.
+
+### Vector store comparison (Phase 6)
+
+Full write-up: [`results/vector_store_comparison.md`](results/vector_store_comparison.md), rendered
+from [`results/bench/20261002T194208Z_vector_bench.json`](results/bench/20261002T194208Z_vector_bench.json).
+Benchmark run as a Cloud Run Job inside the VPC: 4,340 vectors, 99 questions x 3 rounds, with the
+same query vector sent to both stores.
+
+| Backend | Recall@6 (golden) | ANN overlap@10 vs exact | Latency p50 / p99, incl. text | Incremental cost / month |
+|---|---|---|---|---|
+| Cloud SQL pgvector (HNSW) | 0.854 | 0.986 | 4.3 / 57.0 ms | $0 (Postgres is the system of record; instance $9.37) |
+| Vertex AI Vector Search (tree-AH, PSC) | 0.865 | 1.000 | 10.0 / 15.2 ms | $75.78 |
+
+At this scale, quality is equivalent and both are under 1% of request latency, so **pgvector is
+the default** and Vector Search is the scale-out path ([ADR-0009](docs/adr/0009-vector-store-choice.md)).
 
 ### Golden-set evaluation (Phase 5)
 

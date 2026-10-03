@@ -170,6 +170,27 @@ module "ingest_job" {
   depends_on = [module.cloud_sql]
 }
 
+module "bench_job" {
+  source                = "../../modules/cloud_run_job"
+  project_id            = var.project_id
+  region                = var.region
+  name                  = "${local.name_prefix}-bench"
+  image                 = var.placeholder_job_image
+  service_account_email = module.iam.emails["eval"] # read-only workload: query + embed + write report
+  network_id            = module.network.network_id
+  subnet_id             = module.network.subnet_id
+  command               = ["python"]
+  args                  = ["-m", "bench.vector_bench"]
+  env = merge(local.app_env, {
+    INGEST_USE_GCS    = "true" # upload the report to GCS (job disk is ephemeral)
+    BENCH_ENVIRONMENT = "Cloud Run Job (2 vCPU / 2 GiB) inside the VPC, us-central1"
+  })
+  secret_env = local.app_secret_env
+  labels     = local.labels
+
+  depends_on = [module.cloud_sql]
+}
+
 module "budget" {
   count  = local.budget_enabled ? 1 : 0
   source = "../../modules/budget"

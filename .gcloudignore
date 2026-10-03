@@ -15,4 +15,6 @@
 !api/**
 !eval/
 !eval/**
+!bench/
+!bench/**
 **/__pycache__/

@@ -32,6 +32,10 @@ output "ingest_job" {
   value = module.ingest_job.name
 }
 
+output "bench_job" {
+  value = module.bench_job.name
+}
+
 output "cloud_sql_instance" {
   value = module.cloud_sql.instance_name
 }

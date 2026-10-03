@@ -34,7 +34,9 @@ if .venv/bin/python -m eval.pipelines.submit --image "$IMAGE" --api-url "$CANDID
     --project "$PROJECT" --region "$REGION" --bucket "$BUCKET" --service-account "$EVAL_SA" \
     --label "release-$(git log -1 --format=%h)" --wait; then
   echo "==> 4/4 gate passed: promoting candidate to 100% of traffic"
-  gcloud run services update-traffic "$SERVICE" --to-tags candidate=100 \
+  # --to-latest (the candidate is the latest revision) rather than --to-tags, which would pin
+  # traffic to this revision and silently strand later `make deploy` revisions at 0%.
+  gcloud run services update-traffic "$SERVICE" --to-latest \
     --region "$REGION" --project "$PROJECT" --quiet
   echo "released $IMAGE"
 else

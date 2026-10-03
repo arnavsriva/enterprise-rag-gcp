@@ -1,0 +1,114 @@
+{
+  "started_at": "2026-10-02T19:42:08+00:00",
+  "finished_at": "2026-10-02T19:42:45+00:00",
+  "environment": "Cloud Run Job (2 vCPU / 2 GiB) inside the VPC, us-central1",
+  "config": {
+    "questions": 99,
+    "answerable": 89,
+    "rounds": 3,
+    "k": 10,
+    "vectors": 4340,
+    "dim": 768,
+    "embedding_model": "gemini-embedding-001",
+    "pgvector": "HNSW (m=16, ef_construction=64 defaults), cosine, ef_search=100, iterative_scan=relaxed_order",
+    "vertex_vector_search": "tree-AH, DOT_PRODUCT on unit vectors, SHARD_SIZE_SMALL, 1x e2-standard-2, PSC",
+    "cloud_sql": "db-f1-micro (shared core), 10 GiB SSD, private IP",
+    "ground_truth": "exact brute-force cosine in Postgres (index scans disabled)"
+  },
+  "results": {
+    "pgvector": {
+      "unfiltered": {
+        "evidence_recall@6": 0.8539,
+        "evidence_recall@10": 0.8989,
+        "latency_total": {
+          "n": 297,
+          "p50_ms": 4.31,
+          "p95_ms": 9.9,
+          "p99_ms": 57.02,
+          "mean_ms": 5.94
+        },
+        "latency_ann_only": {
+          "n": 297,
+          "p50_ms": 4.31,
+          "p95_ms": 9.9,
+          "p99_ms": 57.02,
+          "mean_ms": 5.94
+        },
+        "returned_k_mean": 10,
+        "ann_overlap@10_vs_exact": 0.9859
+      },
+      "ticker_filtered": {
+        "evidence_recall@6": 0.8652,
+        "evidence_recall@10": 0.9101,
+        "latency_total": {
+          "n": 297,
+          "p50_ms": 5.51,
+          "p95_ms": 8.45,
+          "p99_ms": 11.18,
+          "mean_ms": 5.88
+        },
+        "latency_ann_only": {
+          "n": 297,
+          "p50_ms": 5.51,
+          "p95_ms": 8.45,
+          "p99_ms": 11.18,
+          "mean_ms": 5.88
+        },
+        "returned_k_mean": 10
+      }
+    },
+    "vertex_vector_search": {
+      "unfiltered": {
+        "evidence_recall@6": 0.8652,
+        "evidence_recall@10": 0.9101,
+        "latency_total": {
+          "n": 297,
+          "p50_ms": 10.03,
+          "p95_ms": 11.62,
+          "p99_ms": 15.22,
+          "mean_ms": 10.22
+        },
+        "latency_ann_only": {
+          "n": 297,
+          "p50_ms": 6.19,
+          "p95_ms": 6.94,
+          "p99_ms": 7.15,
+          "mean_ms": 6.21
+        },
+        "returned_k_mean": 10,
+        "ann_overlap@10_vs_exact": 1.0
+      },
+      "ticker_filtered": {
+        "evidence_recall@6": 0.8652,
+        "evidence_recall@10": 0.9101,
+        "latency_total": {
+          "n": 297,
+          "p50_ms": 8.65,
+          "p95_ms": 10.1,
+          "p99_ms": 10.84,
+          "mean_ms": 8.82
+        },
+        "latency_ann_only": {
+          "n": 297,
+          "p50_ms": 4.91,
+          "p95_ms": 5.85,
+          "p99_ms": 6.32,
+          "mean_ms": 4.96
+        },
+        "returned_k_mean": 10
+      }
+    }
+  },
+  "monthly_cost_usd": {
+    "hours_per_month": 730,
+    "prices_checked": "2026-10-02",
+    "pgvector_cloud_sql_db_f1_micro_10gib_ssd": 9.37,
+    "vector_search_1x_e2_standard_2": 68.48,
+    "vector_search_psc_endpoint": 7.3,
+    "vector_search_total_serving": 75.78,
+    "vector_search_one_off_build_usd": 0.0373,
+    "vector_search_one_off_stream_insert_usd": 0.0056,
+    "index_size_gib": 0.0124,
+    "note": "Postgres is required either way as the system of record (text, metadata, keyword search), so Vector Search is an incremental cost on top of Cloud SQL."
+  }
+}

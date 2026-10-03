@@ -149,6 +149,19 @@ make status                    # the index endpoint should list no deployed inde
 Vectors stay in the index while undeployed (upserts work without a deployment), so redeploying
 doesn't need re-ingestion.
 
+## 5d. Benchmark the vector stores (needs the index deployed)
+
+```bash
+# terraform.tfvars: vector_search_deployed = true;  make tf-plan && make up   (~30 min)
+make image && make deploy        # the image includes bench/
+make bench                       # Cloud Run Job in the VPC -> results/bench/<ts>.json
+                                 # -> results/vector_store_comparison.md (bench/interpretation.md appended)
+# then UNDEPLOY: vector_search_deployed = false;  make tf-plan && make up;  make status
+```
+
+The job runs as the eval service account. If only pgvector is reachable it benchmarks pgvector
+alone and says so.
+
 ## 6. Evaluate and release
 
 The golden set is `eval/golden_set/golden_v1.jsonl` (99 items, approved; see `REVIEW.md`). The
@@ -211,4 +224,9 @@ These are intentionally kept after `make down`:
   (Terraform grants it).
 - **Eval run has request errors (502/504):** Gemini global-endpoint congestion. Re-run later.
   Errored runs are never used as a baseline.
+- **`make deploy` succeeds but the new revision gets 0% traffic:** traffic was pinned to a tag.
+  Run `gcloud run services update-traffic rag-dev-api --to-latest`. Since this fix,
+  `scripts/release.sh` promotes with `--to-latest`.
+- **Job fails with `No module named 'bench'`** (or any new package): add it to the `Dockerfile`,
+  `.dockerignore` and `.gcloudignore` allow-lists.
 - **Local DB port conflict:** the project uses 5433. Change `PG_PORT` in `.env` if that's taken too.

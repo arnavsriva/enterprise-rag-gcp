@@ -73,3 +73,15 @@ def generation_cost_usd(
     return (
         input_tokens * price.input_per_1m + (output_tokens + thinking_tokens) * price.output_per_1m
     ) / 1_000_000
+
+
+# ---------------------------------------------------------------- infrastructure (us-central1)
+# Checked 2026-10-02 on cloud.google.com/sql/pricing, .../gemini-enterprise-agent-platform/pricing
+# (Vector Search) and .../vpc/network-pricing (Private Service Connect).
+HOURS_PER_MONTH = 730
+CLOUD_SQL_DB_F1_MICRO_PER_HOUR = 0.0105
+CLOUD_SQL_SSD_PER_GIB_HOUR = 0.000232877
+VECTOR_SEARCH_E2_STANDARD_2_PER_NODE_HOUR = 0.0938084
+PSC_ENDPOINT_PER_HOUR = 0.01
+VECTOR_SEARCH_STREAM_INSERT_PER_GIB = 0.45
+VECTOR_SEARCH_BUILD_PER_GIB = 3.00

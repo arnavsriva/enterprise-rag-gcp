@@ -129,6 +129,8 @@ deploy: ## Roll the ingest job, then the API, to the image from `make image` (fi
 	@test -f .last-image || { echo "run 'make image' first"; exit 1; }
 	gcloud run jobs update $$($(TF_OUT) ingest_job) --image $$(cat .last-image) \
 	  --region $(GCP_REGION) --project $(GCP_PROJECT_ID)
+	gcloud run jobs update $$($(TF_OUT) bench_job) --image $$(cat .last-image) \
+	  --region $(GCP_REGION) --project $(GCP_PROJECT_ID)
 	gcloud run services update $$($(TF_OUT) api_service) --image $$(cat .last-image) \
 	  --region $(GCP_REGION) --project $(GCP_PROJECT_ID)
 
@@ -169,5 +171,7 @@ eval-pipeline: ## [BILLABLE, ~$1.80] Same eval on Vertex AI Pipelines (as the ev
 release: ## [BILLABLE, ~$2] Build -> no-traffic candidate -> eval pipeline -> promote only if the gate passes
 	GCP_PROJECT_ID=$(GCP_PROJECT_ID) GCP_REGION=$(GCP_REGION) scripts/release.sh
 
-bench: ## [BILLABLE] Benchmark Vector Search vs pgvector
-	@echo "bench: not implemented yet (Phase 6)"; exit 1
+bench: ## [BILLABLE, needs vector_search_deployed=true] Benchmark Vector Search vs pgvector in the VPC
+	gcloud run jobs execute $$($(TF_OUT) bench_job) --region $(GCP_REGION) --project $(GCP_PROJECT_ID) --wait
+	gcloud storage cp -n "gs://$$($(TF_OUT) bucket)/results/bench/*.json" results/bench/
+	$(BIN)/python -m bench.report $$(ls -t results/bench/*_vector_bench.json | head -1)

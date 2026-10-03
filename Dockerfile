@@ -19,6 +19,7 @@ COPY ingest ./ingest
 COPY rag ./rag
 COPY api ./api
 COPY eval ./eval
+COPY bench ./bench
 
 # Run as an unprivileged user; only /tmp is writable (Cloud Run's filesystem is in-memory).
 RUN useradd --uid 10001 --no-create-home app
